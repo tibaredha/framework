@@ -1,0 +1,9 @@
+http   hyper txt transpor protocol
+https  hyper txt transpor protocol secure
+ssl=secure socket layer -> tsl=transport layer security
+rsa whith tow key  privat_key and public_key 
+
+proxy => vpn 
+
+
+

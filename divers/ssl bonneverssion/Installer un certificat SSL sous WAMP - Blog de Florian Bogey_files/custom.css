@@ -1,0 +1,282 @@
+/* 
+WOO CUSTOM STYLESHEET
+---------------------
+
+Instructions:
+
+Add your custom styles here instead of style.css so it 
+is easier to update the theme. Simply copy an existing 
+style from style.css to this file, and modify it to 
+your liking.
+
+*/
+
+/* Font */
+
+@font-face{
+	font-family:'BebasNeueRegular';
+	src:url('fonts/BebasNeue-webfont.eot');
+	src:url('fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/BebasNeue-webfont.woff') format('woff'),
+		url('fonts/BebasNeue-webfont.ttf') format('truetype'),
+		url('fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+	font-weight:normal;
+	font-style:normal;
+}
+
+h1, h2, h3, h4, h5, h6  {
+	font-family: BebasNeueRegular,arial,Georgia,serif;
+}
+
+#pagenav a  {
+	font-family: BebasNeueRegular, Helvetica, arial, Georgia, serif;
+}
+
+#logo .site-title a { 
+	font-family: BebasNeueRegular,arial,Georgia,serif;
+}
+
+body{
+	font-family: 'Droid Sans',Arial,Verdana,sans-serif;
+	font-size: 13px;
+}
+
+/* thumb des images */
+.post img.thumbnail:hover{
+    border: 5px solid #17517B;
+}
+
+/* header datacenter */
+div#customHeaderImage {
+    background: url("styles/blue/header1.jpg") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 220px;
+    margin-top: 100px;
+}
+
+/* La recherche */
+input#s {
+    width: 185px;
+}
+
+form#searchform input.submit{
+	padding: 5px 5px;
+}
+
+/* Les H1, H2, ... */
+.entry h1, .entry h2, .entry h3, .entry h4, .entry h5, .entry h6 {
+    font-weight: normal;
+}
+
+
+/* Formulaire de contact + formulaire de commentaires */
+img.wpcf7-captcha-form_securite, a.yarpp-thumbnail img{
+	border : 0px;
+}
+
+div.contact{
+    height: 490px;
+}
+
+div.contact label , #commentform label{
+    float: left;
+    text-align: right;
+    width: 85px;
+    padding-top : 4px;
+    padding-right : 10px;
+    padding-bottom : 4px;
+    padding-left : 0px;
+    color: #4F4F4F;
+    /*vertical-align: middle;
+    height: 16px;	
+    font-size: 1em;	*/
+}
+
+div.contact .requis, #commentform .requis, #commentform .required {
+    color: #17517B;
+    margin-left: 5px;
+}
+
+div.contact input[type=text], div.contact textarea , #commentform input[type=text], #commentform textarea {
+    width:350px;
+}
+
+
+div.contact textarea, #commentform textarea {
+    height:160px;
+}
+
+div.contact input#securite{
+    float: none;
+    margin-left: 20px;
+    vertical-align: top;
+    width: 246px;
+}
+
+div.contact input.submit {
+    margin-right: 48px;
+    margin-top: 20px;
+}
+
+
+div.contact p, #commentform p {
+    width: 100%;
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+div.contact img.ajax-loader{
+    left: 340px;
+    position: absolute;
+    top: 25px;
+}
+
+.post .title{
+	padding-bottom: 15px;
+}
+
+div.wpcf7-response-output{
+	border: 0px;
+	color: #CC0000;
+    display: block;
+    font-size: 13px;
+    font-style: italic;
+}
+
+div.wpcf7-validation-errors{
+	color: #CC0000;
+}
+
+div.wpcf7-mail-sent-ok{
+	color: #008000;
+}
+
+input.field.haveError , textarea.field.haveError {
+    border-color: #CC0000;
+}
+
+/* Formulaire de commentaires */
+
+#commentform #submit {
+    float: right;
+    margin-right: 43px;
+    margin-top: 20px;
+}
+
+#commentform div.captchaSizeDivLarge{
+    margin-bottom: 10px;
+    margin-left: 116px;
+    margin-top: 10px;
+    width: 240px;
+}
+
+#commentform img#si_image_com{
+	display: inline-block;
+}
+
+#commentform div#si_refresh_com{
+    display: inline-block;
+    width: 20px;
+}
+
+#commentform input[type=text], #commentform textarea{
+	border: 1px solid #9FCEF1;
+	width:350px  !important;
+}
+
+#commentform input[type=text]:focus, #commentform textarea:focus{
+	border: 1px solid #17517B;
+}
+#commentform input {
+    margin: 0 5px 10px 0;
+    padding: 7px 5px;
+}
+
+#commentform label#captcha_code_label{
+	width: 102px;
+}
+
+#commentform input#captcha_code{
+	width:330px !important;
+}
+
+/* Barre de nav noir */
+#navigation{
+	display: none;
+}
+
+
+/* La pagination */
+.more_entries a, .more_entries .wp-pagenavi .current, .more_entries .wp-pagenavi .on, .more_entries .wp-pagenavi a{
+	text-transform: none;
+	font-size: 12px;
+}
+
+/* Posts similaires */
+a.yarpp-thumbnail span.yarpp-thumbnail-title{
+	max-height: 100%;
+}
+
+div.yarpp-thumbnails-horizontal a.yarpp-thumbnail{
+	font-size : 12px;
+	text-align: center;
+	height: 100%;
+}
+
+/* La recherche */
+span.search-highlight{
+	color: #686868;
+	font-weight: bold;
+}
+
+/* formattage des lien dans la barre de widget */
+.widget ul li a:link, .widget ul li a:visited{
+    background: none repeat scroll 0 0 transparent;
+    line-height: 20px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.widget ul li a:hover{
+	font-weight: normal;
+}
+
+/* Les métas des posts */
+.post-meta{
+	margin-top : 20px;
+}	
+
+p#tags {
+    margin-top: 20px;
+}
+
+/* Fil d'ariane */
+#breadcrumb, .archive_header{
+	font-family: 'Droid Sans',Arial,Verdana,sans-serif;
+	font-size: 13px;
+}
+#breadcrumb{
+	font-family: 'Droid Sans',Arial,Verdana,sans-serif;
+	font-size: 13px;
+}
+
+/* A propos */
+img.portrait{
+	border: 0px;
+	float: right;
+	padding-top: 34px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+	width: 110px;
+}
+
+div.entry h2.paddingTop{
+	padding-top: 20px;
+}
+
+.entry ol li {
+    list-style-type: decimal;
+}

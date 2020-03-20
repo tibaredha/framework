@@ -1,0 +1,4 @@
+pour configurer le virtual host il faut modifier ces 03 fichiers
+C:\Windows\System32\drivers\etc\hosts
+C:\wamp\bin\apache\Apache2.2.11\conf\extra\httpd-vhosts.conf
+C:\wamp\bin\apache\Apache2.2.11\conf\httpd.con   decocher ligne 466

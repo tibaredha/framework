@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background:url(../design/image/bg.png);
+}
+
+a {
+	text-decoration:none;
+}
+
+#form {
+	display:block;
+	margin:20px auto auto;
+	width:500px;
+	background:#FFC;
+	border:#006 solid 2px;
+	border-radius:15px;
+}
+
+.titre_form {
+	font-variant:small-caps;
+	font-weight:900;
+	background:#006;
+	color:#FFF;
+	border-radius:5px;
+}
+
+.input {
+	background:#006;
+	color:#FFF;
+	border-radius:3px;
+	border:none;
+	cursor:pointer;
+}
+
+.input:hover {
+	background:#06C;
+	color:#FFF;
+	border-radius:3px;
+	border:none;
+	cursor:pointer;
+}
