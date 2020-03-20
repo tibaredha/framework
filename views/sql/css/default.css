@@ -1,0 +1,17 @@
+.naissance{ position:absolute;border: 3px solid #73AD21;background-color: #E0FFFF;border-radius: 15px;text-align: left;font-size: 15px;font-weight: bold; height: 35px;width: 200px; display: inline;}
+.naissance:hover{ background-color: red; color: white; text-decoration: underline; cursor: pointer;}
+#btna{top:280px;left:50px;}#btnb{top:280px;left:250px;}#btnc{top:280px;left:450px;}#btnd{top:280px;left:650px;}
+#btna1{top:320px;left:50px;}#btnb1{top:320px;left:250px;}#btnc1{top:320px;left:450px;}#btnd1{top:320px;left:650px;}
+#btna2{top:360px;left:50px;}#btnb2{top:360px;left:250px;}#btnc2{top:360px;left:450px;}#btnd2{top:360px;left:650px;}
+#btna3{top:400px;left:50px;}#btnb3{top:400px;left:250px;}#btnc3{top:400px;left:450px;}#btnd3{top:400px;left:650px;}
+#btna4{top:440px;left:50px;}#btnb4{top:440px;left:250px;}#btnc4{top:440px;left:450px;}#btnd4{top:440px;left:650px;}
+#btna5{top:480px;left:50px;}#btnb5{top:480px;left:250px;}#btnc5{top:480px;left:450px;}#btnd5{top:480px;left:650px;}
+
+
+
+
+
+
+
+
+

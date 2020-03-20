@@ -1,0 +1,13 @@
+.ord,#idordonnace,#iddoseparprise,#idnbrdrfoisparjours,#idnbrdejours,#idqteProduit,#idprix,#iddate,#idfn,#fn{position:absolute;border: 3px solid #73AD21;border-radius: 15px;margin-top: 0px;text-align: center;font-size: 15px;font-weight: bold;margin-bottom: 20px;height: 32px;display: inline;}
+#ordonnace{top:275px;left:250px;background-color: var(--edit1);width: 180px;  }      #idordonnace{top:275px;left:50px;background-color: green;width: 180px;color: #fff;}
+#doseparprise{top:315px;left:250px;background-color: var(--edit1);width: 180px;}     #iddoseparprise{top:315px;left:50px;background-color: green;width: 180px;color: #fff;}
+#nbrdrfoisparjours{top:355px;left:250px;background-color: var(--edit1);width: 180px;}#idnbrdrfoisparjours{top:355px;left:50px;background-color: green;width: 180px;color: #fff;}
+#nbrdejours{top:395px;left:250px;background-color: var(--edit1);width: 180px;}       #idnbrdejours{top:395px;left:50px;background-color: green;width: 180px;color: #fff;}
+#qteProduit{top:435px;left:250px;background-color: var(--edit1);width: 180px;}       #idqteProduit{top:435px;left:50px;background-color: green;width: 180px;color: #fff;}
+#prix{top:475px;left:250px;background-color: var(--edit1);width: 180px;}             #idprix{top:475px;left:50px;background-color: green;width: 180px;color: #fff;}
+#date{top:515px;left:250px;background-color: var(--edit1);width: 180px;}             #iddate{top:515px;left:50px;background-color: green;width: 180px;color: #fff;}
+#id{top:555px;left:50px;background-color: var(--edit1);width: 180px;}
+#idfn{top:555px;left:50px;background-color: var(--edit1);width: 180px;}              #fn{top:555px;left:250px;background-color: green;width: 180px;color: #fff;}
+#submitord{top:595px;left:50px;background-color: #E0FFFF;width: 180px;}
+
+

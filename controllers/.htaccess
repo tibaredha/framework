@@ -1,0 +1,5 @@
+Options -Indexes 
+# or #
+IndexIgnore *
+
+ErrorDocument 403 http://localhost/framework/Error/

@@ -1,0 +1,9 @@
+# git rm -r --cached  a executer pour prendre en charge les modifications
+
+/nbproject/private/
+
+
+/chart/demo/generated/
+
+
+divers/

@@ -1,0 +1,46 @@
+/* POUR AGENDA */
+.tableaux_centrer1 {
+-moz-border-radius: 5px;position:absolute;top:280px;left:30px;
+border-radius: 15px; 
+border: 1px solid #ff7800;
+text-align:center;width: 700px;background-color: #E0FFFF;
+margin:auto;    
+}
+.tableaux_centrer2 {
+-moz-border-radius: 5px;position:absolute;top:280px;left:770px;
+border-radius: 15px; 
+border: 1px solid #ff7800;
+text-align:center;width: 700px;background-color: #E0FFFF;
+margin:auto;    
+}
+#pdrdv{position:absolute;top:280px;left:770px;}
+#daterdv{position:absolute;top:500px;left:30px;height: 35px;background-color: yellow;border-radius: 15px;width: 200px; display: inline;}
+#typerdv{position:absolute;top:500px;left:270px;height: 35px;background-color: yellow;border-radius: 15px;width: 200px; display: inline;}
+#txtrdv{position:absolute;top:500px;left:494px;background-color: yellow;border-radius: 15px;width: 230px; display: inline;}
+#submitrdv{position:absolute;top:580px;left:30px;height: 35px;background-color: #E0FFFF;border-radius: 15px;width: 200px; display: inline;}
+
+.today{
+font-weight:bold;background-color: greenyellow;
+color:#C00;
+
+}
+.todaya{
+font-weight:bold;
+color:#C00;
+}
+
+.cell_vide {
+background:#ADD5F7;
+}
+
+.dimanche{
+background:silver;
+
+}
+.calendar { 
+background:white;
+}
+.calendar1 { 
+background:#0CC4FC;
+} 
+ 
