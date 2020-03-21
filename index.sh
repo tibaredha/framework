@@ -44,7 +44,7 @@ show_help(){
 	# echo  "---------------|-------|-----------------------------------"
 	#Configuration
 	echo -e "| --version,  \t afficher des informations de version     |"
-	echo -e "| --cfg       \t git init                                 |"
+	echo -e "| --cfg       \t git init (-gh)*create remote repository  |"
 	echo -e "| --ssh       \t set ssh key                              |"
 	echo -e "| --ignore    \t add .gitignore                           |"
 	echo -e "| --listdir   \t afficher list des dossiers               |"
@@ -70,7 +70,7 @@ show_help(){
 # MESSAGES : message de version
 show_version(){
 	echo -e "|---------------|-------|------------------------------------"
-	echo -e "|$script (Script utils) $version                             |"
+	echo -e "|$script (Script tools) $version                              |"
 	echo -e "|                                                           |"
 	echo -e "|Copyright © $annee $author.                               |"
 	echo -e "|                                                           |"
@@ -344,11 +344,85 @@ if [ -z  $1  ]; then
  show_error_miss
 fi
 ##########################################################################
+user_status(){
+echo  "---------------|-------|-----------------------------------"
+# get user name
+username=`git config user.name`
+if [ "$username" = "" ]; then
+    echo "Could not find username, run 'git config --global user.name 'tibaredha'"
+    invalid_credentials=1
+else 
+	echo $username	
+fi
+echo  "---------------|-------|-----------------------------------"
+# get user email
+useremail=`git config user.email`
+if [ "$useremail" = "" ]; then
+    echo "Could not find useremail, run 'git config --global user.email 'tibaredha@yahoo.fr'"
+    invalid_credentials=1
+else 
+	echo $useremail	
+fi
+#pasword
+echo  "---------------|-------|-----------------------------------"
+}
+github_status(){
+
+user_status
+
+dir_name=`basename $(pwd)`
+read -p "Do you want to use '$dir_name' as a repo name?(y/n)" answer_dirname
+case $answer_dirname in
+  y)
+    # use currently dir name as a repo name
+    reponame=$dir_name
+    ;;
+  n)
+    read -p "Enter your new repository name: " reponame
+    if [ "$reponame" = "" ]; then
+        reponame=$dir_name
+    fi
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+
+# create repo
+echo "Creating Github repository '$reponame' ..."
+curl -u "tibaredha:git030570" https://api.github.com/user/repos -d '{"name":"'$reponame'"}'
+echo " done."
+
+# create empty README.md
+echo "Creating README ..."
+touch README.md
+echo "tibaredha" >> README.md
+echo " done."
+
+# push to remote repo
+echo "Pushing to remote ..."
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:tibaredha/$reponame.git
+git push -u origin master
+echo " done."
+
+echo "Opening in a browser ..."
+start https://github.com/tibaredha/$reponame
+}
+
+##########################################################################
 # SWITCHER
 for option in "$@" ; do
 	case $option in
 	
-        # git status
+        # git github_status
+		-gh)
+		github_status;;
+		
+		
+		# git status
 		-st)
 		show_status;;
 		
