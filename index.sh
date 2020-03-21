@@ -7,7 +7,7 @@
 #historique                                                    #
 ################################################################
 
-
+# {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
 
 author="redha tiba"
 script="framework"
@@ -38,45 +38,44 @@ NC='\033[0m'
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
-	echo  "---------------|-------|-----------------------------------"
+	echo  "---------------|-------------------------------------------"
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
 	# echo  "---------------|-------|-----------------------------------"
 	#Configuration
-	echo -e " --version,  \t\t afficher des informations de version"
-	echo -e " --cfg       \t\t git init"
-	echo -e " --ssh       \t\t set ssh key"
-	echo -e " --ignore    \t\t add .gitignore"
-	echo -e " --listdir   \t\t afficher list des dossiers"
-	echo -e " --listpath  \t\t afficher list path"
-	echo -e " --help,     \t\t afficher l'aide"
+	echo -e "| --version,  \t afficher des informations de version     |"
+	echo -e "| --cfg       \t git init                                 |"
+	echo -e "| --ssh       \t set ssh key                              |"
+	echo -e "| --ignore    \t add .gitignore                           |"
+	echo -e "| --listdir   \t afficher list des dossiers               |"
+	echo -e "| --listpath  \t afficher list path                       |"
+	echo -e "| --help,     \t afficher l'aide                          |"
 	#importe un projet  ou clone le projet d'xy 
-	echo -e " --cl,       \t\t git clone url dir"
-	echo  "---------------|-------|-----------------------------------"
+	echo -e "| --cl,       \t git clone url dir                        |"
+	echo  "---------------|-------------------------------------------"
 	#Faire des modifications
-	echo -e " -st,       \t\t git status"
-	echo -e " -ac,       \t\t git add + commit"
-	echo -e " -at,       \t\t git tag -a -m "
+	echo -e "| -st,       \t git status                               |"
+	echo -e "| -ac,       \t git add + commit                         |"
+	echo -e "| -at,       \t git tag -a -m                            |"
 	#Voir l'historique
-	echo -e " -lo,       \t\t git log --oneline"
+	echo -e "| -lo,       \t git log --oneline                        |"
 	#Gérer des branches /tags
-	echo -e " -rv        \t\t git remote -v"
-	echo -e " -po,       \t\t git push origin master"
-	echo -e " -pl,       \t\t git pull origin master"
-	echo  "---------------|-------|-----------------------------------"
+	echo -e "| -rv        \t git remote -v                            |"
+	echo -e "| -po,       \t git push origin master                   |"
+	echo -e "| -pl,       \t git pull origin master                   |"
+	echo  "---------------|-------------------------------------------"
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
-	
-	echo  "---------------|-------|-----------------------------------"
-	echo "$script (Script utils) $version"
-	echo ""
-	echo "Copyright © $annee $author."
-	echo ""
-	echo "Écrit par $author."
-	echo  "---------------|-------|-----------------------------------"
+	echo -e "|---------------|-------|------------------------------------"
+	echo -e "|$script (Script utils) $version                             |"
+	echo -e "|                                                           |"
+	echo -e "|Copyright © $annee $author.                               |"
+	echo -e "|                                                           |"
+	echo -e "|Écrit par $author.                                      |"
+	echo -e "|---------------|-------|------------------------------------"
 	git --version
 	exit 0
 }
@@ -84,7 +83,7 @@ show_version(){
 # MESSAGES : message d'erreur
 show_error_miss(){
 	echo  "---------------|-------|-----------------------------------"
-	printf "${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!!!!${NC}\n"
+	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!! ${NC}|\n"
 	# echo "Saisissez « $0 --help » pour plus d'informations."
 	show_help
 	echo  "---------------|-------|-----------------------------------"
@@ -205,13 +204,24 @@ echo  "---------------|-------|-----------------------------------"
 for f in "${list[@]}";do
 	if [[ -d $f ]]
 	then	
-		printf "${YELLOW} $f  ${NC}\n"
+		printf "|${YELLOW} $f  ${NC}\n"
 	else
-	    printf "${WHITE} $f  ${NC}\n"
+	    printf "|${WHITE} $f  ${NC}\n"
 	fi
 	sleep 1
 	echo  "---------------|-------|-----------------------------------"
 done
+}
+##########################################################################
+show_listpath () {
+echo  "---------------|-------|-----------------------------------"
+#a revoir
+# PATH=$PATH:.
+# echo $PATH
+# export PATH=$PATH:/home/user/mes_prog
+# echo 'export PATH=$PATH:/home/user/mes_prog' >> /home/user/.bashrc
+echo $PATH | tr : \\n
+echo  "---------------|-------|-----------------------------------" 
 }
 ##########################################################################
 ssh_status (){
@@ -254,24 +264,10 @@ set +e
 echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
-ignore_status(){
-# .gitignore
-read -p "Do you want to add .gitignore? (y/n)" answer
-case $answer in
-  y)
-    touch .gitignore
-    addToGitignore
-    ;;
-  n)
-    ;;
-  *)
-    ;;
-esac
-}
 
 addToGitignore () {
     # add filename to .gitignore
-    printf "${YELLOW} hit q for quit ${NC}\n"
+    printf "${YELLOW} Hit q for quit ${NC}\n"
     while :
     do
         read -p "Type file name to add to .gitignore: " filename
@@ -285,20 +281,45 @@ addToGitignore () {
     done
 
 }
-##########################################################################
-show_listpath () {
-#a revoir
-# PATH=$PATH:.
-# echo $PATH
-# export PATH=$PATH:/home/user/mes_prog
-# echo 'export PATH=$PATH:/home/user/mes_prog' >> /home/user/.bashrc
-echo $PATH | tr : \\n  
+
+ignore_status(){
+echo  "---------------|-------|-----------------------------------"
+if [ ! -f  .gitignore  ]; then
+	printf "${YELLOW} .gitignore doesnt exist  ${NC}\n"
+echo  "---------------|-------|-----------------------------------"
+	read -p "Do you want to add .gitignore? (y/n)" answer
+	case $answer in
+	  y)
+		touch .gitignore
+		addToGitignore
+		;;
+	  n)
+		;;
+	  *)
+		;;
+	esac
+else
+	printf "${YELLOW} .gitignore exist  ${NC}\n"
+echo  "---------------|-------|-----------------------------------"
+	read -p "Do you want to update .gitignore? (y/n)" answer
+	case $answer in
+	  y)
+		addToGitignore
+		;;
+	  n)
+		;;
+	  *)
+		;;
+	esac		
+fi
+echo  "---------------|-------|-----------------------------------"
 }
+
 ##########################################################################
 if [ -z  $1  ]; then 
  show_error_miss
 fi
-
+##########################################################################
 # SWITCHER
 for option in "$@" ; do
 	case $option in
