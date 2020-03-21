@@ -10,7 +10,7 @@
 # {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
 
 author="redha tiba"
-script="framework"
+script=`basename $(pwd)`
 version="1.0.0"
 annee=2020
 username="tibaredha"
@@ -51,7 +51,7 @@ show_help(){
 	echo -e "| --listpath  \t afficher list path                       |"
 	echo -e "| --help,     \t afficher l'aide                          |"
 	#importe un projet  ou clone le projet d'xy 
-	echo -e "| --cl,       \t git clone url dir                        |"
+	echo -e "| --cl,       \t git clone                                |" 
 	echo  "---------------|-------------------------------------------"
 	#Faire des modifications
 	echo -e "| -st,       \t git status                               |"
@@ -92,20 +92,42 @@ show_error_miss(){
 
 ##########################################################################
 clone_status(){
-# Check for $script Directory
-read -p 'git_repository_to_clone :' repo
 echo  "---------------|-------|-----------------------------------"
-if [ ! -d $script ]; then
-   git clone git@github.com:$username/$script.git  $script
-   echo "/$script folder doesn't exist and it was created"
-else
-	echo "/$script folder exist"
-fi
-
+read -p "Do you want to clone this repository $script ? (y/n)" answerx
+case $answerx in
+  y)
+	echo  "---------------|-------|-----------------------------------"
+	# Check for $script Directory
+	if [ ! -d $script ]; then
+	   echo "/$script folder doesn't exist"
+	   git clone git@github.com:$username/$script.git  $script
+	   echo  "---------------|-------|-----------------------------------"
+	   echo "/$script done"
+	else
+	   echo "/$script folder exist"
+	fi
+	echo  "---------------|-------|-----------------------------------"
+	;;
+  n)
+    read -p 'git_repository_to_clone :' repo
+	if [ ! -d $repo ]; then
+	   echo "/$repo folder doesn't exist"
+	   git clone git@github.com:$username/$repo.git  $repo
+	   echo  "---------------|-------|-----------------------------------"
+	   echo "/$repo done"
+	else
+	   echo "/$repo folder exist"
+	fi
+	echo  "---------------|-------|-----------------------------------"
+    ;;
+  *)
+    ;;
+esac
+# read -p 'Do you want to clone this repository '$script' ? (y/n)' repo
 # read -p 'git_repository_to_clone :' repo
 # read -p 'dir_repository_to_clone :' direc
 # git clone  git@github.com:tibaredha/framework.git  framework
-#git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
+# git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
 }
 
 ##########################################################################
@@ -177,21 +199,24 @@ echo  "---------------|-------|-----------------------------------"
 remote_status(){
 
 # git remote
-# git remote -v 
+echo  "---------------|-------|-----------------------------------"
+git remote -v 
 # git remote show origin
 # git remote add xxx urlxx   git remote add proj_local /opt/git/projet.git
 # git remote rename xxx  yyy
 # git remote rm  xxx
-# git remote -v
-
-read -p "Do you want to open the new repo page in browser?(y/n): " answer_browser
+echo  "---------------|-------|-----------------------------------"
+read -p "Do you want to open the new repo page $script in browser?(y/n): " answer_browser
 case $answer_browser in
   y)
     echo "Opening in a browser ..."
     start https://github.com/$username/$script
     ;;
   n)
-    ;;
+	read -p 'git_repository_to_open :' repo
+	echo "Opening in a browser ..."
+    start https://github.com/$username/$repo
+	;;
   *)
     ;;
 esac
@@ -264,7 +289,6 @@ set +e
 echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
-
 addToGitignore () {
     # add filename to .gitignore
     printf "${YELLOW} Hit q for quit ${NC}\n"
@@ -285,7 +309,7 @@ addToGitignore () {
 ignore_status(){
 echo  "---------------|-------|-----------------------------------"
 if [ ! -f  .gitignore  ]; then
-	printf "${YELLOW} .gitignore doesnt exist  ${NC}\n"
+	printf "${YELLOW} .gitignore doesn't exist  ${NC}\n"
 echo  "---------------|-------|-----------------------------------"
 	read -p "Do you want to add .gitignore? (y/n)" answer
 	case $answer in

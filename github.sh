@@ -36,6 +36,7 @@ echo " done."
 # create empty README.md
 echo "Creating README ..."
 touch README.md
+echo "tibaredha" >> README.md
 echo " done."
 
 # push to remote repo
@@ -46,3 +47,10 @@ git commit -m "first commit"
 git remote add origin git@github.com:tibaredha/$reponame.git
 git push -u origin master
 echo " done."
+
+echo "Opening in a browser ..."
+start https://github.com/tibaredha/$reponame
+
+
+
+
