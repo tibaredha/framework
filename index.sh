@@ -7,10 +7,10 @@
 #historique                                                    #
 ################################################################
 
-
+# {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
 
 author="redha tiba"
-script="framework"
+script=`basename $(pwd)`
 version="1.0.0"
 annee=2020
 username="tibaredha"
@@ -38,45 +38,44 @@ NC='\033[0m'
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
-	echo  "---------------|-------|-----------------------------------"
+	echo  "---------------|-------------------------------------------"
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
 	# echo  "---------------|-------|-----------------------------------"
 	#Configuration
-	echo -e " --version,  \t\t afficher des informations de version"
-	echo -e " --cfg       \t\t git init"
-	echo -e " --ssh       \t\t set ssh key"
-	echo -e " --ignore    \t\t add .gitignore"
-	echo -e " --listdir   \t\t afficher list des dossiers"
-	echo -e " --listpath  \t\t afficher list path"
-	echo -e " --help,     \t\t afficher l'aide"
+	echo -e "| --version,  \t afficher des informations de version     |"
+	echo -e "| --cfg       \t git init (-gh)*create remote repository  |"
+	echo -e "| --ssh       \t set ssh key                              |"
+	echo -e "| --ignore    \t add .gitignore                           |"
+	echo -e "| --listdir   \t afficher list des dossiers               |"
+	echo -e "| --listpath  \t afficher list path                       |"
+	echo -e "| --help,     \t afficher l'aide                          |"
 	#importe un projet  ou clone le projet d'xy 
-	echo -e " --cl,       \t\t git clone url dir"
-	echo  "---------------|-------|-----------------------------------"
+	echo -e "| --cl,       \t git clone                                |" 
+	echo  "---------------|-------------------------------------------"
 	#Faire des modifications
-	echo -e " -st,       \t\t git status"
-	echo -e " -ac,       \t\t git add + commit"
-	echo -e " -at,       \t\t git tag -a -m "
+	echo -e "| -st,       \t git status                               |"
+	echo -e "| -ac,       \t git add + commit                         |"
+	echo -e "| -at,       \t git tag -a -m                            |"
 	#Voir l'historique
-	echo -e " -lo,       \t\t git log --oneline"
+	echo -e "| -lo,       \t git log --oneline                        |"
 	#Gérer des branches /tags
-	echo -e " -rv        \t\t git remote -v"
-	echo -e " -po,       \t\t git push origin master"
-	echo -e " -pl,       \t\t git pull origin master"
-	echo  "---------------|-------|-----------------------------------"
+	echo -e "| -rv        \t git remote -v                            |"
+	echo -e "| -po,       \t git push origin master                   |"
+	echo -e "| -pl,       \t git pull origin master                   |"
+	echo  "---------------|-------------------------------------------"
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
-	
-	echo  "---------------|-------|-----------------------------------"
-	echo "$script (Script utils) $version"
-	echo ""
-	echo "Copyright © $annee $author."
-	echo ""
-	echo "Écrit par $author."
-	echo  "---------------|-------|-----------------------------------"
+	echo -e "|---------------|-------|------------------------------------"
+	echo -e "|$script (Script tools) $version                              |"
+	echo -e "|                                                           |"
+	echo -e "|Copyright © $annee $author.                               |"
+	echo -e "|                                                           |"
+	echo -e "|Écrit par $author.                                      |"
+	echo -e "|---------------|-------|------------------------------------"
 	git --version
 	exit 0
 }
@@ -84,7 +83,7 @@ show_version(){
 # MESSAGES : message d'erreur
 show_error_miss(){
 	echo  "---------------|-------|-----------------------------------"
-	printf "${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!!!!${NC}\n"
+	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!! ${NC}|\n"
 	# echo "Saisissez « $0 --help » pour plus d'informations."
 	show_help
 	echo  "---------------|-------|-----------------------------------"
@@ -93,20 +92,42 @@ show_error_miss(){
 
 ##########################################################################
 clone_status(){
-# Check for $script Directory
-read -p 'git_repository_to_clone :' repo
 echo  "---------------|-------|-----------------------------------"
-if [ ! -d $script ]; then
-   git clone git@github.com:$username/$script.git  $script
-   echo "/$script folder doesn't exist and it was created"
-else
-	echo "/$script folder exist"
-fi
-
+read -p "Do you want to clone this repository $script ? (y/n)" answerx
+case $answerx in
+  y)
+	echo  "---------------|-------|-----------------------------------"
+	# Check for $script Directory
+	if [ ! -d $script ]; then
+	   echo "/$script folder doesn't exist"
+	   git clone git@github.com:$username/$script.git  $script
+	   echo  "---------------|-------|-----------------------------------"
+	   echo "/$script done"
+	else
+	   echo "/$script folder exist"
+	fi
+	echo  "---------------|-------|-----------------------------------"
+	;;
+  n)
+    read -p 'git_repository_to_clone :' repo
+	if [ ! -d $repo ]; then
+	   echo "/$repo folder doesn't exist"
+	   git clone git@github.com:$username/$repo.git  $repo
+	   echo  "---------------|-------|-----------------------------------"
+	   echo "/$repo done"
+	else
+	   echo "/$repo folder exist"
+	fi
+	echo  "---------------|-------|-----------------------------------"
+    ;;
+  *)
+    ;;
+esac
+# read -p 'Do you want to clone this repository '$script' ? (y/n)' repo
 # read -p 'git_repository_to_clone :' repo
 # read -p 'dir_repository_to_clone :' direc
 # git clone  git@github.com:tibaredha/framework.git  framework
-#git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
+# git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
 }
 
 ##########################################################################
@@ -178,21 +199,24 @@ echo  "---------------|-------|-----------------------------------"
 remote_status(){
 
 # git remote
-# git remote -v 
+echo  "---------------|-------|-----------------------------------"
+git remote -v 
 # git remote show origin
 # git remote add xxx urlxx   git remote add proj_local /opt/git/projet.git
 # git remote rename xxx  yyy
 # git remote rm  xxx
-# git remote -v
-
-read -p "Do you want to open the new repo page in browser?(y/n): " answer_browser
+echo  "---------------|-------|-----------------------------------"
+read -p "Do you want to open the new repo page $script in browser?(y/n): " answer_browser
 case $answer_browser in
   y)
     echo "Opening in a browser ..."
     start https://github.com/$username/$script
     ;;
   n)
-    ;;
+	read -p 'git_repository_to_open :' repo
+	echo "Opening in a browser ..."
+    start https://github.com/$username/$repo
+	;;
   *)
     ;;
 esac
@@ -205,13 +229,24 @@ echo  "---------------|-------|-----------------------------------"
 for f in "${list[@]}";do
 	if [[ -d $f ]]
 	then	
-		printf "${YELLOW} $f  ${NC}\n"
+		printf "|${YELLOW} $f  ${NC}\n"
 	else
-	    printf "${WHITE} $f  ${NC}\n"
+	    printf "|${WHITE} $f  ${NC}\n"
 	fi
 	sleep 1
 	echo  "---------------|-------|-----------------------------------"
 done
+}
+##########################################################################
+show_listpath () {
+echo  "---------------|-------|-----------------------------------"
+#a revoir
+# PATH=$PATH:.
+# echo $PATH
+# export PATH=$PATH:/home/user/mes_prog
+# echo 'export PATH=$PATH:/home/user/mes_prog' >> /home/user/.bashrc
+echo $PATH | tr : \\n
+echo  "---------------|-------|-----------------------------------" 
 }
 ##########################################################################
 ssh_status (){
@@ -254,24 +289,9 @@ set +e
 echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
-ignore_status(){
-# .gitignore
-read -p "Do you want to add .gitignore? (y/n)" answer
-case $answer in
-  y)
-    touch .gitignore
-    addToGitignore
-    ;;
-  n)
-    ;;
-  *)
-    ;;
-esac
-}
-
 addToGitignore () {
     # add filename to .gitignore
-    printf "${YELLOW} hit q for quit ${NC}\n"
+    printf "${YELLOW} Hit q for quit ${NC}\n"
     while :
     do
         read -p "Type file name to add to .gitignore: " filename
@@ -285,25 +305,124 @@ addToGitignore () {
     done
 
 }
-##########################################################################
-show_listpath () {
-#a revoir
-# PATH=$PATH:.
-# echo $PATH
-# export PATH=$PATH:/home/user/mes_prog
-# echo 'export PATH=$PATH:/home/user/mes_prog' >> /home/user/.bashrc
-echo $PATH | tr : \\n  
+
+ignore_status(){
+echo  "---------------|-------|-----------------------------------"
+if [ ! -f  .gitignore  ]; then
+	printf "${YELLOW} .gitignore doesn't exist  ${NC}\n"
+echo  "---------------|-------|-----------------------------------"
+	read -p "Do you want to add .gitignore? (y/n)" answer
+	case $answer in
+	  y)
+		touch .gitignore
+		addToGitignore
+		;;
+	  n)
+		;;
+	  *)
+		;;
+	esac
+else
+	printf "${YELLOW} .gitignore exist  ${NC}\n"
+echo  "---------------|-------|-----------------------------------"
+	read -p "Do you want to update .gitignore? (y/n)" answer
+	case $answer in
+	  y)
+		addToGitignore
+		;;
+	  n)
+		;;
+	  *)
+		;;
+	esac		
+fi
+echo  "---------------|-------|-----------------------------------"
 }
+
 ##########################################################################
 if [ -z  $1  ]; then 
  show_error_miss
 fi
+##########################################################################
+user_status(){
+echo  "---------------|-------|-----------------------------------"
+# get user name
+username=`git config user.name`
+if [ "$username" = "" ]; then
+    echo "Could not find username, run 'git config --global user.name 'tibaredha'"
+    invalid_credentials=1
+else 
+	echo $username	
+fi
+echo  "---------------|-------|-----------------------------------"
+# get user email
+useremail=`git config user.email`
+if [ "$useremail" = "" ]; then
+    echo "Could not find useremail, run 'git config --global user.email 'tibaredha@yahoo.fr'"
+    invalid_credentials=1
+else 
+	echo $useremail	
+fi
+#pasword
+echo  "---------------|-------|-----------------------------------"
+}
+github_status(){
 
+user_status
+
+dir_name=`basename $(pwd)`
+read -p "Do you want to use '$dir_name' as a repo name?(y/n)" answer_dirname
+case $answer_dirname in
+  y)
+    # use currently dir name as a repo name
+    reponame=$dir_name
+    ;;
+  n)
+    read -p "Enter your new repository name: " reponame
+    if [ "$reponame" = "" ]; then
+        reponame=$dir_name
+    fi
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+
+# create repo
+echo "Creating Github repository '$reponame' ..."
+curl -u "tibaredha:git030570" https://api.github.com/user/repos -d '{"name":"'$reponame'"}'
+echo " done."
+
+# create empty README.md
+echo "Creating README ..."
+touch README.md
+echo "tibaredha" >> README.md
+echo " done."
+
+# push to remote repo
+echo "Pushing to remote ..."
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:tibaredha/$reponame.git
+git push -u origin master
+echo " done."
+
+echo "Opening in a browser ..."
+start https://github.com/tibaredha/$reponame
+}
+
+##########################################################################
 # SWITCHER
 for option in "$@" ; do
 	case $option in
 	
-        # git status
+        # git github_status
+		-gh)
+		github_status;;
+		
+		
+		# git status
 		-st)
 		show_status;;
 		
