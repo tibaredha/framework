@@ -153,7 +153,9 @@ case $answer in
     read -p "Tagging Message: " taggingMessage
     git tag -a $tagVersion -m "$taggingMessage"
     git push --tags
-    git tag > tag.txt
+    # What's new in **** 3.0 (release date: Dec 29, 2012)
+    # -------------------------------------------------------
+	git tag > tag.txt
 	;;
   n)
     ;;
