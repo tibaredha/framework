@@ -1,2 +1,4 @@
 # git rm -r --cached  a executer pour prendre en charge les modifications
+*.tmp
+
 
