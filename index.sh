@@ -178,9 +178,20 @@ git pull
 }
 ##########################################################################
 push_status(){
+echo  "---------------|-------|-----------------------------------"
+read -p "Do you want to push whith msg?(y/n): " answer_push
+case $answer_push in
+  y)
+   git push  
+    ;;
+  n)
+	git push --quiet
+	;;
+  *)
+    ;;
+esac
 # git push origin  develop
 # git push origin  master
-git push 
 }
 ##########################################################################
 config_status(){
