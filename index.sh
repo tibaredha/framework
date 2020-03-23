@@ -171,10 +171,21 @@ git log --oneline  -$nbr
 }
 ##########################################################################
 pull_status(){
+echo  "---------------|-------|-----------------------------------"
+read -p "Do you want to pull whith msg?(y/n): " answer_pull
+case $answer_pull in
+  y)
+   git pull  
+    ;;
+  n)
+	git pull --quiet
+	;;
+  *)
+    ;;
+esac
 # git pull origin  develop
 # git pull origin  master
 # git fetch xxx
-git pull
 }
 ##########################################################################
 push_status(){
