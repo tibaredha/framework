@@ -38,10 +38,10 @@ NC='\033[0m'
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
-	echo  "---------------|-------------------------------------------"
+	echo  "+---------------|-----------------------------------------+"
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
-	# echo  "---------------|-------|-----------------------------------"
+	# echo  "+---------------|-------|--------------------------------+"
 	#Configuration
 	echo -e "| --version,  \t afficher des informations de version     |"
 	echo -e "| --cfg       \t git init (-gh)*create remote repository  |"
@@ -52,7 +52,7 @@ show_help(){
 	echo -e "| --help,     \t afficher l'aide                          |"
 	#importe un projet  ou clone le projet d'xy 
 	echo -e "| --cl,       \t git clone                                |" 
-	echo  "---------------|-------------------------------------------"
+	echo  "+---------------|-----------------------------------------+"
 	#Faire des modifications
 	echo -e "| -st,       \t git status                               |"
 	echo -e "| -ac,       \t git add + commit                         |"
@@ -63,30 +63,30 @@ show_help(){
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
 	echo -e "| -pl,       \t git pull origin master                   |"
-	echo  "---------------|-------------------------------------------"
+	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
-	echo -e "|---------------|-------|------------------------------------"
-	echo -e "|$script (Script tools) $version                              |"
+	echo -e "+---------------|-------|-----------------------------------+"
+	echo -e "|(Script tools) $version                                       |"
 	echo -e "|                                                           |"
 	echo -e "|Copyright © $annee $author.                               |"
 	echo -e "|                                                           |"
 	echo -e "|Écrit par $author.                                      |"
-	echo -e "|---------------|-------|------------------------------------"
+	echo -e "+---------------|-------|-----------------------------------+"
 	git --version
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message d'erreur
 show_error_miss(){
-	echo  "---------------|-------|-----------------------------------"
+	echo  "+--------------|-------|----------------------------------+"
 	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!! ${NC}|\n"
 	# echo "Saisissez « $0 --help » pour plus d'informations."
 	show_help
-	echo  "---------------|-------|-----------------------------------"
+	echo  "+--------------|-------|-----------------------------------"
 	exit 1
 }
 
