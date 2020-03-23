@@ -8,7 +8,7 @@
 ################################################################
 
 # {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
-
+################################################################
 author="redha tiba"
 script=`basename $(pwd)`
 version="1.0.0"
@@ -38,10 +38,10 @@ NC='\033[0m'
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
-	echo  "---------------|-------------------------------------------"
+	echo  "+---------------|-----------------------------------------+"
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
-	# echo  "---------------|-------|-----------------------------------"
+	# echo  "+---------------|-------|--------------------------------+"
 	#Configuration
 	echo -e "| --version,  \t afficher des informations de version     |"
 	echo -e "| --cfg       \t git init (-gh)*create remote repository  |"
@@ -52,7 +52,7 @@ show_help(){
 	echo -e "| --help,     \t afficher l'aide                          |"
 	#importe un projet  ou clone le projet d'xy 
 	echo -e "| --cl,       \t git clone                                |" 
-	echo  "---------------|-------------------------------------------"
+	echo  "+---------------|-----------------------------------------+"
 	#Faire des modifications
 	echo -e "| -st,       \t git status                               |"
 	echo -e "| -ac,       \t git add + commit                         |"
@@ -63,30 +63,30 @@ show_help(){
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
 	echo -e "| -pl,       \t git pull origin master                   |"
-	echo  "---------------|-------------------------------------------"
+	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
-	echo -e "|---------------|-------|------------------------------------"
-	echo -e "|$script (Script tools) $version                              |"
+	echo -e "+---------------|-------|-----------------------------------+"
+	echo -e "|(Script tools) $version                                       |"
 	echo -e "|                                                           |"
 	echo -e "|Copyright © $annee $author.                               |"
 	echo -e "|                                                           |"
 	echo -e "|Écrit par $author.                                      |"
-	echo -e "|---------------|-------|------------------------------------"
+	echo -e "+---------------|-------|-----------------------------------+"
 	git --version
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message d'erreur
 show_error_miss(){
-	echo  "---------------|-------|-----------------------------------"
+	echo  "+--------------|-------|----------------------------------+"
 	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!! ${NC}|\n"
 	# echo "Saisissez « $0 --help » pour plus d'informations."
 	show_help
-	echo  "---------------|-------|-----------------------------------"
+	echo  "+--------------|-------|-----------------------------------"
 	exit 1
 }
 
@@ -153,7 +153,9 @@ case $answer in
     read -p "Tagging Message: " taggingMessage
     git tag -a $tagVersion -m "$taggingMessage"
     git push --tags
-    git tag > tag.txt
+    # What's new in **** 3.0 (release date: Dec 29, 2012)
+    # -------------------------------------------------------
+	git tag > tag.txt
 	;;
   n)
     ;;
@@ -176,9 +178,20 @@ git pull
 }
 ##########################################################################
 push_status(){
+echo  "---------------|-------|-----------------------------------"
+read -p "Do you want to push whith msg?(y/n): " answer_push
+case $answer_push in
+  y)
+   git push  
+    ;;
+  n)
+	git push --quiet
+	;;
+  *)
+    ;;
+esac
 # git push origin  develop
 # git push origin  master
-git push 
 }
 ##########################################################################
 config_status(){
