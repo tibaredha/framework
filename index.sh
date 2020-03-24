@@ -26,7 +26,31 @@ annee=2020
 username="tibaredha"
 useremail="tibaredha@yahoo.fr"
 
-# COLOR
+# COLOR notification du c programming 
+# printf("\033[%sm",param) la couleur de la police
+# 30 Noir
+# 31 Rouge
+# 32 Vert
+# 33 Jaune
+# 34 Bleu
+# 35 Magenta
+# 36 Cyan
+# 37 Blanc
+# "5" permet de faire clignoter le texte.
+# "1" active la haute intensité des caractères.
+# "7" inverse la sélection de couleurs : si votre système est noir sur fond blanc cela deviendra blanc sur fond noir.
+# printf("\033[%sm",param)la couleur de fond
+# 40 Noir
+# 41 Rouge
+# 42 Jaune
+# 43 Vert
+# 44 Bleu
+# 45 Magenta
+# 46 Cyan
+# 47 Blanc
+# couleur("34");
+# printf("test");
+# couleur("0");
 DARKGRAY='\033[1;30m'
 RED='\033[0;31m'
 LIGHTRED='\033[1;31m'
@@ -42,14 +66,16 @@ ORANGE='\033[1;33m'
 SUM='\033[1;36m'
 HEADER='\033[1;36m'
 HIGHLINE='\033[7;37m'
+#reinitialise la couleur a zero
 NC='\033[0m'
+# printf("\033[%sm",param)
 
 
 #exec vim "$@"
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
-	local val="--help"
+	local val="$1"
 	bg=41
 	fg=37
 	echo  "+---------------|-----------------------------------------+"
@@ -86,24 +112,30 @@ show_help(){
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
-	echo -e "+---------------|-------|-----------------------------------+"
-	echo -e "| $(git --version)                              |"
-	echo -e "|                                                           |"
-	echo -e "|(Script tools) $version                                       |"
-	echo -e "|                                                           |"
-	echo -e "| Copyright © $annee $author.                              |"
-	echo -e "|                                                           |"
-	echo -e "| Écrit par $author.                                     |"
-	echo -e "+---------------|-------|-----------------------------------+"
+	local val="$1"
+	bg=41
+	fg=37
+	echo  "+---------------|-----------------------------------------+"
+    printf "|${GREEN}$0:${YELLOW} $val ${NC}                                   |\n"
+	echo -e "|\033[${bg}m\033[${fg}m                                                         \033[0m|"
+	echo -e "+---------------|-----------------------------------------+"
+	echo -e "| $(git --version)                            |"
+	echo -e "|                                                         |"
+	echo -e "|(Script tools) $version                                     |"
+	echo -e "|                                                         |"
+	echo -e "| Copyright © $annee $author.                            |"
+	echo -e "|                                                         |"
+	echo -e "| Écrit par $author.                                   |"
+	echo -e "+---------------|-----------------------------------------+"
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message d'erreur
 show_error_miss(){
 	echo  "+--------------|-------|----------------------------------+"
-	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!! ${NC}|\n"
-	# echo "Saisissez « $0 --help » pour plus d'informations."
-	show_help
+	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]: Opérateur Non pris en charge !!!${NC}|\n"
+	echo  "+--------------|-------|-----------------------------------"
+	printf "|${GREEN}$0:${YELLOW} --help pour plus d'information ${NC}              |\n"
 	echo  "+--------------|-------|-----------------------------------"
 	exit 1
 }
@@ -392,7 +424,7 @@ echo  "---------------|-------|-----------------------------------"
 ##########################################################################
 # si pas de paramètre, affiche une erreur
 if [ -z  $1  ]; then 
- show_error_miss
+ show_error_miss $1
 fi
 # if [ $# -eq 0 ] ; then
 	# show_error_miss
@@ -475,10 +507,10 @@ for option in "$@" ; do
 	
         # affiche l'aide
 		--help)
-		show_help;;
+		show_help $1;;
 		# affiche la version
 		--version)
-		show_version;;
+		show_version $1;;
 		# git clone_status
 		--cl)
 		clone_status;;
@@ -525,7 +557,7 @@ for option in "$@" ; do
 		remote_status;;
 		# rien ne correspond
 		*)
-		show_error_miss;;
+		show_error_miss $1;;
         # rien ne correspond
 	esac
 done
