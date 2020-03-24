@@ -368,9 +368,13 @@ echo  "---------------|-------|-----------------------------------"
 }
 
 ##########################################################################
+# si pas de paramètre, affiche une erreur
 if [ -z  $1  ]; then 
  show_error_miss
 fi
+# if [ $# -eq 0 ] ; then
+	# show_error_miss
+# fi
 ##########################################################################
 user_status(){
 echo  "---------------|-------|-----------------------------------"
@@ -610,6 +614,16 @@ done
 # -lt	<	Less than
 # -le	<=	Less than or equal
 # -z	== null	Is null
+
+# -e "$file" Returns true if the file exists.
+# -d "$file" Returns true if the file exists and is a directory
+# -f "$file" Returns true if the file exists and is a regular file
+# -h "$file" Returns true if the file exists and is a symbolic link
+
+# -z "$str" True if length of string is zero
+# -n "$str True if length of string is non-zero
+# "$str" = "$str2" True if string $str is equal to string $str2. Not best for integers. It may work but will be inconsitent
+# "$str" != "$str2" True if the strings are not equal
 
 
 # FILES=/Users/tania/dev/*
