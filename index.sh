@@ -35,22 +35,36 @@ HEADER='\033[1;36m'
 HIGHLINE='\033[7;37m'
 NC='\033[0m'
 
+
+
+# echo "tibaredha"
+# echo "0-"$0
+# echo "1-"$1
+# echo "2-"$2
+# echo "#-"$#
+# echo "*-"$*
+# echo "@-"$@
+
+
 #exec vim "$@"
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
+	local val="--help"
+	echo  "+---------------|-----------------------------------------+"
+    printf "|${GREEN}$0:${YELLOW} $val ${NC}                                      |\n"
 	echo  "+---------------|-----------------------------------------+"
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
 	# echo  "+---------------|-------|--------------------------------+"
 	#Configuration
+	echo -e "| --help,     \t afficher l'aide                          |"
 	echo -e "| --version,  \t afficher des informations de version     |"
-	echo -e "| --cfg       \t git init (-gh)*create remote repository  |"
 	echo -e "| --ssh       \t set ssh key                              |"
+	echo -e "| --cfg       \t git init (--gh)*create remote repository |"
 	echo -e "| --ignore    \t add .gitignore                           |"
 	echo -e "| --listdir   \t afficher list des dossiers               |"
 	echo -e "| --listpath  \t afficher list path                       |"
-	echo -e "| --help,     \t afficher l'aide                          |"
 	#importe un projet  ou clone le projet d'xy 
 	echo -e "| --cl,       \t git clone                                |" 
 	echo  "+---------------|-----------------------------------------+"
@@ -179,7 +193,7 @@ echo  "---------------|-------|-----------------------------------"
 read -p "Do you want to pull whith msg?(y/n): " answer_pull
 case $answer_pull in
   y)
-   git pull  
+    git pull  
     ;;
   n)
 	git pull --quiet
@@ -197,7 +211,7 @@ echo  "---------------|-------|-----------------------------------"
 read -p "Do you want to push whith msg?(y/n): " answer_push
 case $answer_push in
   y)
-   git push  
+    git push  
     ;;
   n)
 	git push --quiet
@@ -217,6 +231,11 @@ git config --local alias.co checkout
 git config --local alias.br branch
 git config --local alias.ci commit
 git config --local alias.st status
+echo  "---------------|-------|-----------------------------------"
+echo  "git flow init : "
+echo  "---------------|-------|-----------------------------------"
+git add .
+git commit -m "initialisation" 
 echo  "---------------|-------|-----------------------------------"
 echo "list configuration : "
 echo  "---------------|-------|-----------------------------------"
@@ -433,11 +452,13 @@ echo " done."
 
 # push to remote repo
 echo "Pushing to remote ..."
-git init
+# git init
 git add README.md
 git commit -m "first commit"
 git remote add origin git@github.com:tibaredha/$reponame.git
 git push -u origin master
+git flow init
+git push --set-upstream origin develop
 echo " done."
 
 echo "Opening in a browser ..."
@@ -449,32 +470,49 @@ start https://github.com/tibaredha/$reponame
 for option in "$@" ; do
 	case $option in
 	
-        # git github_status
-		-gh)
+        # affiche l'aide
+		--help)
+		show_help;;
+		# affiche la version
+		--version)
+		show_version;;
+		# git clone_status
+		--cl)
+		clone_status;;
+		# git config_status
+		--cfg)
+		config_status;;
+		# git ignore_status
+		--ignore)
+		ignore_status;;
+		# git ssh_status
+		--ssh)
+		ssh_status;;
+		# git github_status
+		--gh)
 		github_status;;
-		
-		
+		# affiche la version
+		--listdir)
+		list_status;;
+		# affiche listpath
+		--listpath)
+		show_listpath;;
+        ##########################################################################
 		# git status
 		-st)
 		show_status;;
-		
 		# git add_status
 		-ac)
 		add_status;;
-		
 		# git add_tag
 		-at)
 		add_tag;;
-		
-		
 		# git view_status
 		-lo)
 		view_status;;
-		
 		# git pull_status
 		-pl)
 		pull_status;;
-		
 		# git push_status
 		-po)
 		push_status;;
@@ -482,41 +520,6 @@ for option in "$@" ; do
 		# git remote_status
 		-rv)
 		remote_status;;
-		
-		# git ssh_status
-		--ssh)
-		ssh_status;;
-		
-		# git clone_status
-		--cl)
-		clone_status;;
-		
-		# git config_status
-		--cfg)
-		config_status;;
-		
-		# git ignore_status
-		--ignore)
-		ignore_status;;
-		
-		
-		# affiche listpath
-		--listpath)
-		show_listpath;;
-		
-		
-		# affiche l'aide
-		--help)
-		show_help;;
-		
-		# affiche la version
-		--version)
-		show_version;;
-		
-		# affiche la version
-		--listdir)
-		list_status;;
-		
 		# rien ne correspond
 		*)
 		show_error_miss;;
@@ -604,6 +607,8 @@ done
 # done
 
 
+
+ 
 
 #$0,$1....$9, $#, $* et $@,
 
