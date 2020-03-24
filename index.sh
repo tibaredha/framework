@@ -56,8 +56,11 @@ NC='\033[0m'
 # MESSAGES : message d'aide
 show_help(){
 	local val="--help"
+	bg=41
+	fg=37
 	echo  "+---------------|-----------------------------------------+"
     printf "|${GREEN}$0:${YELLOW} $val ${NC}                                      |\n"
+	echo -e "|\033[${bg}m\033[${fg}m                                                         \033[0m|"
 	echo  "+---------------|-----------------------------------------+"
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
