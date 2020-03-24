@@ -2,6 +2,7 @@
 
 if [ ! -f /bin/tiba ]; then
 cp index.sh /bin/tiba
+echo "you can use tiba" 
 fi
 
 
