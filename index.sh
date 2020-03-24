@@ -5,6 +5,10 @@ cp index.sh /bin/tiba
 echo "you can use tiba" 
 fi
 
+# for i in "$@"; do
+# echo $i
+# done
+
 
 ################################################################
 #index.sh                                                      #
@@ -41,16 +45,6 @@ HIGHLINE='\033[7;37m'
 NC='\033[0m'
 
 
-
-# echo "tibaredha"
-# echo "0-"$0
-# echo "1-"$1
-# echo "2-"$2
-# echo "#-"$#
-# echo "*-"$*
-# echo "@-"$@
-
-
 #exec vim "$@"
 ##########################################################################
 # MESSAGES : message d'aide
@@ -69,19 +63,19 @@ show_help(){
 	echo -e "| --help,     \t afficher l'aide                          |"
 	echo -e "| --version,  \t afficher des informations de version     |"
 	echo -e "| --ssh       \t set ssh key                              |"
-	echo -e "| --cfg       \t git init (--gh)*create remote repository |"
+	#importe un projet  ou clone le projet d'xy 
+	echo -e "| --cl,       \t git clone to get the code and history    |" 
+	echo -e "| --cfg       \t git init(--gh)*create remote repository  |"
 	echo -e "| --ignore    \t add .gitignore                           |"
 	echo -e "| --listdir   \t afficher list des dossiers               |"
 	echo -e "| --listpath  \t afficher list path                       |"
-	#importe un projet  ou clone le projet d'xy 
-	echo -e "| --cl,       \t git clone                                |" 
 	echo  "+---------------|-----------------------------------------+"
 	#Faire des modifications
 	echo -e "| -st,       \t git status                               |"
 	echo -e "| -ac,       \t git add + commit                         |"
 	echo -e "| -at,       \t git tag -a -m                            |"
 	#Voir l'historique
-	echo -e "| -lo,       \t git log --oneline                        |"
+	echo -e "| -lo,       \t git log --oneline to see the history     |"
 	#Gérer des branches /tags
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
@@ -93,13 +87,14 @@ show_help(){
 # MESSAGES : message de version
 show_version(){
 	echo -e "+---------------|-------|-----------------------------------+"
+	echo -e "| $(git --version)                              |"
+	echo -e "|                                                           |"
 	echo -e "|(Script tools) $version                                       |"
 	echo -e "|                                                           |"
-	echo -e "|Copyright © $annee $author.                               |"
+	echo -e "| Copyright © $annee $author.                              |"
 	echo -e "|                                                           |"
-	echo -e "|Écrit par $author.                                      |"
+	echo -e "| Écrit par $author.                                     |"
 	echo -e "+---------------|-------|-----------------------------------+"
-	git --version
 	exit 0
 }
 ##########################################################################
@@ -535,6 +530,84 @@ for option in "$@" ; do
 	esac
 done
 ##########################################################################
+# echo "tibaredha"
+# a=42
+# echo $a
+
+# read x
+# Ceci est une phrase
+# echo $x
+# Ceci est une phrase
+
+# $(cmd) récupérer le resultat texte écrit sur le terminal par une commande dans une chaîne de caractères 
+# echo "Nous sommes le $(date). "
+# $cmd   accès à la valeur de la variable cmd
+
+#condition
+# if cond; then         if test $x -eq 42; then
+#       cmds
+# elif cond; then
+#       cmds
+# else
+#      cmds
+# fi
+
+# res="fr"
+# case $res in
+#	 "fr")
+# 		 echo "Bonjour";;
+# 	 "it")
+#       echo "Ciao";;
+#       *)
+#        echo "Hello";;
+# esac
+
+#boucle
+# x=10
+# while [ $x –ge 0 ]; do
+# 		read x
+# 		echo $x
+# done
+
+# for var in 1 2 3 4; do
+#         echo $var
+# done
+
+
+# -eq	==	Equal
+# -ne	!=	Not equal
+# -gt	>	Greater than
+# -ge	>=	Greater than or equal
+# -lt	<	Less than
+# -le	<=	Less than or equal
+
+# -e "$file" Returns true if the file exists.
+# -d "$file" Returns true if the file exists and is a directory
+# -f "$file" Returns true if the file exists and is a regular file
+# -h "$file" Returns true if the file exists and is a symbolic link
+
+# -z "$str" True if length of string is zero
+# -n "$str  True if length of string is non-zero
+# "$str"  = "$str2" True if string $str is equal to string $str2. Not best for integers. It may work but will be inconsitent
+# "$str" != "$str2" True if the strings are not equal
+
+#argument de cmd   mon_script.sh arg1 arg2 arg3 arg4
+#$0,$1....$9,$#,$*,$@
+# echo "0-"$0 le nom de la commande
+# echo "1-"$1 les paramètres de la commande
+# echo "2-"$2 les paramètres de la commande
+# echo "#-"$# nombre de paramètres de la commande
+# echo "*-"$*
+# echo "@-"$@ liste des paramètres
+
+##########################################################################
+
+
+
+
+
+
+##########################################################################
 # get user name
 # username=`git config user.name`
 # if [ "$username" = "" ]; then
@@ -617,26 +690,6 @@ done
 
 
  
-
-#$0,$1....$9, $#, $* et $@,
-
-# -eq	==	Equal
-# -ne	!=	Not equal
-# -gt	>	Greater than
-# -ge	>=	Greater than or equal
-# -lt	<	Less than
-# -le	<=	Less than or equal
-# -z	== null	Is null
-
-# -e "$file" Returns true if the file exists.
-# -d "$file" Returns true if the file exists and is a directory
-# -f "$file" Returns true if the file exists and is a regular file
-# -h "$file" Returns true if the file exists and is a symbolic link
-
-# -z "$str" True if length of string is zero
-# -n "$str True if length of string is non-zero
-# "$str" = "$str2" True if string $str is equal to string $str2. Not best for integers. It may work but will be inconsitent
-# "$str" != "$str2" True if the strings are not equal
 
 
 # FILES=/Users/tania/dev/*
