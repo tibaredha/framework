@@ -1,5 +1,10 @@
 #!/bin/bash
-# cp index.sh /bin/tiba
+
+if [ ! -f /bin/tiba ]; then
+cp index.sh /bin/tiba
+
+fi
+
 
 ################################################################
 #index.sh                                                      #
