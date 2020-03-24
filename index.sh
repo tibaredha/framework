@@ -2,7 +2,6 @@
 
 if [ ! -f /bin/tiba ]; then
 cp index.sh /bin/tiba
-
 fi
 
 
