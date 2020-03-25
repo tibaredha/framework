@@ -1,23 +1,11 @@
 #!/bin/bash
-
-if [ ! -f /bin/tiba ]; then
-cp index.sh /bin/tiba
-echo "you can use tiba" 
-fi
-
-# for i in "$@"; do
-# echo $i
-# done
-
-
 ################################################################
 #index.sh                                                      #
 #aide git a executer les commandes plus rapidement             #
 #auteur tiba redha                                             #
 #historique                                                    #
 ################################################################
-
-# {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
+source cfg.sh
 ################################################################
 author="redha tiba"
 script=`basename $(pwd)`
@@ -25,56 +13,17 @@ version="1.0.0"
 annee=2020
 username="tibaredha"
 useremail="tibaredha@yahoo.fr"
+# {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
 
-# COLOR notification du c programming 
-# printf("\033[%sm",param) la couleur de la police
-# 30 Noir
-# 31 Rouge
-# 32 Vert
-# 33 Jaune
-# 34 Bleu
-# 35 Magenta
-# 36 Cyan
-# 37 Blanc
-# "5" permet de faire clignoter le texte.
-# "1" active la haute intensité des caractères.
-# "7" inverse la sélection de couleurs : si votre système est noir sur fond blanc cela deviendra blanc sur fond noir.
-# printf("\033[%sm",param)la couleur de fond
-# 40 Noir
-# 41 Rouge
-# 42 Jaune
-# 43 Vert
-# 44 Bleu
-# 45 Magenta
-# 46 Cyan
-# 47 Blanc
-# couleur("34");
-# printf("test");
-# couleur("0");
-DARKGRAY='\033[1;30m'
-RED='\033[0;31m'
-LIGHTRED='\033[1;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-LIGHTPURPLE='\033[1;35m'
-CYAN='\033[0;36m'
-WHITE='\033[1;37m'
-DEFAULT='\033[0m'
-ORANGE='\033[1;33m'
-SUM='\033[1;36m'
-HEADER='\033[1;36m'
-HIGHLINE='\033[7;37m'
-#reinitialise la couleur a zero
-NC='\033[0m'
-# printf("\033[%sm",param)
-
-
-#exec vim "$@"
+##########################################################################
+if [ ! -f /bin/tiba ]; then
+cp index.sh /bin/tiba
+echo "you can use tiba" 
+fi
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
+	clear
 	local val="$1"
 	bg=41
 	fg=37
@@ -112,6 +61,7 @@ show_help(){
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
+	clear
 	local val="$1"
 	bg=41
 	fg=37
@@ -132,11 +82,12 @@ show_version(){
 ##########################################################################
 # MESSAGES : message d'erreur
 show_error_miss(){
-	echo  "+--------------|-------|----------------------------------+"
+	clear
+	echo  "+---------------------------------------------------------+"
 	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]: Opérateur Non pris en charge !!!${NC}|\n"
-	echo  "+--------------|-------|-----------------------------------"
-	printf "|${GREEN}$0:${YELLOW} --help pour plus d'information ${NC}              |\n"
-	echo  "+--------------|-------|-----------------------------------"
+	echo  "+----------------------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} --help pour plus d'informations ${NC}             |\n"
+	echo  "+----------------------------------------------------------"
 	exit 1
 }
 
@@ -182,6 +133,7 @@ esac
 
 ##########################################################################
 show_status(){
+clear
 echo  "---------------|-------------------------------------------"
 printf "|${GREEN}$0:${YELLOW} status ${NC}                                      |\n"
 echo  "---------------|-------------------------------------------"
@@ -189,6 +141,7 @@ git status
 }
 ##########################################################################
 add_status(){
+clear
 git add .
 # echo "ajouter message : "
 read -p 'ajouter message : ' msg
@@ -196,6 +149,7 @@ git commit -a -m "$msg"
 }
 ##########################################################################
 add_tag(){
+clear
 read -p "Do you want to add tag? (y/n)" answer
 case $answer in
   y)
@@ -218,12 +172,14 @@ esac
 }
 ##########################################################################
 view_status(){
+clear
 # echo "preciser le nombre de commit : "
 read -p 'preciser le nombre de commit :' nbr
 git log --oneline  -$nbr
 }
 ##########################################################################
 pull_status(){
+clear
 echo  "---------------|-------|-----------------------------------"
 read -p "Do you want to pull whith msg?(y/n): " answer_pull
 case $answer_pull in
@@ -242,6 +198,7 @@ esac
 }
 ##########################################################################
 push_status(){
+clear
 echo  "---------------|-------|-----------------------------------"
 read -p "Do you want to push whith msg?(y/n): " answer_push
 case $answer_push in
@@ -259,6 +216,7 @@ esac
 }
 ##########################################################################
 config_status(){
+clear
 git init              #--bare 
 git config --local user.name "$username"
 git config --local user.email "$useremail"
@@ -279,7 +237,7 @@ echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
 remote_status(){
-
+clear
 # git remote
 echo  "---------------|-------|-----------------------------------"
 git remote -v 
@@ -303,9 +261,9 @@ case $answer_browser in
     ;;
 esac
 }
-
 ##########################################################################
 list_status(){
+clear
 list=($(ls))
 echo  "---------------|-------|-----------------------------------"
 for f in "${list[@]}";do
@@ -321,6 +279,7 @@ done
 }
 ##########################################################################
 show_listpath () {
+clear
 echo  "---------------|-------|-----------------------------------"
 #a revoir
 # PATH=$PATH:.
@@ -389,6 +348,7 @@ addToGitignore () {
 }
 
 ignore_status(){
+clear
 echo  "---------------|-------|-----------------------------------"
 if [ ! -f  .gitignore  ]; then
 	printf "${YELLOW} .gitignore doesn't exist  ${NC}\n"
@@ -426,6 +386,11 @@ echo  "---------------|-------|-----------------------------------"
 if [ -z  $1  ]; then 
  show_error_miss $1
 fi
+
+# if [ $# == 0 ] ; then
+        # show_usage;
+# fi
+
 # if [ $# -eq 0 ] ; then
 	# show_error_miss
 # fi
@@ -551,240 +516,18 @@ for option in "$@" ; do
 		# git push_status
 		-po)
 		push_status;;
-		
 		# git remote_status
 		-rv)
 		remote_status;;
+		# git show_color
+		-sc)
+		show_color;;
+		# git show_color1
+		-sc1)
+		show_color1;;
 		# rien ne correspond
 		*)
 		show_error_miss $1;;
         # rien ne correspond
 	esac
 done
-##########################################################################
-# echo "tibaredha"
-# a=42
-# echo $a
-
-# read x
-# Ceci est une phrase
-# echo $x
-# Ceci est une phrase
-
-# $(cmd) récupérer le resultat texte écrit sur le terminal par une commande dans une chaîne de caractères 
-# echo "Nous sommes le $(date). "
-# $cmd   accès à la valeur de la variable cmd
-
-#condition
-# if cond; then         if test $x -eq 42; then
-#       cmds
-# elif cond; then
-#       cmds
-# else
-#      cmds
-# fi
-
-# res="fr"
-# case $res in
-#	 "fr")
-# 		 echo "Bonjour";;
-# 	 "it")
-#       echo "Ciao";;
-#       *)
-#        echo "Hello";;
-# esac
-
-#boucle
-# x=10
-# while [ $x –ge 0 ]; do
-# 		read x
-# 		echo $x
-# done
-
-# for var in 1 2 3 4; do
-#         echo $var
-# done
-
-
-# -eq	==	Equal
-# -ne	!=	Not equal
-# -gt	>	Greater than
-# -ge	>=	Greater than or equal
-# -lt	<	Less than
-# -le	<=	Less than or equal
-
-# -e "$file" Returns true if the file exists.
-# -d "$file" Returns true if the file exists and is a directory
-# -f "$file" Returns true if the file exists and is a regular file
-# -h "$file" Returns true if the file exists and is a symbolic link
-
-# -z "$str" True if length of string is zero
-# -n "$str  True if length of string is non-zero
-# "$str"  = "$str2" True if string $str is equal to string $str2. Not best for integers. It may work but will be inconsitent
-# "$str" != "$str2" True if the strings are not equal
-
-#argument de cmd   mon_script.sh arg1 arg2 arg3 arg4
-#$0,$1....$9,$#,$*,$@
-# echo "0-"$0 le nom de la commande
-# echo "1-"$1 les paramètres de la commande
-# echo "2-"$2 les paramètres de la commande
-# echo "#-"$# nombre de paramètres de la commande
-# echo "*-"$*
-# echo "@-"$@ liste des paramètres
-
-##########################################################################
-
-
-
-
-
-
-##########################################################################
-# get user name
-# username=`git config user.name`
-# if [ "$username" = "" ]; then
-    # echo "Could not find username, run 'git config --global user.name 'tibaredha'"
-    # invalid_credentials=1
-# else 
-# echo $username	
-# fi
-# get repo name
-# dir_name=`basename $(pwd)`
-# read -p "Do you want to use '$dir_name' as a repo name?(y/n)" answer_dirname
-# case $answer_dirname in
-  # y)
-    # reponame=$dir_name
-    # ;;
-  # n)
-    # read -p "Enter your new repository name: " reponame
-    # if [ "$reponame" = "" ]; then
-        # reponame=$dir_name
-    # fi
-    # ;;
-  # *)
-    # ;;
-# esac
-# create repo
-# echo "Creating Github repository '$reponame' ..."
-# curl -u $username https://api.github.com/user/repos -d '{"name":"'$reponame'"}'
-# echo " done."
-#create empty README.md
-# echo "Creating README ..."
-# touch README.md
-# echo " done."
-# push to remote repo
-# echo "Pushing to remote ..."
-# git init
-# git add -A
-# git commit -m "first commit"
-# git remote rm origin
-# git remote add origin https://github.com/$username/$reponame.git
-# git push -u origin master
-# echo " done."
-
-# open in a browser
-# read -p "Do you want to open the new repo page in browser?(y/n): " answer_browser
-
-# case $answer_browser in
-  # y)
-    # echo "Opening in a browser ..."
-    # open https://github.com/$username/$reponame
-    # ;;
-  # n)
-    # ;;
-  # *)
-    # ;;
-# esac
-##########################################################################
-
-
-# shift $(($OPTIND - 1))
-
-# DARKGRAY='\033[1;30m'
-# RED='\033[0;31m'
-# LIGHTRED='\033[1;31m'
-# GREEN='\033[0;32m'
-# YELLOW='\033[1;33m'
-# BLUE='\033[0;34m'
-# PURPLE='\033[0;35m'
-# LIGHTPURPLE='\033[1;35m'
-# CYAN='\033[0;36m'
-# WHITE='\033[1;37m'
-# DEFAULT='\033[0m'
-
-# COLORS=($DARKGRAY $RED $LIGHTRED $GREEN $YELLOW $BLUE $PURPLE $LIGHTPURPLE $CYAN $WHITE )
-
-# for c in "${COLORS[@]}";do
-    # printf "\r $c tibaredha $DEFAULT "
-    # sleep 1
-# done
-
-
-
- 
-
-
-# FILES=/Users/tania/dev/*
-
-# for file in $FILES
-# do
-    # echo $(basename $file)
-# done
-
-
-# for F in *
-# do
-	# if [[ -f $F ]]
-	# then
-		# echo $F: $(cat $F | wc -l)
-	# fi
-# done
-
-#ls -all > tiba.txt
-# mkdir mimi
-
-#. ./myscript.sh    Notice the dot and space before the script name.
-
-#cd mimi 
-
- # if [ ! -d "$HOME"/git-sources ]; then
-    # mkdir "$HOME"/git-sources
-# fi
-
-# cd "$HOME"/git-sources || { printf "cd failed, exiting\n" >&2;  return 1; }
-
-# printf "Gitsource: "
-# read -r gitsource
-
-# git clone "$gitsource"
-
-# unset gitsource
-
-# echo "Please choose from the options bellow"
-
-# echo "1) Go back to your working directory"
-# echo "2) Go to the 'git-sources' folder"
-
-# read -r ans
-# back="1"
-# stay="2"
-# if [ "$ans" = "$back" ]; then
-      # cd - || { printf "cd failed, exiting\n" >&2; unset ans; return 1; }
-# elif [ "$ans" = "$stay" ]; then
-      # cd "$HOME"/git-sources || { printf "cd failed, exiting\n" >&2; unset ans; return 1; }
-# fi
-
-# unset ans
-
- # if [ $# -eq 0 ]; then     $#=nombre d' argument    $@ tous les arguments 
-  # echo "oui = 0" 
- # else
-  # echo "non != 0"  
- # fi
-
-# read filename
-# if [ -f $filename  ]; then
-  # echo "oui this fille name "$filename" exist" 
- # else
-  # echo "non this fille name "$filename" doesn't exist" 
- # fi
