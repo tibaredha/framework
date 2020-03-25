@@ -109,6 +109,10 @@ echo -e "|16-\033[0m $var"
 echo "---------------------------------------------------------------------"
 }
 
+
+
+
+
 # echo "Traitement des arguments de trois_arg ()"
 function trois_arg
 {
@@ -138,6 +142,30 @@ echo $somme
 }
 
 # additionne "$@"
+
+parameters=$#
+check_parameters () {
+# Check the number of parameters given and display help
+if [ "$parameters" -ne 2  ] ; then
+echo "Description : This script do this"
+echo "Usage       : $0 <type : isolated or nat or full>"
+echo "Example     : '$0 isolated' or '$0 nat'"
+exit
+fi
+}
+
+are_you_sure () {
+read -r -p "Are you sure? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY])
+       sleep 1
+        ;;
+    *)
+        exit
+        ;;
+esac
+}
+
 #exec vim "$@"
 ##########################################################################
 # for i in "$@"; do
