@@ -32,6 +32,18 @@ class clgraphe  {
 	return $OP;
 	}
 
+    function tiba($DATEJOUR1,$DATEJOUR2) 
+	{
+	$this->mysqlconnectx();
+	$sql = " select DINS from deceshosp where  DINS BETWEEN '$DATEJOUR1' AND '$DATEJOUR2'";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
+
+
+
 	function multigraphe($x,$y,$TITRE,$TBL,$COL,$COLONE,$VALEUR1,$VALEUR2,$structure) //,$data$data[$DATE-4]
 	{
 	include "./CHART/libchart/classes/libchart.php";
