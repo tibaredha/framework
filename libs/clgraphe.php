@@ -225,6 +225,89 @@ class clgraphe  {
         $y = (1 / $sd*sqrt(2 * pi())) * exp(-0.5 * pow(($x-$mean)/$sd, 2));
         return $y;
     }
+	
+	function norm1 ($x, $mean, $sd)
+    {
+        $y = exp($x);
+        return $y;
+    }
+	
+	function norm2 ($x, $mean, $sd)
+    {
+        $y = sin($x);
+        return $y;
+    }
+	
+	
+	// function SquareRoot($X) { 
+  // if($X==0.0) { 
+     // return 0.0;  
+  // } else { 
+     // $M=1.0;
+     // $XN=$X;
+     // while($XN>=2.0) { 
+        // $XN=0.25*$XN;  
+        // $M=2.0*$M;  
+     // } 
+     // while($XN<0.5) { 
+        // $XN=4.0*$XN;  
+        // $M=0.5*$M;  
+     // } 
+     // $A=$XN;
+     // $B=1.0-$XN;  
+     // do {  
+        // $A=$A*(1.0+0.5*$B);  
+        // $B=0.25*(3.0+$B)*$B*$B;  
+     // } while($B>=1.0E-15);  
+     // return $A*$M;  
+  // } 
+// }  
+    
+	// function Ln($x) {
+	  // $negatif = false;
+	  // $fois = 1;
+	  // $ajout = 0;
+	  // if($x<=0.0) return 0;
+	  // if($x<1.0) {
+		 // $negatif = true;
+		 // $x = 1.0/$x;
+	  // }
+	  // while($x >= 10.0) {
+		 // $x /= 10.0;
+		 // $ajout += 2.302585092994046;
+	  // }
+	  // while($x>=1.1) {
+		 // $x = $this->SquareRoot($x);
+		 // $fois *= 2;
+	  // }
+	  // $x--;
+	  // $savx = $x;
+	  // $i = 2;
+	  // $xp = $x*$x;
+	  // $quotient = ($xp/$i);
+	  // $dl = $x-$quotient;
+	  // while (1.0E-15<$quotient) {
+		 // $i++;
+		 // $xp *= $x;
+		 // $dl += ($xp/$i);
+		 // $i++;
+		 // $xp *= $x;
+		 // $quotient = ($xp/$i);
+		 // $dl -= $quotient;
+	  // }
+	  // $dl *= $fois;
+	  // $dl += $ajout;
+	  // if($negatif) $dl = -$dl;
+	  // return $dl;
+	// }
+
+// for($I=0;$I<=2.0;$I+=0.1) {
+   // echo "Ln(".$I.")=".Ln($I)."<BR>";
+// } 
+	
+	
+	
+	
 	function normaldist($x,$y,$TITRE,$SRS,$TBL,$COLONE1,$COLONE2,$ANNEE,$IND,$STR) 
 	{
 	include "./chart/libchart/classes/libchart.php";
