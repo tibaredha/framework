@@ -32,10 +32,10 @@ class clgraphe  {
 	return $OP;
 	}
 
-    function tiba($DATEJOUR1,$DATEJOUR2) 
+    function tiba($DATEJOUR1,$DATEJOUR2,$structure) 
 	{
-	$this->mysqlconnectx();
-	$sql = " select DINS from deceshosp where  DINS BETWEEN '$DATEJOUR1' AND '$DATEJOUR2'";
+	$this->mysqlconnectx();//
+	$sql = " select DINS,STRUCTURED from deceshosp where STRUCTURED = '$structure' AND DINS BETWEEN '$DATEJOUR1' AND '$DATEJOUR2'";
 	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
 	$OP=mysql_num_rows($requete);
 	mysql_free_result($requete);

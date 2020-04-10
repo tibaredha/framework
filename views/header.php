@@ -31,7 +31,12 @@
 <script src="<?php echo URL;?>public/js/alertify.min.js?t=<?php echo time();?>"></script>
 
 <script src="<?php echo URL;?>public/js/jquery.ui.autocomplete.js?t=<?php echo time();?>"></script>
-
+<!--graphe-hightchart-->
+<script src="<?php echo URL;?>code/highcharts.js"></script>
+<script src="<?php echo URL;?>code/modules/series-label.js"></script>
+<script src="<?php echo URL;?>code/modules/exporting.js"></script>
+<script src="<?php echo URL;?>code/modules/export-data.js"></script>
+<!--graphe-->
 
 <?php if (isset($this->js)){foreach ($this->js as $js){echo '<script type="text/javascript" src="'.URL.'views/'.$js.'"></script>';}}?>
 <?php if (isset($this->css)){foreach ($this->css as $css){echo '<link rel="stylesheet" type="text/css" href="'.URL.'views/'.$css.'"></script>';}}?>

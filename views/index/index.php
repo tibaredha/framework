@@ -192,7 +192,7 @@ $subject = 'abcdé fgäü';
 -->
 
 
-<!--
+<!---->
 <marquee behavior="slide" direction="up" scrollamount="2">
 <p class="a">* Les informations rapportées par les certificats de décès permettent l'élaboration </p>
 <p class="a">* Des statistiques exhaustives des causes médicales de décès en Algerie</p>
@@ -203,103 +203,9 @@ $subject = 'abcdé fgäü';
 <p class="a">* Electronique des décès est imperatif</p>
 <p class="a">* Deverait permettre d'ameliorer considerablement le circuit du certificat de décès </p>	
 </marquee>
--->
 
-<script src="<?php echo URL;?>code/highcharts.js"></script>
-<script src="<?php echo URL;?>code/modules/series-label.js"></script>
-<script src="<?php echo URL;?>code/modules/exporting.js"></script>
-<script src="<?php echo URL;?>code/modules/export-data.js"></script>
-<style type="text/css">#container {width: 100%;height: 100%;}</style>
-<div id="container"></div>
-<script type="text/javascript">
-		Highcharts.chart('container', {
 
-			title: {
-				text: 'Electronic Death and Birth Registration System'
-			},
 
-			subtitle: {
-				text: 'Source: DSP djelfa'
-			},
-
-			yAxis: {
-				title: {
-					text: 'Nombre de décés'
-				}
-			},
-			legend: {
-				layout: 'vertical',
-				align: 'right',
-				verticalAlign: 'middle'
-			},
-
-			plotOptions: {
-				series: {
-					label: {
-						connectorAllowed: false
-					},
-					pointStart: 2013
-				}
-			},
-
-			series: [
-			{
-				name: 'Wilaya:djelfa',
-				data: [
-				<?php echo $this->clgraphe->tiba("2013-01-01","2013-12-31");?> , 
-				<?php echo $this->clgraphe->tiba("2014-01-01","2014-12-31");?> , 
-				<?php echo $this->clgraphe->tiba("2015-01-01","2015-12-31");?> , 
-				<?php echo $this->clgraphe->tiba("2016-01-01","2016-12-31");?> , 
-				<?php echo $this->clgraphe->tiba("2017-01-01","2017-12-31");?> , 
-				<?php echo $this->clgraphe->tiba("2018-01-01","2018-12-31");?> , 
-				<?php echo $this->clgraphe->tiba("2019-01-01","2019-12-31");?> , 
-				<?php echo $this->clgraphe->tiba("2020-01-01","2020-12-31");?> 
-				]
-			}, 
-			// {
-				// name: 'EHs:djelfa',
-				// data: [
-				// <?php echo $this->clgraphe->tiba("2013-01-01","2013-12-31",5);?> , 
-				// <?php echo $this->clgraphe->tiba("2014-01-01","2014-12-31",5);?> , 
-				// <?php echo $this->clgraphe->tiba("2015-01-01","2015-12-31",5);?> , 
-				// <?php echo $this->clgraphe->tiba("2016-01-01","2016-12-31",5);?> , 
-				// <?php echo $this->clgraphe->tiba("2017-01-01","2017-12-31",5);?> , 
-				// <?php echo $this->clgraphe->tiba("2018-01-01","2018-12-31",5);?> , 
-				// <?php echo $this->clgraphe->tiba("2019-01-01","2019-12-31",5);?> , 
-				// <?php echo $this->clgraphe->tiba("2020-01-01","2020-12-31",5);?> 
-				// ]
-			// }, 
-			// {
-				// name: 'Sales & Distribution',
-				// data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-			// }, 
-			// {
-				// name: 'Project Development',
-				// data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-			// }, 
-			// {
-				// name: 'Other',
-				// data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-			// }
-			],
-
-			responsive: {
-				rules: [{
-					condition: {
-						maxWidth: 500
-					},
-					chartOptions: {
-						legend: {
-							layout: 'horizontal',
-							align: 'center',
-							verticalAlign: 'bottom'
-						}
-					}
-				}]
-			}
-
-		});
-		</script>
 </div>	
 <div class="content"><img id="image" src="<?php echo URL;?>public/images/accueil.jpg"></div>
 <div class="contentr"><img id="image" src="<?php echo URL;?>public/images/<?php echo logod;?>">
