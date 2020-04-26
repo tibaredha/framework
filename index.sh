@@ -21,6 +21,11 @@ cp index.sh /bin/tiba
 echo "you can use tiba" 
 fi
 ##########################################################################
+if [ ! -f /bin/cfg ]; then
+cp cfg.sh /bin/cfg.sh
+echo "you can use cfg" 
+fi
+##########################################################################
 # MESSAGES : message d'aide
 show_help(){
 	clear
