@@ -16,14 +16,28 @@ function draw(f,f1,f2) {
 	// nb de pixels pour une unité
 	var sc=20;
     
-//axe des x et des y 
+    //axe des x 
 	ctx.strokeStyle = "black";
-	ctx.moveTo(0,160);
-	ctx.lineTo(W,160);
-	ctx.moveTo(200,0);
-	ctx.lineTo(200,H);
+	ctx.moveTo(0,160);ctx.lineTo(420,160);
+	//numerotation x
+	for(var xg=0;xg<W;xg+=sc)
+	{
+	  ctx.moveTo(xg,155);ctx.lineTo(xg,160);
+	  ctx.fillText(xg.toString()/sc-10,xg-2,175);
+	}
 	ctx.stroke();
-    
+	
+	//axe des y 
+	ctx.moveTo(200,0);ctx.lineTo(200,300);
+	ctx.stroke();
+	//numerotation y
+	for(var xg=0;xg<W;xg+=sc)
+	{
+	  ctx.moveTo(200,xg);ctx.lineTo(205,xg);
+	  ctx.fillText((xg.toString()/sc-10)*-1,185,xg-38);
+	}
+	ctx.stroke();
+
 	// tracé du quadrillage
     ctx.strokeStyle = "silver";
     ctx.beginPath();
@@ -74,9 +88,6 @@ function draw(f,f1,f2) {
   ctx.stroke();
 }
 
-
-
-//tracer();
 
 function tracer()
 {
