@@ -40,7 +40,7 @@
 			  <option value="a*pow(2,b*x)">f(x)=a*pow(2,b*x) - Expo</option>
 			  <option value="a*exp(b*x)">f(x)=a*exp(b*x) - Expo (e)</option>
 			  <option value="a*exp(-x*x/(1*b))">f(x)=a*exp(-x*x/b) - Expo (n)</option>
-			  <option value="4.75/(1+exp(-x+5))">f(x)= - Expo (s)</option>
+			  <option value="a/(1+exp(-x+1*b))">f(x)=a/(1+exp(-x+b)) - Expo (s)</option>
 			  <option value="a*log(b*x)">f(x)=a*log(b*x) - Log</option>
 			  <option value="a*log2(b*x)">f(x)=a*ln(b*x) - Ln</option>
 			  <option value="a*log10(b*x)">f(x)=a*log10 - Log10</option>

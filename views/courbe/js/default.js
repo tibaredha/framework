@@ -91,12 +91,13 @@ function draw(f,f1,f2,fun_selector) {
     ctx.lineWidth=2;
     ctx.beginPath();
 	var u=eval(f)
-	ctx.moveTo(-W, H-u*sc)
+	ctx.moveTo(-W, H-u*sc);
+	
     for(x=-W/(2*sc); x<=W/(2*sc); x+=1/sc) 
 	{ 
 	  x1 = (W/2)+x*sc;
 	  y1 = H-(eval(f))*sc;
-      ctx.lineTo(x1,y1) 
+      ctx.lineTo( x1,y1); 
 	}
 	ctx.stroke();
     ctx.closePath();
@@ -141,7 +142,7 @@ function draw(f,f1,f2,fun_selector) {
     ctx.moveTo(-200, H-u3*sc)
     for(x=-W/(2*sc); x<=W/(2*sc); x+=1/sc) 
 	{
-     u3=eval(fun_selector)
+	 u3=eval(fun_selector)
      ctx.lineTo(200+x*sc, H-u3*sc)
     }
     ctx.stroke();
