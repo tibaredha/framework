@@ -38,6 +38,10 @@
 <script src="<?php echo URL;?>code/modules/export-data.js"></script>
 <!--graphe-->
 
+
+
+
+<!--default js and css in view / -->
 <?php if (isset($this->js)){foreach ($this->js as $js){echo '<script type="text/javascript" src="'.URL.'views/'.$js.'"></script>';}}?>
 <?php if (isset($this->css)){foreach ($this->css as $css){echo '<link rel="stylesheet" type="text/css" href="'.URL.'views/'.$css.'"></script>';}}?>
 </head>

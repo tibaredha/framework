@@ -1,4 +1,25 @@
-function draw(f,f1,f2) { 
+
+// let tiba ={
+	// nom:"tiba",
+	// prenom:"redha",
+	// changeTaille : function(f,f1,f2){console.log("J'habite a " +f);},
+	// draw : function(f,f1,f2){console.log("J'habite a " +f1);},
+	// age:"2000"
+	
+// };
+
+
+// try {
+// tiba.changeTaille ("ffsgdsdfsdfff","","");
+// tiba.draw ("","ffsgdsdfsdfff","");
+// alert (tiba.age);
+// }
+// catch(err){
+// alert(err);
+// }
+
+
+function draw(f,f1,f2,fun_selector) { 
 	// Largeur et hauteur en pixels
 	var W=400, H=300
 	var canvas = document.getElementById("graphe");
@@ -43,22 +64,48 @@ function draw(f,f1,f2) {
   
   
   // tracé de la fonction
-  var x;
+  
   with(Math) 
   { 
-    ctx.strokeStyle = "red";
+    var x=0;
+	var a=document.forms[0].rangea.value;
+    var b=document.forms[0].rangeb.value;
+    var c=document.forms[0].rangec.value;
+   
+    
+	//document.write("x : "+x);document.write('<br>');
+	//document.write("f : "+f);document.write('<br>');
+	//document.write("u : "+u);document.write('<br>');
+	//document.write("-w : "+-W);document.write('<br>');
+	//document.write("h : "+H);document.write('<br>');
+	//document.write("sc : "+sc);document.write('<br>');
+	//document.write("H-u*sc : "+(H-(u*sc)));document.write('<br>');
+    
+    //ctx.fillText("/*****************/",-10,160);
+    //document.write("x1 : "+roundToTwo(x1));document.write('<br>');
+	//document.write("y1 : "+roundToTwo(y1));document.write('<br>'); 
+	
+	//*****************************************//
+	if(f!=0){
+	ctx.strokeStyle = "red";
     ctx.lineWidth=2;
     ctx.beginPath();
-    x=0
-    
 	var u=eval(f)
-    ctx.moveTo(-W, H-u*sc)
+	ctx.moveTo(-W, H-u*sc)
     for(x=-W/(2*sc); x<=W/(2*sc); x+=1/sc) 
-	{
-      u=eval(f)
-      ctx.lineTo((W/2)+x*sc, H-u*sc)
-    }
-    
+	{ 
+	  x1 = (W/2)+x*sc;
+	  y1 = H-(eval(f))*sc;
+      ctx.lineTo(x1,y1) 
+	}
+	ctx.stroke();
+    ctx.closePath();
+	}
+    //*****************************************//
+	if(f!=0){
+	ctx.strokeStyle = "green";
+    ctx.lineWidth=2;
+    ctx.beginPath();
 	var u1=eval(f1)
     ctx.moveTo(-200, H-u1*sc)
     for(x=-W/(2*sc); x<=W/(2*sc); x+=1/sc) 
@@ -66,7 +113,14 @@ function draw(f,f1,f2) {
      u1=eval(f1)
      ctx.lineTo(200+x*sc, H-u1*sc)
     }
-	
+	ctx.stroke();
+    ctx.closePath();
+	}
+    //*****************************************//
+	if(f2!=0){
+	ctx.strokeStyle = "blue";
+    ctx.lineWidth=2;
+    ctx.beginPath();
 	var u2=eval(f2)
     ctx.moveTo(-200, H-u2*sc)
     for(x=-W/(2*sc); x<=W/(2*sc); x+=1/sc) 
@@ -74,27 +128,77 @@ function draw(f,f1,f2) {
      u2=eval(f2)
      ctx.lineTo(200+x*sc, H-u2*sc)
     }
+    ctx.stroke();
+    ctx.closePath();
+	}
+    //*****************************************//
+    
+	if(fun_selector!=0){
+	ctx.strokeStyle = "black";
+    ctx.lineWidth=2;
+    ctx.beginPath();
+	var u3=eval(fun_selector)
+    ctx.moveTo(-200, H-u3*sc)
+    for(x=-W/(2*sc); x<=W/(2*sc); x+=1/sc) 
+	{
+     u3=eval(fun_selector)
+     ctx.lineTo(200+x*sc, H-u3*sc)
+    }
+    ctx.stroke();
+    ctx.closePath();	
+	}
+	
   }
-  //ctx.closePath();
-  ctx.stroke();
+  
 }
 
+
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+3")  + "e-3");
+}
 
 function tracer()
 {
-	var b = document.forms[0].formule.value;
-	if (b !="") {var f = "7+" + b}else {var f = "0"}
+	var v0 = document.forms[0].f.value;
+	if (v0 !="") {var f = "7+" + v0}else {var f = "0"}
 
-	var c = document.forms[0].formule1.value;
-	if (c !=""){var f1 = "7+" + c}else {var f1 = "0"};
+	var v1 = document.forms[0].f1.value;
+	if (v1 !=""){var f1 = "7+" + v1}else {var f1 = "0"};
 	
-	var d = document.forms[0].formule2.value;
-	if (d !="") {var f2 = "7+" + d}else {var f2 = "0"};
+	var v2 = document.forms[0].f2.value;
+	if (v2 !="") {var f2 = "7+" + v2}else {var f2 = "0"};
 	
-	draw(f,f1,f2);
+	var v3 = document.forms[0].fun_selector.value;
+	if (v3 !="") {var fun_selector = "7+" + v3}else {var fun_selector = "0"};
+	
+	
+	
+	
+	draw(f,f1,f2,fun_selector);
+}
+//********************************************************************************************//
+//affichage heurs en direct 
+function startTime() {
+  var today = new Date();
+  var h = today.getHours()-1;
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  // add a zero in front of numbers<10
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById("heures").innerHTML = h + ":" + m + ":" + s;
+  var t = setTimeout(function(){ startTime() }, 500);
 }
 
+function checkTime(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
+//********************************************************************************************//
 window.onload = function(){ 
  tracer();
+ startTime();
 }
 

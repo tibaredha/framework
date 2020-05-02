@@ -154,15 +154,15 @@ echo "<button id=\"Cleari\"  onclick=\"document.location='".URL.$data['cb2']."/"
 			{
 				name: 'EPH:deces',
 				data: [
-				<?php $date=date("Y");$lx = Session::get("structure");?>
-				<?php echo $this->clgraphe->tiba(($date-7)."-01-01",($date-7)."-12-31","".$lx);?> , 
-				<?php echo $this->clgraphe->tiba(($date-6)."-01-01",($date-6)."-12-31","".$lx);?> , 
-				<?php echo $this->clgraphe->tiba(($date-5)."-01-01",($date-5)."-12-31","".$lx);?> , 
-				<?php echo $this->clgraphe->tiba(($date-4)."-01-01",($date-4)."-12-31","".$lx);?> , 
-				<?php echo $this->clgraphe->tiba(($date-3)."-01-01",($date-3)."-12-31","".$lx);?> , 
-				<?php echo $this->clgraphe->tiba(($date-2)."-01-01",($date-2)."-12-31","".$lx);?> , 
-				<?php echo $this->clgraphe->tiba(($date-1)."-01-01",($date-1)."-12-31","".$lx);?> , 
-				<?php echo $this->clgraphe->tiba(($date-0)."-01-01",($date-0)."-12-31","".$lx);?> 
+				<?php //$date=date("Y");$lx = Session::get("structure");?>
+				<?php //echo $this->clgraphe->tiba(($date-7)."-01-01",($date-7)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-6)."-01-01",($date-6)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-5)."-01-01",($date-5)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-4)."-01-01",($date-4)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-3)."-01-01",($date-3)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-2)."-01-01",($date-2)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-1)."-01-01",($date-1)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-0)."-01-01",($date-0)."-12-31","".$lx);?> 
 				]
 			}, 
 			// {
