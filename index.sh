@@ -60,6 +60,7 @@ show_help(){
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
 	echo -e "| -pl,       \t git pull origin master                   |"
+	echo -e "| -am,       \t add module : ctrl_mdl_view               |"
 	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
