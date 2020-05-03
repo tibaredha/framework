@@ -26,10 +26,10 @@ function draw(f,f1,f2,fun_selector) {
 	canvas.width=W; 
 	canvas.height=H;
 	var ctx = canvas.getContext("2d");
-
-	// nb de pixels pour une unité
+   
+	
+    // nb de pixels pour une unité
 	var sc=20;
-    
     //axe des x 
 	ctx.strokeStyle = "black";
 	ctx.moveTo(0,160);ctx.lineTo(420,160);
@@ -135,18 +135,39 @@ function draw(f,f1,f2,fun_selector) {
     //*****************************************//
     
 	if(fun_selector!=0){
+	//add rectangle plein
+	// ctx.beginPath();
+	// ctx.rect(20, 20, 140, 100);
+	// var my_gradient = ctx.createLinearGradient(0, 0, 0, 170);
+	// my_gradient.addColorStop(0, "black");
+	// my_gradient.addColorStop(1, "white");
+	// ctx.fillStyle = my_gradient;
+	// ctx.fill();
+	// ctx.closePath();
+	
+	// ctx.beginPath();
+	// ctx.lineWidth="2";
+	// ctx.arc(200, 160, 80, 0, 2 * Math.PI);
+	// ctx.stroke();
+	
+    //ctx.fillStyle="Cyan";
 	ctx.strokeStyle = "black";
-    ctx.lineWidth=2;
+	ctx.lineWidth=2;
     ctx.beginPath();
 	var u3=eval(fun_selector)
-    ctx.moveTo(-200, H-u3*sc)
+    ctx.font = "15px Georgia";
+	ctx.fillText(document.forms[0].fun_selector.value,20,20);
+	ctx.moveTo(-200, H-u3*sc)
     for(x=-W/(2*sc); x<=W/(2*sc); x+=1/sc) 
 	{
 	 u3=eval(fun_selector)
      ctx.lineTo(200+x*sc, H-u3*sc)
     }
     ctx.stroke();
-    ctx.closePath();	
+    //ctx.fill();
+	ctx.closePath();	
+	
+	
 	}
 	
   }
@@ -171,33 +192,10 @@ function tracer()
 	
 	var v3 = document.forms[0].fun_selector.value;
 	if (v3 !="") {var fun_selector = "7+" + v3}else {var fun_selector = "0"};
-	
-	
-	
-	
+		
 	draw(f,f1,f2,fun_selector);
 }
-//********************************************************************************************//
-//affichage heurs en direct 
-function startTime() {
-  var today = new Date();
-  var h = today.getHours()-1;
-  var m = today.getMinutes();
-  var s = today.getSeconds();
-  // add a zero in front of numbers<10
-  m = checkTime(m);
-  s = checkTime(s);
-  document.getElementById("heures").innerHTML = h + ":" + m + ":" + s;
-  var t = setTimeout(function(){ startTime() }, 500);
-}
 
-function checkTime(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
-}
-//********************************************************************************************//
 window.onload = function(){ 
  tracer();
  startTime();

@@ -3,10 +3,10 @@
 <div class="sheader2r">MSPRH</div>
 <div class="listl">
 <style>#graphe{border:1px solid;background-color:#FFFFFF}</style>
-<script src="<?php echo URL;?>views/courbe/js/math.js?t=<?php echo time();?>"></script>
+
 <script>
 // fonction pour dessiner voir default.js ci-jouint
-// document.write(math.derivative('x^2 + x', 'x'));
+//document.write(math.derivative('x^2 + x', 'x'));
 // var x=5;
 // document.write(eval("1/x"));
 </script>
@@ -39,7 +39,7 @@
 			  <option value="1/x">f(x)= - Rationnelle</option>
 			  <option value="a*pow(2,b*x)">f(x)=a*pow(2,b*x) - Expo</option>
 			  <option value="a*exp(b*x)">f(x)=a*exp(b*x) - Expo (e)</option>
-			  <option value="a*exp(-x*x/(1*b))">f(x)=a*exp(-x*x/b) - Expo (n)</option>
+			  <option value="a*1*exp(-x*x/(1*b))">f(x)=a*exp(-x*x/b) - Expo (n)</option>
 			  <option value="a/(1+exp(-x+1*b))">f(x)=a/(1+exp(-x+b)) - Expo (s)</option>
 			  <option value="a*log(b*x)">f(x)=a*log(b*x) - Log</option>
 			  <option value="a*log2(b*x)">f(x)=a*ln(b*x) - Ln</option>

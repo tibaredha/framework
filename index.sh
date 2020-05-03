@@ -135,7 +135,15 @@ esac
 # git clone  git@github.com:tibaredha/framework.git  framework
 # git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
 }
-
+##########################################################################
+add_module()
+{
+clear
+echo  "---------------|-------------------------------------------"
+printf "|${GREEN}$0:${YELLOW} status ${NC}                                      |\n"
+echo  "---------------|-------------------------------------------"
+# git status
+}
 ##########################################################################
 show_status(){
 clear
@@ -530,6 +538,9 @@ for option in "$@" ; do
 		# git show_color1
 		-sc1)
 		show_color1;;
+		# rien ne correspond
+		-am)
+		add_module;;
 		# rien ne correspond
 		*)
 		show_error_miss $1;;
