@@ -158,6 +158,11 @@ case $answer in
 	echo  ""        >> controllers/"$msg".php
 	echo  $message3 >> controllers/"$msg".php
 	echo  $message4 >> controllers/"$msg".php
+	DIR="controllers/$msg.php"
+	for file in $(ls $DIR); do
+	# Affichage du nom du fichier et de ses droits
+	echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
+	done
 	###2
 	touch models/"$msg"_model.php
 	message0=$msg"_Model"
@@ -167,6 +172,11 @@ case $answer in
 	echo  ""        >> models/"$msg"_model.php
 	echo  $message3 >> models/"$msg"_model.php
 	echo  $message4 >> models/"$msg"_model.php
+	DIR="models/$msg"_model.php
+	for file in $(ls $DIR); do
+	# Affichage du nom du fichier et de ses droits
+	echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
+	done
 	###3
 	mkdir views/"$msg"
 	touch views/"$msg"/index.php
@@ -174,8 +184,14 @@ case $answer in
 	echo  ""        >> views/"$msg"/index.php
 	echo  ""        >> views/"$msg"/index.php
 	echo  $message4 >> views/"$msg"/index.php
+	DIR="views/$msg"/index.php
+	for file in $(ls $DIR); do
+	# Affichage du nom du fichier et de ses droits
+	echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
+	done
 	###
 	echo  "le module : $msg a ete ajouté avec succés"
+	
 	;;
   n)
     ;;
@@ -525,10 +541,10 @@ for option in "$@" ; do
 	case $option in
 	
         # affiche l'aide
-		--help)
+		--h|--help)
 		show_help $1;;
 		# affiche la version
-		--version)
+		--v|--version)
 		show_version $1;;
 		# git clone_status
 		--cl)
