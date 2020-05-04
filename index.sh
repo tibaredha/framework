@@ -150,37 +150,32 @@ case $answer in
 	###1
 	touch controllers/"$msg".php
 	message1="<?php"
-	message2="class $msg extends Controller { "
-	message3="} "
+	message2="class $msg extends Controller {"
+	message3="}"
 	message4="?>"
 	echo  $message1 >> controllers/"$msg".php
 	echo  $message2 >> controllers/"$msg".php
+	echo  ""        >> controllers/"$msg".php
 	echo  $message3 >> controllers/"$msg".php
 	echo  $message4 >> controllers/"$msg".php
 	###2
 	touch models/"$msg"_model.php
 	message0=$msg"_Model"
-	message1="<?php"
-	message2="class $message0 extends Model { "
-	message3="} "
-	message4="?>"
+	message2="class $message0 extends Model {"
 	echo  $message1 >> models/"$msg"_model.php
 	echo  $message2 >> models/"$msg"_model.php
+	echo  ""        >> models/"$msg"_model.php
 	echo  $message3 >> models/"$msg"_model.php
 	echo  $message4 >> models/"$msg"_model.php
 	###3
 	mkdir views/"$msg"
 	touch views/"$msg"/index.php
-	message1="<?php"
-	message2=""
-	message3=""
-	message4="?>"
 	echo  $message1 >> views/"$msg"/index.php
-	echo  $message2 >> views/"$msg"/index.php
-	echo  $message3 >> views/"$msg"/index.php
+	echo  ""        >> views/"$msg"/index.php
+	echo  ""        >> views/"$msg"/index.php
 	echo  $message4 >> views/"$msg"/index.php
 	###
-	echo  "le module : $msg a ete ajouter avec succés"
+	echo  "le module : $msg a ete ajouté avec succés"
 	;;
   n)
     ;;
