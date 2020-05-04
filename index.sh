@@ -190,8 +190,7 @@ case $answer in
 	echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
 	done
 	###
-	echo  "le module : $msg a ete ajouté avec succés"
-	
+	echo  "le module : $msg a été ajouté avec succés"
 	;;
   n)
     ;;
