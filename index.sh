@@ -649,19 +649,31 @@ for option in "$@" ; do
 		--listpath)
 		show_listpath;;
         ##########################################################################
-		-st)show_status;;
-		-ac)add_status;;
-		-at)add_tag;;
-		-lo)view_status;;
-		-pl)pull_status;;
-		-po)push_status;;
-		-rv)remote_status;;
-		-sc)show_color;;
-		-sc1)show_color1;;
-		-am)add_module;;
-		-fs)feature_start;;
-		-ff)feature_finish;;
-		*)show_error_miss $1;;  
-		 
+		-st)
+		show_status;;
+		-ac)
+		add_status;;
+		-at)
+		add_tag;;
+		-lo)
+		view_status;;
+		-pl)
+		pull_status;;
+		-po)
+		push_status;;
+		-rv)
+		remote_status;;
+		-sc)
+		show_color;;
+		-sc1)
+		show_color1;;
+		-am)
+		add_module;;
+		-fs)
+		feature_start;;
+		-ff)
+		feature_finish;;
+		*)
+		show_error_miss $1;; 	 
 	esac
 done
