@@ -61,6 +61,10 @@ show_help(){
 	echo -e "| -po,       \t git push origin master                   |"
 	echo -e "| -pl,       \t git pull origin master                   |"
 	echo -e "| -am,       \t add module : ctrl_mdl_view               |"
+	echo -e "| -fs,       \t flow feature start feature_name          |"
+	echo -e "| -ff,       \t flow feature finish feature_name         |"
+	echo -e "| -rs,       \t flow release start release_name          |"
+	echo -e "| -rf,       \t flow release finish release_name         |"
 	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
@@ -136,6 +140,7 @@ esac
 # git clone  git@github.com:tibaredha/framework.git  framework
 # git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
 }
+##########################################################################
 feature_start()
 {
 	clear
@@ -148,8 +153,10 @@ feature_start()
 			read -p 'donner nom feature : ' msgf
 			git flow feature start $msgf
 		;;
-		n);;
-		*);;
+		n)
+		;;
+		*)
+		;;
 	esac
 }
 feature_finish()
@@ -164,11 +171,51 @@ feature_finish()
 			read -p 'donner nom feature : ' msgff
 			git flow feature finish $msgff
 		;;
-		n);;
-		*);;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
+release_start()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter release_start ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add release_start ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom release : ' msgf
+			git flow release start $msgf
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
+release_finish()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter release_finish ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add release_finish ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom release : ' msgf
+			git flow release finish $msgf
+		;;
+		n)
+		;;
+		*)
+		;;
 	esac
 }
 
+ 
+# flow release 
 ##########################################################################
 add_module()
 {
@@ -673,6 +720,10 @@ for option in "$@" ; do
 		feature_start;;
 		-ff)
 		feature_finish;;
+		-rs)
+		release_start;;
+		-rf)
+		release_finish;;
 		*)
 		show_error_miss $1;; 	 
 	esac
