@@ -147,7 +147,6 @@ feature_start()
 		y)
 			read -p 'donner nom feature : ' msgf
 			git flow feature start $msgf
-		 #git flow feature finish tiba
 		;;
 		n);;
 		*);;
