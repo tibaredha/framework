@@ -94,21 +94,12 @@ echo "<button id=\"Cleari\"  onclick=\"document.location='".URL.$data['cb2']."/"
 			echo '<td align="center"  >'.$value['HINS'].'</td>';
 			echo '<td align="left"  >'.HTML::nbrtostring('servicedeces','id',$value['SERVICEHOSPIT'],'service').'</td>';
 			echo '<td align="center"  >'.$value['DUREEHOSPIT'].'</td>';
-			
 			echo '<td align="center" style="width:10px;"  ><a target="_blank" title="GARDE A VUE"  href="'.URL.'tcpdf/gav/certgav.php?uc='.$value['id'].'" ><img src="'.URL.'public/images/mlegaleicon.jpg"   width="16" height="16" border="0" alt=""   /></a></td>';
-			
-			
 			echo '<td align="center" style="width:10px;"  ><a target="_blank" title="Signalement graphique médecine légale"  href="'.URL.$ctrl.'/mlegale/'.$value['id'].'" ><img src="'.URL.'public/images/mlegaleicon.jpg"   width="16" height="16" border="0" alt=""   /></a></td>';
-			
-			
 			echo '<td align="center" style="width:10px;"  ><a target="_blank" title="Signalement graphique médecine légale"  href="'.URL.'tcpdf/deces/sgml.php?uc='.$value['id'].'" ><img src="'.URL.'public/images/mlegaleicon.jpg"   width="16" height="16" border="0" alt=""   /></a></td>';
-			
 			echo '<td align="center" style="width:10px;" bgcolor="#32CD32" ><a target="_blank" title="enquete"  href="'.URL.'fpdf/deces/enquete.php?uc='.$value['id'].'" ><img src="'.URL.'public/images/b_props.png"   width="16" height="16" border="0" alt=""   /></a></td>';
-			
 			echo '<td align="center" style="width:10px;" bgcolor="#32CD32" ><a target="_blank" title="Certificat de décès normal recto"  href="'.URL.'fpdf/deces/deceshosp.php?uc='.$value['id'].'" ><img src="'.URL.'public/images/b_props.png"   width="16" height="16" border="0" alt=""   /></a></td>';
-			
             echo '<td align="center" style="width:10px;" bgcolor="#32CD32" ><a target="_blank" title="Déclaration de décès arabe" href="'.URL.'tcpdf/deces/declaration.php?uc='.$value['id'].'" ><img src="'.URL.'public/images/b_props.png"   width="16" height="16" border="0" alt=""   /></a></td>';
-			
 			if ($value['DECEMAT']=='1'  and  $value['Years'] >= '20') 
 			{
 				echo '<td align="center" style="width:10px;" bgcolor="#32CD32" ><a target="_blank" title="Certificat de décès maternel"  href="'.URL.'fpdf/deces/certdecesmat.php?uc='.$value['id'].'" ><img src="'.URL.'public/images/b_props.png"   width="16" height="16" border="0" alt=""   /></a></td>';echo '<td align="center" style="width:10px;" bgcolor="#32CD32" ><a target="_blank" title="Audit de décès maternel"  href="'.URL.$ctrl.'/decesmaternel/'.$value['id'].'" ><img src="'.URL.'public/images/b_props.png"   width="16" height="16" border="0" alt=""   /></a></td>';
@@ -146,6 +137,65 @@ echo "<button id=\"Cleari\"  onclick=\"document.location='".URL.$data['cb2']."/"
 		else 
 		{
 		echo '<div class="contentl">';
+		?>
+		<style type="text/css">#containerx {width: 100%;height: 100%;}</style>
+        <!--
+        <div id="containerx"></div>-->
+        <script type="text/javascript">
+		Highcharts.chart('containerx', {
+			
+			title: {text: 'Electronic Death and Birth Registration System'},
+            subtitle: {text: 'Source: DSP djelfa'},
+            yAxis: {title: {text: 'Nombre de décés'}},
+			legend: {layout: 'vertical',align: 'right',verticalAlign: 'middle'},
+            plotOptions: {series: {label: {connectorAllowed: false},pointStart: 2013}},
+			
+			series: [
+			{
+				name: 'EPH:deces',
+				data: [
+				<?php //$date=date("Y");$lx = Session::get("structure");?>
+				<?php //echo $this->clgraphe->tiba(($date-7)."-01-01",($date-7)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-6)."-01-01",($date-6)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-5)."-01-01",($date-5)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-4)."-01-01",($date-4)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-3)."-01-01",($date-3)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-2)."-01-01",($date-2)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-1)."-01-01",($date-1)."-12-31","".$lx);?> , 
+				<?php //echo $this->clgraphe->tiba(($date-0)."-01-01",($date-0)."-12-31","".$lx);?> 
+				]
+			}, 
+			// {
+				// name: 'EHs:djelfa',
+				// data: [
+				// <?php echo $this->clgraphe->tiba("2013-01-01","2013-12-31",5);?> , 
+				// <?php echo $this->clgraphe->tiba("2014-01-01","2014-12-31",5);?> , 
+				// <?php echo $this->clgraphe->tiba("2015-01-01","2015-12-31",5);?> , 
+				// <?php echo $this->clgraphe->tiba("2016-01-01","2016-12-31",5);?> , 
+				// <?php echo $this->clgraphe->tiba("2017-01-01","2017-12-31",5);?> , 
+				// <?php echo $this->clgraphe->tiba("2018-01-01","2018-12-31",5);?> , 
+				// <?php echo $this->clgraphe->tiba("2019-01-01","2019-12-31",5);?> , 
+				// <?php echo $this->clgraphe->tiba("2020-01-01","2020-12-31",5);?> 
+				// ]
+			// }, 
+			// {
+				// name: 'Sales & Distribution',
+				// data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+			// }, 
+			// {
+				// name: 'Project Development',
+				// data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+			// }, 
+			// {
+				// name: 'Other',
+				// data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+			// }
+			],
+            responsive: {rules: [{condition: {maxWidth: 500},chartOptions: {legend: {layout: 'horizontal',align: 'center',verticalAlign: 'bottom'}}}]}
+
+		});
+		</script>
+		<?php 
 		$this->clgraphe->multigraphe(30,340,'Décès par année et sexe  arreté au : ','deceshosp','DINS','SEX','M','F','='.Session::get('structure')) ;
 		echo "</div>";
 		echo'<div class="content"><img id="image" src="'.URL.'public/images/dashbord.jpg" ></div>';

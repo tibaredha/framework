@@ -23,8 +23,6 @@ echo '<ul id="menu">';
 		if (Session::get('lang')=='fr') {echo HTML::nbrtostring('structure','id',Session::get('structure'),'structure');}
 		if (Session::get('lang')=='en') {echo HTML::nbrtostring('structure','id',Session::get('structure'),'structure');}		
 		}
-		
-		
 		echo '</p>';
 	}
 echo '</ul>';

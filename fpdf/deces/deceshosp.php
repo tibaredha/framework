@@ -17,7 +17,8 @@ while($row=mysql_fetch_object($resultat))
 {
 	
 	//partie administrative***//
-	$pdf->SetFont('Arial','B',08);
+	
+	$pdf->SetFont('Arial','B',8);
 	$pdf->SetXY(54,35.5);$pdf->Write(0,'ETABLISSEMENT DE SANTE : '.$pdf->nbrtostring('structure','id',intval(trim($row->STRUCTURED)),'structure'));
 	$pdf->SetFont('Arial','B',10);
 	$pdf->SetTextColor(255,0,0);

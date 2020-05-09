@@ -101,7 +101,10 @@ class deces extends FPDI
 	$this->SetXY(5,158);$this->cell(15,10,"2",0,0,'C',0,0);$this->SetXY(5+15,158);$this->cell(105,10,"Liste nominative des décès hospitaliers",0,0,'L',0,0);$this->SetXY(5+15+105,158);$this->cell(15,10,"01",0,0,'C',0,0);$this->SetXY(5+30+105,158);$this->cell(65,10,"Rapport",0,0,'C',0,0);
 	$this->SetXY(5,168);$this->cell(15,10,"3",0,0,'C',0,0);$this->SetXY(5+15,168);$this->cell(105,10,"Rapport de la mortatlité hospitalière",0,0,'L',0,0);$this->SetXY(5+15+105,168);$this->cell(15,10,"01",0,0,'C',0,0);$this->SetXY(5+30+105,168);$this->cell(65,10,"Mortalité Hospitalière",0,0,'C',0,0);
 	$this->SetXY(5,178);$this->cell(15,10,"4",0,0,'C',0,0);$this->SetXY(5+15,178);$this->cell(105,10,"Support Informatique (CD)",0,0,'L',0,0);$this->SetXY(5+15+105,178);$this->cell(15,10,"01",0,0,'C',0,0);$this->SetXY(5+30+105,178);$this->cell(65,10,"Du ".$this->dateUS2FR($datejour1)." Au ".$this->dateUS2FR($datejour2),0,0,'C',0,0);
-	$this->SetXY(5+30+105,250);$this->cell(40,10,"Le Directeur",0,0,'L',0,0);
+	$this->AddFont('Prettygirlfree','','Prettygirlfree.php');
+	$this->SetXY(140,250);$this->cell(40,10,"Le Directeur",0,0,'L',0,0);
+    $this->SetFont('Prettygirlfree','',35);
+	$this->SetXY(140,255);$this->cell(40,10,"tibaredha",0,0,'L',0,0);
 	$this->SetFont('Times', 'B', 11);
 	// $this->Footerdc();
 	}

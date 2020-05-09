@@ -31,8 +31,17 @@
 <script src="<?php echo URL;?>public/js/alertify.min.js?t=<?php echo time();?>"></script>
 
 <script src="<?php echo URL;?>public/js/jquery.ui.autocomplete.js?t=<?php echo time();?>"></script>
+<!--graphe-hightchart-->
+<script src="<?php echo URL;?>code/highcharts.js"></script>
+<script src="<?php echo URL;?>code/modules/series-label.js"></script>
+<script src="<?php echo URL;?>code/modules/exporting.js"></script>
+<script src="<?php echo URL;?>code/modules/export-data.js"></script>
+<!--graphe-->
 
 
+<script src="<?php echo URL;?>public/js/math.min.js?t=<?php echo time();?>"></script>
+
+<!--default js and css in view / -->
 <?php if (isset($this->js)){foreach ($this->js as $js){echo '<script type="text/javascript" src="'.URL.'views/'.$js.'"></script>';}}?>
 <?php if (isset($this->css)){foreach ($this->css as $css){echo '<link rel="stylesheet" type="text/css" href="'.URL.'views/'.$css.'"></script>';}}?>
 </head>
@@ -45,7 +54,9 @@ Lang::init(Session::get('loggedIn'));
 $temps = Temp::getmicrotime();
 ?>
 <div class="tiba" >
-    <div class="headerl"></div><div class="headerc"><?php echo '<p id="wdj2" >';echo TXT_TITRE_INDEX ;echo '</p>';?></div>	<div class="headerr"></div>
+    <div class="headerl"></div>
+	<div class="headerc"><p id="wdj2"><?php echo TXT_TITRE_INDEX ;?></p></div>	
+	<div class="headerr"></div>
 	<div class="sheaderl"><?php require 'menu/menu.php';?></div>		
 	<div class="sheaderr"><?php 
 	if (Session::get('loggedIn') == true)
