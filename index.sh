@@ -1,13 +1,11 @@
 #!/bin/bash
-
 ################################################################
 #index.sh                                                      #
 #aide git a executer les commandes plus rapidement             #
 #auteur tiba redha                                             #
 #historique                                                    #
 ################################################################
-
-# {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
+source cfg.sh
 ################################################################
 author="redha tiba"
 script=`basename $(pwd)`
@@ -15,78 +13,91 @@ version="1.0.0"
 annee=2020
 username="tibaredha"
 useremail="tibaredha@yahoo.fr"
+# {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
 
-# COLOR
-DARKGRAY='\033[1;30m'
-RED='\033[0;31m'
-LIGHTRED='\033[1;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-LIGHTPURPLE='\033[1;35m'
-CYAN='\033[0;36m'
-WHITE='\033[1;37m'
-DEFAULT='\033[0m'
-ORANGE='\033[1;33m'
-SUM='\033[1;36m'
-HEADER='\033[1;36m'
-HIGHLINE='\033[7;37m'
-NC='\033[0m'
-
-#exec vim "$@"
+##########################################################################
+if [ ! -f /bin/tiba ]; then
+cp index.sh /bin/tiba
+echo "you can use tiba" 
+fi
+##########################################################################
+if [ ! -f /bin/cfg ]; then
+cp cfg.sh /bin/cfg.sh
+echo "you can use cfg" 
+fi
 ##########################################################################
 # MESSAGES : message d'aide
 show_help(){
+	clear
+	local val="$1"
+	bg=41
+	fg=37
+	echo  "+---------------|-----------------------------------------+"
+    printf "|${GREEN}$0:${YELLOW} $val ${NC}                                      |\n"
+	echo -e "|\033[${bg}m\033[${fg}m                                                         \033[0m|"
 	echo  "+---------------|-----------------------------------------+"
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
 	# echo  "+---------------|-------|--------------------------------+"
 	#Configuration
+	echo -e "| --help,     \t afficher l'aide                          |"
 	echo -e "| --version,  \t afficher des informations de version     |"
-	echo -e "| --cfg       \t git init (-gh)*create remote repository  |"
 	echo -e "| --ssh       \t set ssh key                              |"
+	#importe un projet  ou clone le projet d'xy 
+	echo -e "| --cl,       \t git clone to get the code and history    |" 
+	echo -e "| --cfg       \t git init(--gh)*create remote repository  |"
 	echo -e "| --ignore    \t add .gitignore                           |"
 	echo -e "| --listdir   \t afficher list des dossiers               |"
 	echo -e "| --listpath  \t afficher list path                       |"
-	echo -e "| --help,     \t afficher l'aide                          |"
-	#importe un projet  ou clone le projet d'xy 
-	echo -e "| --cl,       \t git clone                                |" 
 	echo  "+---------------|-----------------------------------------+"
 	#Faire des modifications
 	echo -e "| -st,       \t git status                               |"
 	echo -e "| -ac,       \t git add + commit                         |"
 	echo -e "| -at,       \t git tag -a -m                            |"
 	#Voir l'historique
-	echo -e "| -lo,       \t git log --oneline                        |"
+	echo -e "| -lo,       \t git log --oneline to see the history     |"
 	#Gérer des branches /tags
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
 	echo -e "| -pl,       \t git pull origin master                   |"
+	echo -e "| -am,       \t add module : ctrl_mdl_view               |"
+	echo -e "| -fs,       \t flow feature start feature_name          |"
+	echo -e "| -ff,       \t flow feature finish feature_name         |"
+	echo -e "| -rs,       \t flow release start release_name          |"
+	echo -e "| -rf,       \t flow release finish release_name         |"
 	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
-	echo -e "+---------------|-------|-----------------------------------+"
-	echo -e "|(Script tools) $version                                       |"
-	echo -e "|                                                           |"
-	echo -e "|Copyright © $annee $author.                               |"
-	echo -e "|                                                           |"
-	echo -e "|Écrit par $author.                                      |"
-	echo -e "+---------------|-------|-----------------------------------+"
-	git --version
+	clear
+	local val="$1"
+	bg=41
+	fg=37
+	echo  "+---------------|-----------------------------------------+"
+    printf "|${GREEN}$0:${YELLOW} $val ${NC}                                   |\n"
+	echo -e "|\033[${bg}m\033[${fg}m                                                         \033[0m|"
+	echo -e "+---------------|-----------------------------------------+"
+	echo -e "| $(git --version)                            |"
+	echo -e "|                                                         |"
+	echo -e "|(Script tools) $version                                     |"
+	echo -e "|                                                         |"
+	echo -e "| Copyright © $annee $author.                            |"
+	echo -e "|                                                         |"
+	echo -e "| Écrit par $author.                                   |"
+	echo -e "+---------------|-----------------------------------------+"
 	exit 0
 }
 ##########################################################################
 # MESSAGES : message d'erreur
 show_error_miss(){
-	echo  "+--------------|-------|----------------------------------+"
-	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]:Opérateur Non pris en charge !!! ${NC}|\n"
-	# echo "Saisissez « $0 --help » pour plus d'informations."
-	show_help
-	echo  "+--------------|-------|-----------------------------------"
+	clear
+	echo  "+---------------------------------------------------------+"
+	printf "|${GREEN}$0:${YELLOW}[EXTENSIONS]: Opérateur Non pris en charge !!!${NC}|\n"
+	echo  "+----------------------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} --help pour plus d'informations ${NC}             |\n"
+	echo  "+----------------------------------------------------------"
 	exit 1
 }
 
@@ -129,13 +140,204 @@ esac
 # git clone  git@github.com:tibaredha/framework.git  framework
 # git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
 }
+##########################################################################
+feature_start()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter feature_start ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add feature_start ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom feature : ' msgf
+			git flow feature start $msgf
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
+feature_finish()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter feature_finish ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add feature_finish ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom feature : ' msgff
+			git flow feature finish $msgff
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
+release_start()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter release_start ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add release_start ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom release : ' msgf
+			git flow release start $msgf
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
+release_finish()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter release_finish ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add release_finish ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom release : ' msgf
+			git flow release finish $msgf
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
 
+ 
+# flow release 
+##########################################################################
+add_module()
+{
+clear
+echo  "---------------|-------------------------------------------"
+printf "|${GREEN}$0:${YELLOW} ajouter nom module ${NC}                          |\n"
+echo  "---------------|-------------------------------------------"
+read -p "Do you want to add module ? (y/n)" answer
+case $answer in
+y)
+read -p 'ajouter nom module : ' msg
+###1-contorleur
+touch controllers/"$msg".php
+OUTC=controllers/"$msg".php	
+cat  << EOF > $OUTC 
+<?php
+class $msg extends Controller { 
+	
+	public \$controleur="$msg";
+	
+	function __construct() {
+		parent::__construct();
+		Session::init();
+		\$logged = Session::get('loggedIn');
+		if (\$logged == false) {
+			Session::destroy();
+			header('location: '.URL.'login');
+			exit;
+		}
+		\$this->view->js = array(\$this->controleur.'/js/default.js?t='.time());
+		\$this->view->css = array(\$this->controleur.'/css/default.css?t='.time());
+	}
+	
+	function index() {
+		\$this->view->title = '$msg';
+		\$this->view->msg = '$msg';
+		\$this->view->render(\$this->controleur.'/index');
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}
+?>
+EOF
+DIR="controllers/$msg.php"
+for file in $(ls $DIR); do
+# Affichage du nom du fichier et de ses droits
+echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")	  
+done
+###2-model
+touch models/"$msg"_model.php
+message0=$msg"_Model"
+OUTM=models/"$msg"_model.php
+cat  << EOF > $OUTM 
+<?php
+class $message0 extends Model { 
+    
+	public \$tbl="$msg";
+   
+	public function __construct() {
+		parent::__construct();
+	}
+
+
+
+
+
+
+	
+}
+?>
+EOF
+DIR="models/$msg"_model.php
+for file in $(ls $DIR); do
+# Affichage du nom du fichier et de ses droits
+echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
+done
+###3-view
+mkdir views/"$msg"
+touch views/"$msg"/index.php
+OUTV=views/"$msg"/index.php
+cat  << EOF > $OUTV 
+<?php
+  
+?>
+EOF
+DIR="views/$msg"/index.php
+for file in $(ls $DIR); do
+# Affichage du nom du fichier et de ses droits
+echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
+done
+###4-creer le dossier css/default.css + js /default.js
+mkdir views/"$msg"/css
+touch views/"$msg"/css/default.css
+mkdir views/"$msg"/js
+touch views/"$msg"/js/default.js
+
+###
+echo  "le module : $msg a été ajouté avec succés"
+;;
+n)
+;;
+*)
+;;
+esac
+}
 ##########################################################################
 show_status(){
+clear
+echo  "---------------|-------------------------------------------"
+printf "|${GREEN}$0:${YELLOW} status ${NC}                                      |\n"
+echo  "---------------|-------------------------------------------"
 git status
 }
 ##########################################################################
 add_status(){
+clear
 git add .
 # echo "ajouter message : "
 read -p 'ajouter message : ' msg
@@ -143,6 +345,7 @@ git commit -a -m "$msg"
 }
 ##########################################################################
 add_tag(){
+clear
 read -p "Do you want to add tag? (y/n)" answer
 case $answer in
   y)
@@ -165,17 +368,19 @@ esac
 }
 ##########################################################################
 view_status(){
+clear
 # echo "preciser le nombre de commit : "
 read -p 'preciser le nombre de commit :' nbr
 git log --oneline  -$nbr
 }
 ##########################################################################
 pull_status(){
+clear
 echo  "---------------|-------|-----------------------------------"
 read -p "Do you want to pull whith msg?(y/n): " answer_pull
 case $answer_pull in
   y)
-   git pull  
+    git pull  
     ;;
   n)
 	git pull --quiet
@@ -189,11 +394,14 @@ esac
 }
 ##########################################################################
 push_status(){
-echo  "---------------|-------|-----------------------------------"
+clear
+echo  "---------------|-------------------------------------------"
+printf "|${GREEN}$0:${YELLOW} push online  ${NC}                                |\n"
+echo  "---------------|-------------------------------------------"
 read -p "Do you want to push whith msg?(y/n): " answer_push
 case $answer_push in
   y)
-   git push  
+    git push  
     ;;
   n)
 	git push --quiet
@@ -206,6 +414,7 @@ esac
 }
 ##########################################################################
 config_status(){
+clear
 git init              #--bare 
 git config --local user.name "$username"
 git config --local user.email "$useremail"
@@ -214,6 +423,11 @@ git config --local alias.br branch
 git config --local alias.ci commit
 git config --local alias.st status
 echo  "---------------|-------|-----------------------------------"
+echo  "git flow init : "
+echo  "---------------|-------|-----------------------------------"
+git add .
+git commit -m "initialisation" 
+echo  "---------------|-------|-----------------------------------"
 echo "list configuration : "
 echo  "---------------|-------|-----------------------------------"
 git config --list
@@ -221,7 +435,7 @@ echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
 remote_status(){
-
+clear
 # git remote
 echo  "---------------|-------|-----------------------------------"
 git remote -v 
@@ -245,9 +459,9 @@ case $answer_browser in
     ;;
 esac
 }
-
 ##########################################################################
 list_status(){
+clear
 list=($(ls))
 echo  "---------------|-------|-----------------------------------"
 for f in "${list[@]}";do
@@ -263,6 +477,7 @@ done
 }
 ##########################################################################
 show_listpath () {
+clear
 echo  "---------------|-------|-----------------------------------"
 #a revoir
 # PATH=$PATH:.
@@ -331,6 +546,7 @@ addToGitignore () {
 }
 
 ignore_status(){
+clear
 echo  "---------------|-------|-----------------------------------"
 if [ ! -f  .gitignore  ]; then
 	printf "${YELLOW} .gitignore doesn't exist  ${NC}\n"
@@ -364,9 +580,18 @@ echo  "---------------|-------|-----------------------------------"
 }
 
 ##########################################################################
+# si pas de paramètre, affiche une erreur
 if [ -z  $1  ]; then 
- show_error_miss
+ show_error_miss $1
 fi
+
+# if [ $# == 0 ] ; then
+        # show_usage;
+# fi
+
+# if [ $# -eq 0 ] ; then
+	# show_error_miss
+# fi
 ##########################################################################
 user_status(){
 echo  "---------------|-------|-----------------------------------"
@@ -425,11 +650,13 @@ echo " done."
 
 # push to remote repo
 echo "Pushing to remote ..."
-git init
+# git init
 git add README.md
 git commit -m "first commit"
 git remote add origin git@github.com:tibaredha/$reponame.git
 git push -u origin master
+git flow init
+git push --set-upstream origin develop
 echo " done."
 
 echo "Opening in a browser ..."
@@ -441,234 +668,63 @@ start https://github.com/tibaredha/$reponame
 for option in "$@" ; do
 	case $option in
 	
-        # git github_status
-		-gh)
-		github_status;;
-		
-		
-		# git status
-		-st)
-		show_status;;
-		
-		# git add_status
-		-ac)
-		add_status;;
-		
-		# git add_tag
-		-at)
-		add_tag;;
-		
-		
-		# git view_status
-		-lo)
-		view_status;;
-		
-		# git pull_status
-		-pl)
-		pull_status;;
-		
-		# git push_status
-		-po)
-		push_status;;
-		
-		# git remote_status
-		-rv)
-		remote_status;;
-		
-		# git ssh_status
-		--ssh)
-		ssh_status;;
-		
+        # affiche l'aide
+		--h|--help)
+		show_help $1;;
+		# affiche la version
+		--v|--version)
+		show_version $1;;
 		# git clone_status
 		--cl)
 		clone_status;;
-		
 		# git config_status
 		--cfg)
 		config_status;;
-		
 		# git ignore_status
 		--ignore)
 		ignore_status;;
-		
-		
-		# affiche listpath
-		--listpath)
-		show_listpath;;
-		
-		
-		# affiche l'aide
-		--help)
-		show_help;;
-		
-		# affiche la version
-		--version)
-		show_version;;
-		
+		# git ssh_status
+		--ssh)
+		ssh_status;;
+		# git github_status
+		--gh)
+		github_status;;
 		# affiche la version
 		--listdir)
 		list_status;;
-		
-		# rien ne correspond
+		# affiche listpath
+		--listpath)
+		show_listpath;;
+        ##########################################################################
+		-st)
+		show_status;;
+		-ac)
+		add_status;;
+		-at)
+		add_tag;;
+		-lo)
+		view_status;;
+		-pl)
+		pull_status;;
+		-po)
+		push_status;;
+		-rv)
+		remote_status;;
+		-sc)
+		show_color;;
+		-sc1)
+		show_color1;;
+		-am)
+		add_module;;
+		-fs)
+		feature_start;;
+		-ff)
+		feature_finish;;
+		-rs)
+		release_start;;
+		-rf)
+		release_finish;;
 		*)
-		show_error_miss;;
-        # rien ne correspond
+		show_error_miss $1;; 	 
 	esac
 done
-##########################################################################
-# get user name
-# username=`git config user.name`
-# if [ "$username" = "" ]; then
-    # echo "Could not find username, run 'git config --global user.name 'tibaredha'"
-    # invalid_credentials=1
-# else 
-# echo $username	
-# fi
-# get repo name
-# dir_name=`basename $(pwd)`
-# read -p "Do you want to use '$dir_name' as a repo name?(y/n)" answer_dirname
-# case $answer_dirname in
-  # y)
-    # reponame=$dir_name
-    # ;;
-  # n)
-    # read -p "Enter your new repository name: " reponame
-    # if [ "$reponame" = "" ]; then
-        # reponame=$dir_name
-    # fi
-    # ;;
-  # *)
-    # ;;
-# esac
-# create repo
-# echo "Creating Github repository '$reponame' ..."
-# curl -u $username https://api.github.com/user/repos -d '{"name":"'$reponame'"}'
-# echo " done."
-#create empty README.md
-# echo "Creating README ..."
-# touch README.md
-# echo " done."
-# push to remote repo
-# echo "Pushing to remote ..."
-# git init
-# git add -A
-# git commit -m "first commit"
-# git remote rm origin
-# git remote add origin https://github.com/$username/$reponame.git
-# git push -u origin master
-# echo " done."
-
-# open in a browser
-# read -p "Do you want to open the new repo page in browser?(y/n): " answer_browser
-
-# case $answer_browser in
-  # y)
-    # echo "Opening in a browser ..."
-    # open https://github.com/$username/$reponame
-    # ;;
-  # n)
-    # ;;
-  # *)
-    # ;;
-# esac
-##########################################################################
-
-
-# shift $(($OPTIND - 1))
-
-# DARKGRAY='\033[1;30m'
-# RED='\033[0;31m'
-# LIGHTRED='\033[1;31m'
-# GREEN='\033[0;32m'
-# YELLOW='\033[1;33m'
-# BLUE='\033[0;34m'
-# PURPLE='\033[0;35m'
-# LIGHTPURPLE='\033[1;35m'
-# CYAN='\033[0;36m'
-# WHITE='\033[1;37m'
-# DEFAULT='\033[0m'
-
-# COLORS=($DARKGRAY $RED $LIGHTRED $GREEN $YELLOW $BLUE $PURPLE $LIGHTPURPLE $CYAN $WHITE )
-
-# for c in "${COLORS[@]}";do
-    # printf "\r $c tibaredha $DEFAULT "
-    # sleep 1
-# done
-
-
-
-#$0,$1....$9, $#, $* et $@,
-
-# -eq	==	Equal
-# -ne	!=	Not equal
-# -gt	>	Greater than
-# -ge	>=	Greater than or equal
-# -lt	<	Less than
-# -le	<=	Less than or equal
-# -z	== null	Is null
-
-
-# FILES=/Users/tania/dev/*
-
-# for file in $FILES
-# do
-    # echo $(basename $file)
-# done
-
-
-# for F in *
-# do
-	# if [[ -f $F ]]
-	# then
-		# echo $F: $(cat $F | wc -l)
-	# fi
-# done
-
-#ls -all > tiba.txt
-# mkdir mimi
-
-#. ./myscript.sh    Notice the dot and space before the script name.
-
-#cd mimi 
-
- # if [ ! -d "$HOME"/git-sources ]; then
-    # mkdir "$HOME"/git-sources
-# fi
-
-# cd "$HOME"/git-sources || { printf "cd failed, exiting\n" >&2;  return 1; }
-
-# printf "Gitsource: "
-# read -r gitsource
-
-# git clone "$gitsource"
-
-# unset gitsource
-
-# echo "Please choose from the options bellow"
-
-# echo "1) Go back to your working directory"
-# echo "2) Go to the 'git-sources' folder"
-
-# read -r ans
-# back="1"
-# stay="2"
-# if [ "$ans" = "$back" ]; then
-      # cd - || { printf "cd failed, exiting\n" >&2; unset ans; return 1; }
-# elif [ "$ans" = "$stay" ]; then
-      # cd "$HOME"/git-sources || { printf "cd failed, exiting\n" >&2; unset ans; return 1; }
-# fi
-
-# unset ans
-
- # if [ $# -eq 0 ]; then     $#=nombre d' argument    $@ tous les arguments 
-  # echo "oui = 0" 
- # else
-  # echo "non != 0"  
- # fi
-
-# read filename
-# if [ -f $filename  ]; then
-  # echo "oui this fille name "$filename" exist" 
- # else
-  # echo "non this fille name "$filename" doesn't exist" 
- # fi
