@@ -34,7 +34,17 @@ if (isset($_SESSION['errorlogin'])){echo '<p id="errorlogin">'.$_SESSION['errorl
 <div class="contentl formaut">
 	<form action="<?php echo URL.'login/run';?>" method="post">			
 		<div id="inner-grid">
-			<div id="a">Programme : <?php echo '<select id="aa" name="demgraphie">';echo '<option value="1">Décès</option>';echo '<option value="2">Naissance</option>';echo '<option value="3">Bnm</option>';echo "</select>";?> </div>
+			<div id="a">Programme : 
+			<?php 
+			echo '<select id="aa" name="demgraphie">';
+			echo '<option value="1">Décès</option>';
+			echo '<option value="2">Naissance</option>';
+			echo '<option value="3">Bnm</option>';
+			echo '<option value="4">Evacuation</option>';
+			echo "</select>";
+			?> 
+			
+			</div>
 			<div id="b">Nom d'utilisateur :  <input id="bb"  type="text"     name="login"    value="tibaredha"  required=""   /></div>
 			<div id="c">Mot de passe :       <input id="cc"  type="password" name="password" value="030570"     required=""   /></div>
 			<div id="d"><a class="x" href="<?php echo URL;?>register">S'inscrire</a>&nbsp;&nbsp;&nbsp;<a class="x" href="<?php echo URL;?>register/forget">Mot de passe oublié</a> </div>

@@ -145,57 +145,87 @@ printf "|${GREEN}$0:${YELLOW} ajouter nom module ${NC}                          
 echo  "---------------|-------------------------------------------"
 read -p "Do you want to add module ? (y/n)" answer
 case $answer in
-  y)
-	read -p 'ajouter nom module : ' msg
-	###1
-	touch controllers/"$msg".php
-	message1="<?php"
-	message2="class $msg extends Controller {"
-	message3="}"
-	message4="?>"
-	echo  $message1 >> controllers/"$msg".php
-	echo  $message2 >> controllers/"$msg".php
-	echo  ""        >> controllers/"$msg".php
-	echo  $message3 >> controllers/"$msg".php
-	echo  $message4 >> controllers/"$msg".php
-	DIR="controllers/$msg.php"
-	for file in $(ls $DIR); do
-	# Affichage du nom du fichier et de ses droits
-	echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
-	done
-	###2
-	touch models/"$msg"_model.php
-	message0=$msg"_Model"
-	message2="class $message0 extends Model {"
-	echo  $message1 >> models/"$msg"_model.php
-	echo  $message2 >> models/"$msg"_model.php
-	echo  ""        >> models/"$msg"_model.php
-	echo  $message3 >> models/"$msg"_model.php
-	echo  $message4 >> models/"$msg"_model.php
-	DIR="models/$msg"_model.php
-	for file in $(ls $DIR); do
-	# Affichage du nom du fichier et de ses droits
-	echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
-	done
-	###3
-	mkdir views/"$msg"
-	touch views/"$msg"/index.php
-	echo  $message1 >> views/"$msg"/index.php
-	echo  ""        >> views/"$msg"/index.php
-	echo  ""        >> views/"$msg"/index.php
-	echo  $message4 >> views/"$msg"/index.php
-	DIR="views/$msg"/index.php
-	for file in $(ls $DIR); do
-	# Affichage du nom du fichier et de ses droits
-	echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
-	done
-	###
-	echo  "le module : $msg a été ajouté avec succés"
-	;;
-  n)
-    ;;
-  *)
-    ;;
+y)
+read -p 'ajouter nom module : ' msg
+###1-contorleur
+touch controllers/"$msg".php
+OUTC=controllers/"$msg".php	
+cat  << EOF > $OUTC 
+<?php
+class $msg extends Controller { 
+	
+	public \$controleur="$msg";
+	
+	function __construct() {
+		parent::__construct();
+		Session::init();
+		\$logged = Session::get('loggedIn');
+		if (\$logged == false) {
+			Session::destroy();
+			header('location: '.URL.'login');
+			exit;
+		}
+		\$this->view->js = array(\$this->controleur.'/js/default.js?t='.time());
+		\$this->view->css = array(\$this->controleur.'/css/default.css?t='.time());
+	}
+	
+	function index() {
+		\$this->view->title = '$msg';
+		\$this->view->msg = '$msg';
+		\$this->view->render(\$this->controleur.'/index');
+	}
+	
+}
+?>
+EOF
+DIR="controllers/$msg.php"
+for file in $(ls $DIR); do
+# Affichage du nom du fichier et de ses droits
+echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")	  
+done
+###2-model
+touch models/"$msg"_model.php
+message0=$msg"_Model"
+OUTM=models/"$msg"_model.php
+cat  << EOF > $OUTM 
+<?php
+class $message0 extends Model { 
+	
+}
+?>
+EOF
+DIR="models/$msg"_model.php
+for file in $(ls $DIR); do
+# Affichage du nom du fichier et de ses droits
+echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
+done
+###3-view
+mkdir views/"$msg"
+touch views/"$msg"/index.php
+OUTV=views/"$msg"/index.php
+cat  << EOF > $OUTV 
+<?php
+  
+?>
+EOF
+DIR="views/$msg"/index.php
+for file in $(ls $DIR); do
+# Affichage du nom du fichier et de ses droits
+echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
+done
+###4-creer le dossier css/default.css + js /default.js
+mkdir views/"$msg"/css
+touch views/"$msg"/css/default.css
+mkdir views/"$msg"/js
+touch views/"$msg"/js/default.js
+
+###
+echo  "le module : $msg a été ajouté avec succés"
+;;
+n)
+;;
+*)
+;;
 esac
 }
 ##########################################################################

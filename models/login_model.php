@@ -62,15 +62,17 @@ class Login_Model extends Model
 	}
 	
 	public function redirection($programme,$role){
-			if($programme == 1) {
-			switch($role) {
-				case "1" : header('location: '.URL.'administrateur');break;
-				case "2" : header('location: '.URL.'dashboard');break;
-				case "3" : header('location: '.URL.'dashboard');break;	
-			}
+			if($programme == 1) 
+			{
+				switch($role) {
+					case "1" : header('location: '.URL.'administrateur');break;
+					case "2" : header('location: '.URL.'dashboard');break;
+					case "3" : header('location: '.URL.'dashboard');break;
+				}
 			} 
 			if($_POST['demgraphie']== 2) {header('location: '.URL.'naissance');}
 			if($_POST['demgraphie']== 3) {header('location: '.URL.'BNM');}
+			if($_POST['demgraphie']== 4) {header('location: '.URL.'Evacuation');}
 	}
 	
 	public function remember($remember,$id){
