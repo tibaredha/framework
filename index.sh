@@ -175,6 +175,13 @@ class $msg extends Controller {
 		\$this->view->render(\$this->controleur.'/index');
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 }
 ?>
 EOF
@@ -190,6 +197,18 @@ OUTM=models/"$msg"_model.php
 cat  << EOF > $OUTM 
 <?php
 class $message0 extends Model { 
+    
+	public \$tbl="$msg";
+   
+	public function __construct() {
+		parent::__construct();
+	}
+
+
+
+
+
+
 	
 }
 ?>

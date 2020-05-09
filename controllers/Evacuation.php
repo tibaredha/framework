@@ -22,5 +22,12 @@ class Evacuation extends Controller {
 		$this->view->render($this->controleur.'/index');
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 }
 ?>
