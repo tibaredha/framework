@@ -136,6 +136,40 @@ esac
 # git clone  git@github.com:tibaredha/framework.git  framework
 # git clone /opt/git/projet.git   git clone file:///opt/git/projet.git  git clone ssh://utilisateur@serveur/projet.git 
 }
+feature_start()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter feature_start ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add feature_start ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom feature : ' msgf
+			git flow feature start $msgf
+		 #git flow feature finish tiba
+		;;
+		n);;
+		*);;
+	esac
+}
+feature_finish()
+{
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} ajouter feature_finish ${NC}                       |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to add feature_finish ? (y/n)" answer
+	case $answer in
+		y)
+			read -p 'donner nom feature : ' msgff
+			git flow feature finish $msgff
+		;;
+		n);;
+		*);;
+	esac
+}
+
 ##########################################################################
 add_module()
 {
@@ -616,39 +650,19 @@ for option in "$@" ; do
 		--listpath)
 		show_listpath;;
         ##########################################################################
-		# git status
-		-st)
-		show_status;;
-		# git add_status
-		-ac)
-		add_status;;
-		# git add_tag
-		-at)
-		add_tag;;
-		# git view_status
-		-lo)
-		view_status;;
-		# git pull_status
-		-pl)
-		pull_status;;
-		# git push_status
-		-po)
-		push_status;;
-		# git remote_status
-		-rv)
-		remote_status;;
-		# git show_color
-		-sc)
-		show_color;;
-		# git show_color1
-		-sc1)
-		show_color1;;
-		# rien ne correspond
-		-am)
-		add_module;;
-		# rien ne correspond
-		*)
-		show_error_miss $1;;
-        # rien ne correspond
+		-st)show_status;;
+		-ac)add_status;;
+		-at)add_tag;;
+		-lo)view_status;;
+		-pl)pull_status;;
+		-po)push_status;;
+		-rv)remote_status;;
+		-sc)show_color;;
+		-sc1)show_color1;;
+		-am)add_module;;
+		-fs)feature_start;;
+		-ff)feature_finish;;
+		*)show_error_miss $1;;  
+		 
 	esac
 done
