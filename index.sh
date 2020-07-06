@@ -53,14 +53,14 @@ show_help(){
 	#Faire des modifications
 	echo -e "| -st,       \t git status                               |"
 	echo -e "| -ac,       \t git add + commit                         |"
-	echo -e "| -at,       \t git tag -a -m                            |"
 	#Voir l'historique
 	echo -e "| -lo,       \t git log --oneline to see the history     |"
 	#Gérer des branches /tags
+	echo -e "| -am,       \t add module : ctrl_mdl_view               |"
+	echo -e "| -at,       \t git tag -a -m                            |"
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
 	echo -e "| -pl,       \t git pull origin master                   |"
-	echo -e "| -am,       \t add module : ctrl_mdl_view               |"
 	echo -e "| -fs,       \t flow feature start feature_name          |"
 	echo -e "| -ff,       \t flow feature finish feature_name         |"
 	echo -e "| -rs,       \t flow release start release_name          |"
