@@ -40,7 +40,7 @@ show_help(){
 	# echo "Additionneur de ligne de code de vos projets"
 	# echo  "+---------------|-------|--------------------------------+"
 	#Configuration
-	echo -e "| --help,     \t afficher l'aide                          |"
+	echo -e "| --help,--h  \t afficher l'aide                          |"
 	echo -e "| --version,  \t afficher des informations de version     |"
 	echo -e "| --ssh       \t set ssh key                              |"
 	#importe un projet  ou clone le projet d'xy 
@@ -57,6 +57,7 @@ show_help(){
 	echo -e "| -lo,       \t git log --oneline to see the history     |"
 	#Gérer des branches /tags
 	echo -e "| -am,       \t add module : ctrl_mdl_view               |"
+	echo -e "| -as,       \t add submodule : url / branch             |"
 	echo -e "| -at,       \t git tag -a -m                            |"
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
@@ -326,6 +327,27 @@ n)
 *)
 ;;
 esac
+}
+##########################################################################
+add_submodule(){
+clear
+echo  "---------------|-------------------------------------------"
+printf "|${GREEN}$0:${YELLOW} ajouter nom submodule ${NC}                       |\n"
+echo  "---------------|-------------------------------------------"
+read -p "Do you want to add submodule ? (y/n)" answer
+case $answer in
+y)
+read -p 'ajouter nom submodule : ' submodule
+git submodule add https://github.com/tibaredha/$submodule.git
+git status
+
+;;
+n)
+;;
+*)
+;;
+esac
+#git status
 }
 ##########################################################################
 show_status(){
@@ -716,6 +738,8 @@ for option in "$@" ; do
 		show_color1;;
 		-am)
 		add_module;;
+		-as)
+		add_submodule;;
 		-fs)
 		feature_start;;
 		-ff)
