@@ -337,10 +337,21 @@ echo  "---------------|-------------------------------------------"
 read -p "Do you want to add submodule ? (y/n)" answer
 case $answer in
 y)
-read -p 'ajouter nom submodule : ' submodule
+read -p 'Ajouter nom submodule : ' submodule
 git submodule add --force  https://github.com/tibaredha/$submodule.git
 git status
 
+# git submodule add https://github.com/tibaredha/data.git
+# git status
+
+# git config --global diff.submodule log
+
+# git config -f .gitmodules submodule.data.branch develop
+# git submodule update --remote data
+
+# git config status.submodulesummary 1
+# git log -p 
+# git log -p --submodule
 ;;
 n)
 ;;
