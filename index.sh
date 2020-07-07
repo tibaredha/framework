@@ -338,7 +338,7 @@ read -p "Do you want to add submodule ? (y/n)" answer
 case $answer in
 y)
 read -p 'ajouter nom submodule : ' submodule
-git submodule add https://github.com/tibaredha/$submodule.git
+git submodule add --force  https://github.com/tibaredha/$submodule.git
 git status
 
 ;;
