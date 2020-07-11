@@ -16,6 +16,7 @@ useremail="tibaredha@yahoo.fr"
 # {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
 
 ##########################################################################
+#C:\Program Files\Git\usr\bin
 if [ ! -f /bin/tiba ]; then
 cp index.sh /bin/tiba
 echo "you can use tiba" 
@@ -338,9 +339,12 @@ read -p "Do you want to add submodule ? (y/n)" answer
 case $answer in
 y)
 read -p 'Ajouter nom submodule : ' submodule
+###################################################
+# 1-Add a submodule
 git submodule add --force  https://github.com/tibaredha/$submodule.git
-git status
-
+git submodule status
+cat .gitmodules
+# git submodule add <remote_url> <destination_folder> like : ./xxxxx
 # git submodule add https://github.com/tibaredha/data.git
 # git status
 
@@ -349,6 +353,21 @@ git status
 # git config -f .gitmodules submodule.data.branch develop
 # git submodule update --remote data
 
+###################################################
+# 2-Cloning a project with submodules
+# When you clone a repository that contains submodules there are a few extra steps to be taken
+# git clone /url/to/repo/with/submodules
+# git submodule init
+# git submodule update
+
+###################################################
+# 3-Remove a submodule
+# git submodule deinit <submodule>
+# git rm <submodule>
+# git commit -m "removes submodule <submodule>"
+
+###################################################
+# 4-see submodule status in git status
 # git config status.submodulesummary 1
 # git log -p 
 # git log -p --submodule
