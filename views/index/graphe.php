@@ -1,6 +1,3 @@
-
-
-
 <style type="text/css">#container {width: 100%;height: 100%;}</style>
 <!--<div id="container"></div>-->
 <script type="text/javascript">
