@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<?php $time = microtime(true);?>
 <title><?php if (isset ($this->title)){echo $this->title; }else {echo title ;}?></title>
 <link rel="icon" type="image/png" href="<?PHP echo URL; ?>public/images/<?php echo logo ?>" />
 <meta charset="utf-8">
@@ -44,14 +45,79 @@
 <!--default js and css in view / -->
 <?php if (isset($this->js)){foreach ($this->js as $js){echo '<script type="text/javascript" src="'.URL.'views/'.$js.'"></script>';}}?>
 <?php if (isset($this->css)){foreach ($this->css as $css){echo '<link rel="stylesheet" type="text/css" href="'.URL.'views/'.$css.'"></script>';}}?>
+<?php  
+//*************************1er exemple systeme cahe*******************************//
+// require 'cache.php';//le fichier se localise dans le dossier lib 
+// $root=dirname(__FILE__);
+// $cache=new cache($root.'/temp',1);
+//1ere methode
+// if(!$variable=$cache->read('variable'))
+// {
+// sleep(1);	
+// $variable='mon texte';	
+// $cache->write('variable',$variable);	
+// }
+// echo $variable;
+
+//2eme methode
+// require 'twiter.php';
+// $cache->inc($root.'\twiter.php','tibaredha.html');
+
+//3eme methode
+// if(!$cache->start('variable.html'))
+// {
+	// sleep(1);	
+	// $variable='mon texte';	
+	// echo $variable;	
+
+	// $variable1='mon texte1';	
+	// echo $variable1;	
+
+	// $variable2='mon texte2';	
+	// echo $variable2;	
+
+	// $variable3='mon texte3';	
+	// echo $variable3;	
+
+	// $variable4='mon texte4';	
+	// echo $variable4;	
+
+	// $variable5='mon texte5';	
+	// echo $variable5;	
+// }
+// $cache->fin();
+//************************2eme exemple de cache **********************************************//
+// $handel= opendir('views/');
+// $cache="cache/cache.php";
+// if (file_exists($cache)) 
+// {
+	// echo "1";
+	// include $cache;	
+// } 
+// else 
+// {
+	// echo "2";
+	// $output=null;
+	// while ( ($file=readdir($handel))!=false  ){
+	// $output.=$file.'<br>';		
+	// }
+	// closedir($handel);
+	// echo $output;	
+    // $fh=fopen($cache,'w+') or die('erreur');
+	// fwrite($fh,$output);
+	// fclose($fh);
+// }
+//************************2eme exemple de cache **********************************************//
+?>
 </head>
-<body> 
+<body>
+ 
 <!--<body onload="remplir1(); remplir2(); remplir3();" > -->
 <!--<body onload="InitThis();" >--> 
 <?php 
 Session::init();
 Lang::init(Session::get('loggedIn'));
-$temps = Temp::getmicrotime();
+// $temps = Temp::getmicrotime();
 ?>
 <div class="tiba" >
     <div class="headerl"></div>

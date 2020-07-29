@@ -4,6 +4,9 @@ class Model {
 
     public $key = "tiba";  // Clé de 8 caractères max
 	
+	public $db = null; //*nouvelle facon d'instancier la PDO
+	
+	
 	function __construct() {
 		
 		try {
@@ -14,9 +17,12 @@ class Model {
         // $requete = "CREATE DATABASE IF NOT EXISTS `".DB_NAME."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
         // $this->db0->prepare($requete)->execute();
 		// $this->createdb(DB_NAME);
-		
+		// PDO::ATTR_DEFAULT_FETCH_MODE PDO::FETCH_BOTH (défaut)
 		//connection automatique de la base en cas de non existance 
-		$this->db = new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);
+		
+		
+		if($this->db === null){$this->db=new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);} //*nouvelle facon d'instancier la PDO
+		// $this->db = new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);
 		
 		//Par défaut PDO n'affiche pas les différentes erreurs liées au code ou aux requêtes. 
 		//Pour les faire apparaitre, vous devez activer l'option lors de la connexion.
