@@ -4,7 +4,7 @@
 // echo "tibaredha";
 
 function showHelp() {
-	$help = <<<EOD
+$help = <<<EOD
 tcpdf_addfont - command line tool to convert fonts for the TCPDF library.
 
 Usage: tcpdf_addfont.php [ options ] -i fontfile[,fontfile]...

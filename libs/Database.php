@@ -9,8 +9,8 @@ class Database extends PDO
 	
 	//1-SQL (Structured Query Language):
 		//1-1-DDL(Data Definition Langage):
-				// -CREATE DATABASE, DROP DATABASE  
-				// -CREATE TABLE, ALTER TABLE, RENAME TABLE, DROP TABLE
+				// -SHOW DATABASES ,CREATE DATABASE xxxx,CREATE DATABASE IF NOT EXISTS xxx, USE xxxx , DROP DATABASE xxx:
+				// -SHOW TABLES, CREATE TABLE xxx ('id' INT,'nom' varchar(50),'prenom' varchar(50),'age' INT),CREATE TABLE IF NOT EXISTS xxx, ALTER TABLE, RENAME TABLE, DROP TABLE,DESCRIBE TABLE     
 				// -CREATE INDEX, DROP INDEX
                 // -la création d’objets comme les procédures stockées, les vues, et
 		
