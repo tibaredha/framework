@@ -46,7 +46,8 @@ show_help(){
 	echo -e "| --version,  \t afficher des informations de version     |"
 	echo -e "| --ssh       \t set ssh key                              |"
 	echo -e "| --listpath  \t afficher list path                       |"
-	
+	echo -e "| --config    \t git config -l --show-origin              |"
+	#git config -l --show-origin
 	#importe un projet  ou clone le projet d'xy 
 	echo  "+---------------|-----------------------------------------+"
 	echo -e "| --cl,       \t git clone to get the code and history    |" 
@@ -76,6 +77,16 @@ show_help(){
 	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
+show_config(){
+
+
+git config -l --show-origin
+
+}
+
+
+
+
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
@@ -525,20 +536,20 @@ echo " done."
 git add .
 git commit -m "add README.md" 
 echo  "---------------|-------|-----------------------------------"
-touch index.php
-cat  << EOF > index.php
-<?php
-require './libs/config.php';
-// \$cfg = './libs/cfgg.php';
-\$cfg = './libs/cfg.php';
-if(!file_exists(\$cfg)) {header('location: ./install/');}else {require \$cfg;} 
-spl_autoload_register(function (\$class) {require LIBS . \$class .".php";});
-\$app = new Bootstrap();
-?>
-EOF
-echo " done."
-git add .
-git commit -m "add index.php" 
+# touch index.php
+# cat  << EOF > index.php
+# <?php
+# require './libs/config.php';
+# // \$cfg = './libs/cfgg.php';
+# \$cfg = './libs/cfg.php';
+# if(!file_exists(\$cfg)) {header('location: ./install/');}else {require \$cfg;} 
+# spl_autoload_register(function (\$class) {require LIBS . \$class .".php";});
+# \$app = new Bootstrap();
+# ?>
+# EOF
+# echo " done."
+# git add .
+# git commit -m "add index.php" 
 echo  "---------------|-------|-----------------------------------"
 echo "list configuration : "
 echo  "---------------|-------|-----------------------------------"
@@ -813,6 +824,9 @@ for option in "$@" ; do
 		# affiche listpath
 		--listpath)
 		show_listpath;;
+		# affiche config file localisation  
+		--config)
+		show_config;;
         ##########################################################################
 		-st)
 		show_status;;
