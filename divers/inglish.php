@@ -8,6 +8,8 @@ Although  (bien que) even though (meme si)
 belongs (fait parti de )
 Billing  Facturation
 bay the way  (au fait) 
+Beyond (au-dela)
+
 
 cursory (superficiel)
 
@@ -17,11 +19,16 @@ enhance(ameliorer)improve(ameliorer)
 however(cependant)
 handles (gerer)
 
+in Depth (en profondeur)
+
 involve(impliquer)
 instead of (au lieu de)
 illness(maladie)
 issues problèmes
 in which (dans le quel)
+
+Keeping **** Up to Date:Garder *** à jour
+
 Likewise, (egalement)
 
 often(souvent)

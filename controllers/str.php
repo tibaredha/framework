@@ -59,7 +59,7 @@ class str extends Controller {
 	    $this->view->userListviewq = $_GET['q']; //key word  
 		$this->view->userListviewp = $url1[2];    //parametre 2 page                     limit 2,3
 		$this->view->userListviewl =8     ;     //parametre 3 nombre de ligne par page  limit 2,3 
-		$this->view->userListviewb =15       ;   //parametre nombre de chiffre dan la barre  navigation
+		$this->view->userListviewb =5       ;   //parametre nombre de chiffre dan la barre  navigation
 		$this->view->userListview = $this->model->userSearchstr($this->view->userListviewo,$this->view->userListviewq,$this->view->userListviewp,$this->view->userListviewl);
 		$this->view->userListview1= $this->model->userSearchstr1($this->view->userListviewo,$this->view->userListviewq); // compte total pour bare de navigation
 		$this->view->render($this->controleur.'/str');

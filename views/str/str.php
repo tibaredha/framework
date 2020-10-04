@@ -57,9 +57,9 @@ echo'<table width="100%" border="1" cellpadding="5" cellspacing="1" align="cente
 			echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
 			echo '<td align="left" ><b>'.$value['structure'].'<b></td>';
 			echo '<td align="right" >'.$value['structurear'].'</td>'; 
-			echo '<td style="width:50px" align="left" >'.View::nbrtostring('wil','IDWIL',$value['idwil'],'WILAYAS').'</td>';
-			echo '<td align="center"  ><a target="_blank" title="unité"     href="'.URL.$ctrl.'/comm/'.$value['id'].'" ><img src="'.URL.'public/images/comm.png"   width="16" height="16" border="0" alt=""   /></a></td>';
-			echo '<td align="center"  ><a target="_blank" title="editer"    href="'.URL.$ctrl.'/editstr/'.$value['id'].'" ><img src="'.URL.'public/images/edit.png"   width="16" height="16" border="0" alt=""   /></a></td>';
+			echo '<td style="width:250px" align="left" >'.View::nbrtostring('wil','IDWIL',$value['idwil'],'WILAYAS').'</td>';
+			echo '<td align="center"  ><a target="_blank" title="unité"     href="'.URL.$ctrl.'/comm/'.$value['id'].'" ><img src="'.URL.'public/images/comm.png"          width="16" height="16" border="0" alt=""   /></a></td>';
+			echo '<td align="center"  ><a target="_blank" title="editer"    href="'.URL.$ctrl.'/editstr/'.$value['id'].'" ><img src="'.URL.'public/images/edit.png"       width="16" height="16" border="0" alt=""   /></a></td>';
 			echo '<td align="center"  ><a class="delete" title="supprimer"  href="'.URL.$ctrl.'/deletestr/'.$value['id'].'" ><img src="'.URL.'public/images/delete.png"   width="16" height="16" border="0" alt=""   /></a></td>';
 			echo'</tr>';	
 		}

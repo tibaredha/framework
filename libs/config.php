@@ -3,7 +3,16 @@ include 'cfg.php'; //  fichier creer  lors de la 1ere instatlation instalation p
 //
 define('DOCUMENT_ROOT', 'framework/');
 define('LIBS', 'libs/');
-define('URL', 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/');
+
+if($_SERVER['HTTP_HOST'] == 'localhost') 
+{
+define('URL', 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/');		
+}
+else
+{	
+define('URL', 'http://'.$_SERVER['SERVER_NAME'].":8080".dirname($_SERVER['PHP_SELF']).'/');	
+}
+
 //base de donnes 
 define('DB_TYPE', 'mysql');
 define('DB_HOST', $PARAM_hote);//origine cfg.php
