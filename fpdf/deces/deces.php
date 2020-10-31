@@ -1386,7 +1386,7 @@ class deces extends FPDI
 	$OP=mysql_num_rows($query);
 	if ($OP=='1') 
 	{
-	$OP='Oui';
+	$OP='X';
 	}
 	else
 	{
@@ -1396,7 +1396,24 @@ class deces extends FPDI
 	return $OP;
 	}
 	
-	
+	function etabnmn($communen,$mois,$annee) 
+	{
+	$this->mysqlconnect();
+	$req="SELECT * FROM bordereau where  COMMUNED='$communen' and  mois='$mois' and  annee='$annee'";
+	$query = mysql_query($req);   
+	$rs = mysql_fetch_assoc($query);
+	$OP=mysql_num_rows($query);
+	if ($OP=='0') 
+	{
+	$OP='X';
+	}
+	else
+	{
+	$OP='';
+	}
+	mysql_free_result($query);
+	return $OP;
+	}
 	function bnm($col,$communen,$mois,$annee) 
 	{
 	$this->mysqlconnect();

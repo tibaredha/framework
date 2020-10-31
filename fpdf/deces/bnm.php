@@ -19,7 +19,7 @@ $pdf->SetXY(05,20);$pdf->cell(142,5,"SERVICE PREVENTION",0,0,'L',0,0);$pdf->cell
 $pdf->SetXY(05,25);$pdf->cell(142,5,"N               / ".$_POST['annee'],0,0,'L',0,0);
 $pdf->SetXY(60,30);$pdf->cell(100,5,"Mouvement De La Population",0,0,'L',0,0);
 $pdf->SetXY(60,35);$pdf->cell(100,5,"Annee  ".$_POST['annee'],0,0,'L',0,0);
-$pdf->SetXY(60,40);$pdf->cell(100,5,"BNM Par Mois ",0,0,'L',0,0);
+$pdf->SetXY(60,40);$pdf->cell(100,5,"BNM Par Mois recus par les APC ",0,0,'L',0,0);
 $pdf->SetFillColor(200 );
 $pdf->SetXY(05,50);$pdf->cell(45,5,"Mois",1,0,'L',1,0);
 $pdf->cell(20,10,"Janvier",1,0,'C',1,0);
@@ -59,8 +59,60 @@ $pdf->cell(20,5,$pdf->etabnm($row->IDCOM,'11',$_POST['annee']),1,0,'C',0,0);
 $pdf->cell(20,5,$pdf->etabnm($row->IDCOM,'12',$_POST['annee']),1,0,'C',0,0);
 $pdf->setxy(5,$pdf->gety()+5); 
 }
-}
+$pdf->SetXY(190,$pdf->gety()+5);$pdf->cell(100,5,"DR Tiba ",0,0,'C',0,0);
+$pdf->AddPage('L','A4');
+$pdf->SetDisplayMode('fullpage','single');//mode d affichage 
+$pdf->SetFont('Arial','B',9);
 
+$pdf->SetXY(05,5); $pdf->cell(285,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);
+$pdf->SetXY(05,10);$pdf->cell(285,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
+$pdf->SetXY(05,15);$pdf->cell(285,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
+$pdf->SetXY(05,20);$pdf->cell(142,5,"SERVICE PREVENTION",0,0,'L',0,0);$pdf->cell(142,5," LE : ".date ('d-m-Y'),0,0,'R',0,0);
+$pdf->SetXY(05,25);$pdf->cell(142,5,"N               / ".$_POST['annee'],0,0,'L',0,0);
+$pdf->SetXY(60,30);$pdf->cell(100,5,"Mouvement De La Population",0,0,'L',0,0);
+$pdf->SetXY(60,35);$pdf->cell(100,5,"Annee  ".$_POST['annee'],0,0,'L',0,0);
+$pdf->SetXY(60,40);$pdf->cell(100,5,"BNM Par Mois Non recus par les APC",0,0,'L',0,0);
+$pdf->SetFillColor(200 );
+$pdf->SetXY(05,50);$pdf->cell(45,5,"Mois",1,0,'L',1,0);
+$pdf->cell(20,10,"Janvier",1,0,'C',1,0);
+$pdf->cell(20,10,"Fevrier",1,0,'C',1,0);
+$pdf->cell(20,10,"Mars",1,0,'C',1,0);
+$pdf->cell(20,10,"Avril",1,0,'C',1,0);
+$pdf->cell(20,10,"Mai",1,0,'C',1,0);
+$pdf->cell(20,10,"Juin",1,0,'C',1,0);
+$pdf->cell(20,10,"Juillet",1,0,'C',1,0);
+$pdf->cell(20,10,"Aout",1,0,'C',1,0);
+$pdf->cell(20,10,"Septembre",1,0,'C',1,0);
+$pdf->cell(20,10,"October",1,0,'C',1,0);
+$pdf->cell(20,10,"Novombre",1,0,'C',1,0);
+$pdf->cell(20,10,"Decembre",1,0,'C',1,0);
+
+$pdf->SetXY(05,55);$pdf->cell(45,5,"Commune",1,0,1,'L',0);
+$pdf->mysqlconnect();
+$query = "SELECT * from COM where IDWIL='17000' and yes='1' order by COMMUNE "; 
+$pdf->SetXY(05,60); 
+$resultat=mysql_query($query);
+$totalmbr1=mysql_num_rows($resultat);
+while($row=mysql_fetch_object($resultat))
+{
+
+$pdf->cell(45,5,$row->COMMUNE,1,0,'l',0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'01',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'02',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'03',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'04',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'05',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'06',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'07',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'08',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'09',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'10',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'11',$_POST['annee']),1,0,'C',0,0);
+$pdf->cell(20,5,$pdf->etabnmn($row->IDCOM,'12',$_POST['annee']),1,0,'C',0,0);
+$pdf->setxy(5,$pdf->gety()+5); 
+}
+}
+// $pdf->SetXY(190,$pdf->gety()+5);$pdf->cell(100,5,"DR Tiba ",0,0,'C',0,0);
 
 if ($_POST['BNM']=='1') //1ere partie
 {
