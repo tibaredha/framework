@@ -1,35 +1,52 @@
 <?php
-include 'cfg.php'; //  fichier creer  lors de la 1ere instatlation instalation procesuce en cour de realisation   
-//
-define('DOCUMENT_ROOT', 'framework/');
-define('LIBS', 'libs/');
-
+// echo '<pre>';print_r($_SERVER);echo '<pre>';
+// echo dirname($_SERVER['SCRIPT_NAME']);
+// echo dirname($_SERVER['PHP_SELF']);
+// echo $_SERVER['HTTP_HOST'];
+// echo $_SERVER['SERVER_NAME'];
+// echo $_SERVER["DOCUMENT_ROOT"];
+//***************************************************//
+if(file_exists('./libs/cfg.php'))// fichier creer lors de la 1ere instatlation instalation procesuce en cour de realisation   
+{
+	require './libs/cfg.php';
+}
+else
+{
+	//die('cfg.php was not found');
+	header('location: ./install/');
+}
+//***************************************************//
+//separators anti-slash 
+define('DS',DIRECTORY_SEPARATOR);  
+//http
 if($_SERVER['HTTP_HOST'] == 'localhost') 
 {
-define('URL', 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/');		
+	define('URL', 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/');		
 }
 else
 {	
-define('URL', 'http://'.$_SERVER['SERVER_NAME'].":8080".dirname($_SERVER['PHP_SELF']).'/');	
+	define('URL', 'http://'.$_SERVER['SERVER_NAME'].":8080".dirname($_SERVER['PHP_SELF']).'/');	
 }
 
-//base de donnes 
+//directories
+define('DOCUMENT_ROOT', 'framework/');
+define('LIBS', 'libs/');
+
+//server data 
 define('DB_TYPE', 'mysql');
 define('DB_HOST', $PARAM_hote);//origine cfg.php
 define('DB_NAME', 'framework');
 define('DB_USER', 'tibaredha');//'root' creer avant l utilisateur dans mysql dabord
-define('DB_PASS', '030570'); //''
+define('DB_PASS', '030570');   //''
 
+//autres
 //define('msp', 'Ministère de la santé et de la population et de la réforme hospitalière');
 define('msp', "Système électronique d'enregistrement des décès et naissances ");
 define('version', 'v2.0.1-beta1');
 define('logod', 'demographie.jpg?t='.time());
 define('logo', 'funerail.jpg?t='.time());
 define('logon', 'naissance.png?t='.time());
-
 //define('logolab', 'd:\\framework/public/images/logolab/logolab');
-
-
 define('title', '??????');
 define('sujet', 'deces');
 define('admin', 'admin');
@@ -42,16 +59,14 @@ define('HASH_PASSWORD_KEY', 'catsFLYhigh2000miles');
 define('path', 'D:\framework\libs\sessions');
 define('EDRSFR', 'Système électronique d\'enregistrement des décès et naissances');
 define('EDRSUS', 'Electronic Death and Birth Registration System');
-
 define('URLCANVAS', $_SERVER["DOCUMENT_ROOT"].DOCUMENT_ROOT.'public/images/');//url pour canevas 
 define('URLDUMP', $_SERVER["DOCUMENT_ROOT"].DOCUMENT_ROOT.'sql/Deces_');//url pour DUMP 
 define('URLXLS', $_SERVER["DOCUMENT_ROOT"].DOCUMENT_ROOT.'xls/D_');//url pour DUMP 
 
-// echo $_SERVER["DOCUMENT_ROOT"];
 // date_default_timezone_set('Africa/Tunis');
 date_default_timezone_set('Africa/Algiers');
 //date_default_timezone_set('UTC');
-
+//***************************************************//
 function renemefille ($tiba,$amrane)
  {
        $new_name = dirname(__FILE__)."/".$tiba ;
@@ -78,9 +93,7 @@ function renemefille ($tiba,$amrane)
  }
 
 // renemefille ("tiba.txt","amrane.txt") ;  
-
-
-
+//***************************************************//
 function ajax($id,$tbl,$col,$order)
 {
 $cnx = mysql_connect(DB_HOST,DB_USER,DB_PASS)or die('I cannot connect to the database because: ' . mysql_error());
@@ -95,7 +108,7 @@ echo '<option value="'.$row[0].'">'.$row[1].'</option>';
 }
 }
 }
-
+//***************************************************//
 // suite pour canvas 
 function UPLOAD($imgBase64,$contenu)
 {
@@ -109,5 +122,6 @@ $file = URLCANVAS .trim($contenu). '.jpg';
 $success = file_put_contents($file, $data); 
 }
 }
+//***************************************************//
 
-
+spl_autoload_register(function ($class) {require LIBS . $class .".php";});

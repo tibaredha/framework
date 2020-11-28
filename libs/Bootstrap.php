@@ -9,7 +9,7 @@ class Bootstrap {
 	function __construct() 
 	{
 
-		if(isset($_GET['url'])){$url = $_GET['url'];} else {$url = null;}
+		if(isset($_GET['url'])){$url = $_GET['url'];} else {$url = null;} //url source htaccess
 		// $url = isset($_GET['url']) ? $_GET['url'] : null;
 		
 		$url = rtrim($url, '/');
@@ -43,26 +43,34 @@ class Bootstrap {
 		if (file_exists($file)) 
 		{
 			require $file;
-			$controller = new $url[0];//instacier la class controlleur + appeler le model corespandant + instacier view
-			$controller->loadModel($url[0]);
+			$controller = new $url[0];        //instacier la class controlleur 
+			$controller->loadModel($url[0]);  //appeler le model corespandant + instacier view dans le controleur parent [class Controller] = $this->model,$this->view->render                      
 			
-			if (isset($url[2]))      //calling methods
+			if (isset($url[2]))               //check params            
 			{
-				if (method_exists($controller, $url[1])) {
-					$controller->{$url[1]}($url[2]); // avec parametre 
-				} else {
+				if (method_exists($controller, $url[1])) //calling methods
+				{
+					$controller->{$url[1]}($url[2]);     // avec parametre 
+				} 
+				else 
+				{
 					$this->error();
 				}
 			} 
 			else 
 			{
-				if (isset($url[1])) {
+				if (isset($url[1])) 
+				{
 					if (method_exists($controller, $url[1])) {
 						$controller->{$url[1]}(); //sans parametre
-					} else {
+					} 
+					else 
+					{
 						$this->error();
 					}
-				} else {
+				} 
+				else 
+				{
 					$controller->index();
 				}
 			}	

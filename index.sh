@@ -75,8 +75,20 @@ show_help(){
 	echo -e "| -rs,       \t flow release start release_name          |"
 	echo -e "| -rf,       \t flow release finish release_name         |"
 	echo  "+---------------|-----------------------------------------+"
+    echo -e "| -ci,       \t composer init                            |"
+	echo -e "| -cd,       \t composer dumpautoload                    |"
+	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
+
+#clé GPG
+#gpg --list-secret-keys --keyid-format LONG
+#gpg --full-generate-key
+#gpg --armor --export  *la clé *
+#Copiez votre clé GPG, en commençant par -----BEGIN PGP PUBLIC KEY BLOCK-----et en terminant par -----END PGP PUBLIC KEY BLOCK-----.
+#settings /SSH and GPG keys / new GPG key / copy and paste (Copiez votre clé GPG en commençant par -----BEGIN)
+#git config --global user.signingkey *la clé *
+
 show_config(){
 
 
@@ -84,8 +96,40 @@ git config -l --show-origin
 
 }
 
+composerinit(){
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} composer init ${NC}                                 |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to init composer ? (y/n)" answer
+	case $answer in
+		y)
+			composer init 
+			
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
 
-
+}
+composerdump (){
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} composer dumpautoload ${NC}                         |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to dumpautoload composer ? (y/n)" answer
+	case $answer in
+		y)
+			composer dumpautoload	
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
 
 ##########################################################################
 # MESSAGES : message de version
@@ -858,6 +902,10 @@ for option in "$@" ; do
 		release_start;;
 		-rf)
 		release_finish;;
+		-ci)
+		composerinit;;
+		-cd)
+		composerdump;;
 		*)
 		show_error_miss $1;; 	 
 	esac

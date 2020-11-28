@@ -65,7 +65,7 @@
             </tr>
             <tr>
             	<td align="right">Nom de la base de données : </td>
-                <td><input type="text" name="Base" value="tibaredha"   size="50" /></td>
+                <td><input type="text" name="Base" value="framework"   size="50" /></td>
             </tr>
             <tr>
             	<td colspan="2" align="center">
