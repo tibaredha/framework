@@ -45,6 +45,7 @@ show_help(){
 	echo -e "| --help,--h  \t afficher l'aide                          |"
 	echo -e "| --version,  \t afficher des informations de version     |"
 	echo -e "| --ssh       \t set ssh key                              |"
+	echo -e "| --gpg       \t set gpg key                              |"
 	echo -e "| --listpath  \t afficher list path                       |"
 	echo -e "| --config    \t git config -l --show-origin              |"
 	#git config -l --show-origin
@@ -80,23 +81,7 @@ show_help(){
 	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
-#cle SSH
-#ls -al ~/.ssh
-#ssh-keygen -t ed25519 -C "your_email@example.com"
-#lire la suite
 
-#clé GPG
-#gpg --list-secret-keys --keyid-format LONG
-#gpg --full-generate-key
-#Enter passphrase the pass phrase = tibaredha
-#gpg --armor --export  *la clé *
-#Copiez votre clé GPG, en commençant par -----BEGIN PGP PUBLIC KEY BLOCK-----et en terminant par -----END PGP PUBLIC KEY BLOCK-----.
-#settings /SSH and GPG keys / new GPG key / copy and paste (Copiez votre clé GPG en commençant par -----BEGIN)
-#git config --global user.signingkey *la clé *
-#github / framework / la ligne de tibaredha / commits / mention verified  est presente 
-#en peut signe le tag 
-#git tag -s mytag
-#git tag -v mytag
 show_config(){
 
 
@@ -705,6 +690,42 @@ set +e
 echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
+# from https://docs.github.com/en
+#cle SSH
+#ls -al ~/.ssh
+#ssh-keygen -t ed25519 -C "your_email@example.com"
+#lire la suite
+
+#clé GPG
+#gpg --list-secret-keys --keyid-format LONG
+#gpg --full-generate-key
+#Enter passphrase the pass phrase = tibaredha
+#gpg --armor --export  *la clé *
+#Copiez votre clé GPG, en commençant par -----BEGIN PGP PUBLIC KEY BLOCK-----et en terminant par -----END PGP PUBLIC KEY BLOCK-----.
+#settings /SSH and GPG keys / new GPG key / copy and paste (Copiez votre clé GPG en commençant par -----BEGIN)
+#git config --global user.signingkey *la clé *
+#github / framework / la ligne de tibaredha / commits / mention verified  est presente 
+#en peut signe le tag 
+#git tag -s mytag
+#git tag -v mytag
+gpg_status ()
+{
+clear
+# Exit script on Error
+set -e
+# Check for GPG Directory
+echo  "---------------|-------|-----------------------------------"
+if [ ! -f ~/.gnupg/pubring.kbx ]; then
+        gpg --full-generate-key
+        echo "Execute ssh-keygen --[done]"
+else
+	    echo "/.gnupg/pubring.kbx fille exist"
+echo  "---------------|-------|-----------------------------------"		
+        gpg --list-secret-keys --keyid-format LONG		
+fi
+echo  "---------------|-------|-----------------------------------"
+}
+##########################################################################
 addToGitignore () {
     # add filename to .gitignore
     echo  "---------------|-------|-----------------------------------"
@@ -867,6 +888,8 @@ for option in "$@" ; do
 		ignore_status;;
 		--ssh)
 		ssh_status;;
+		--gpg)
+		gpg_status;;
 		# git github_status
 		--rr)
 		github_status;;
