@@ -83,7 +83,7 @@ show_help(){
 #cle SSH
 #ls -al ~/.ssh
 #ssh-keygen -t ed25519 -C "your_email@example.com"
-
+#lire la suite
 
 #clé GPG
 #gpg --list-secret-keys --keyid-format LONG
