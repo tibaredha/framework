@@ -700,10 +700,10 @@ echo  "---------------|-------|-----------------------------------"
 #gpg --list-secret-keys --keyid-format LONG
 #gpg --full-generate-key
 #Enter passphrase the pass phrase = tibaredha
-#gpg --armor --export  *la clé *
+#gpg --armor --export  *la clé * a 16 caractere
 #Copiez votre clé GPG, en commençant par -----BEGIN PGP PUBLIC KEY BLOCK-----et en terminant par -----END PGP PUBLIC KEY BLOCK-----.
 #settings /SSH and GPG keys / new GPG key / copy and paste (Copiez votre clé GPG en commençant par -----BEGIN)
-#git config --global user.signingkey *la clé *
+#git config --global user.signingkey *la clé * a 16 caractere
 #github / framework / la ligne de tibaredha / commits / mention verified  est presente 
 #en peut signe le tag 
 #git tag -s mytag
