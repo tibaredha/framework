@@ -720,9 +720,9 @@ if [ ! -f ~/.gnupg/pubring.kbx ]; then
         echo "Execute ssh-keygen --[done]"
 else
 	    echo "/.gnupg/pubring.kbx fille exist"
-echo  "---------------|-------|-----------------------------------"		
-        gpg --list-secret-keys --keyid-format LONG		
+echo  "---------------|-------|-----------------------------------"		      		
 fi
+gpg --list-secret-keys --keyid-format LONG
 echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
