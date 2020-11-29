@@ -21,7 +21,7 @@ class Model {
 		//connection automatique de la base en cas de non existance 
 		
 		
-		if($this->db === null){$this->db=new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);} //*nouvelle facon d'instancier la PDO avec la class Database qui se trouve lib/Database.php
+		if($this->db === null){$this->db=new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);} //*nouvelle facon d'instancier la PDO
 		// $this->db = new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);
 		
 		//Par défaut PDO n'affiche pas les différentes erreurs liées au code ou aux requêtes. 
