@@ -1,22 +1,23 @@
-# Easy Facial Recognition
+# framework
 
-Recognition by minimum norm between vectors (128D dlib descriptor)
+framework
+
 ![Alt Text](tiba.jpg)
 
 
 ### Prerequisites
 
-Make sure to have the following libraries installed in your Python environment:
+Make sure to have the following libraries installed in your PHP environment:
 
-- opencv
-- dlib
-- numpy
-- imutils
-- pillow
+- html5
+- css3
+- js 
+- jquery
+- php 5.3.1
+- mysql
 
-Update the known_faces directory with images of people you want to detect (be sure to crop around the faces as the Zuckerberg example.).
 
-Please only use .jpg or .png files.
+framework
 
 ## Run
 
@@ -24,13 +25,13 @@ Please only use .jpg or .png files.
 easy_facial_recognition.py --i known_faces
 ```
 ## Youtube Video explanation (French only)
-Click on the image below :
+
 
 ![Alt Text](tiba.jpg)
 
 ## Authors
 
-* **Anis Ayari** - *Lead Data Scientist* 
+* **TIBA Redha** - *Lead Data Scientist* 
 
 ## License
 
