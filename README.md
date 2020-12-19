@@ -9,12 +9,13 @@ framework
 
 Make sure to have the following libraries installed in your PHP environment:
 
-- html5
-- css3
-- js 
-- jquery
-- php 5.3.1
-- mysql
+- Html5
+- Css3
+- Js 
+- Jquery
+- Apache 2.2.11
+- PHP 5.3.1
+- Mysql 5.1.36
 
 
 framework
