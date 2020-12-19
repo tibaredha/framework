@@ -26,7 +26,7 @@ easy_facial_recognition.py --i known_faces
 ## Youtube Video explanation (French only)
 Click on the image below :
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/54WmrwVWu1w/0.jpg)](https://www.youtube.com/watch?v=54WmrwVWu1w)
+![Alt Text](tiba.jpg)
 
 ## Authors
 
