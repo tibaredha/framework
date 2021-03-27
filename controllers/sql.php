@@ -35,19 +35,27 @@ class sql extends Controller {
 	{  
 		if($_POST['type']=='1')
 		{
+		$this->view->title = 'SQL';
+		$this->view->msg = 'SQL';
+		$this->view->d1 = $_POST['Datedebut'];
+		$this->view->d2 = $_POST['Datefin'];
+		$this->view->render('sql/sql');
+		}
+		elseif($_POST['type']=='2')//XLS
+		{
 		$this->view->title = 'XLS';
 		$this->view->msg = 'XLS';
 		$this->view->d1 = $_POST['Datedebut'];
 		$this->view->d2 = $_POST['Datefin'];
-		$this->view->render($this->controleur.'/sql');
+		$this->view->render('xls/XLS');
 		}
-		elseif($_POST['type']=='2')
+		elseif($_POST['type']=='3')//csv
 		{
-		// $this->view->title = 'XLS';
-		// $this->view->msg = 'XLS';
-		// $this->view->d1 = $_POST['Datedebut'];
-		// $this->view->d2 = $_POST['Datefin'];
-		// $this->view->render($this->controleur.'/XLS');
+		$this->view->title = 'CSV';
+		$this->view->msg = 'CSV';
+		$this->view->d1 = $_POST['Datedebut'];
+		$this->view->d2 = $_POST['Datefin'];
+		$this->view->render('csv/csv');
 		}
 		else
 		{

@@ -82,28 +82,62 @@ class clgdatabse  {
 		else
 		{
 		   echo("This table doesn't exist");
-		}
-		
-		
-		
-		
-		
+		}	
 	}
 	
 	function exportsql($table_name) 
 	{
-	$this->mysqlconnectx();
-	$backup_file  = URLDUMP."$table_name.sql";
-	$sql = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
-	$requete = @mysql_query($sql);
-	if(! $requete ) {
-	  echo "Backedup  data error\n";
-	 }
-	 else
-	 {
-	 echo "Backedup  data successfully\n";
-	 }
+		$this->mysqlconnectx();
+		$backup_file  = URLDUMP."$table_name.sql";
+		$sql = "SELECT * INTO OUTFILE '$backup_file' FROM $table_name";
+		$requete = @mysql_query($sql);
+		if(! $requete ) 
+		{
+			echo "Backedup  data error\n";
+		}
+	    else
+		{
+			echo "Backedup  data successfully\n";
+		}
 	}
+	
+
+	function exportcsv($tbl,$d1,$d2,$attachment = false, $headers = true) 
+	{
+		$filename="csv/deceshosp.csv";
+		$this->mysqlconnectx();
+		if($attachment) 
+		{
+			header( 'Content-Type: text/csv' );
+			header( 'Content-Disposition: attachment;filename='.$filename);
+			$fp = fopen('php://output', 'w');
+		} 
+		else 
+		{
+			$fp = fopen($filename, 'w');
+		}
+		
+		$result = mysql_query("SELECT * FROM $tbl ") or die($sql."<br>".mysql_error());
+		
+		if($headers) 
+		{
+			$row = mysql_fetch_assoc($result);
+			if($row) {
+				fputcsv($fp, array_keys($row));
+				mysql_data_seek($result, 0);
+			}
+		}
+		
+		while($row = mysql_fetch_assoc($result)) 
+		{
+			fputcsv($fp, $row);
+		}
+	   
+		fclose($fp);
+		echo "Backedup  data successfully\n";
+	}
+	
+	
 	
 	function dateFR2US($date)//01/01/2013
 	{
@@ -117,6 +151,7 @@ class clgdatabse  {
 	
 	function XLS($serveur,$STRUCTURED,$d1,$d2)
     {
+	$this->mysqlconnectx();
 	$d11=$this->dateFR2US($d1);
 	$d22=$this->dateFR2US($d2);
 	$fichier = URLXLS.$STRUCTURED.'_'.$d1.'_au_'.$d2.'.php';	
