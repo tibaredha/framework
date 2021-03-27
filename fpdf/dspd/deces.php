@@ -277,42 +277,58 @@ class deces extends FPDI
 	function AGESEXE($colone1,$colone2,$colone3,$datejour1,$datejour2,$SEXEDNR,$STRUCTURED){$this->mysqlconnect();$sql = " select * from deceshosp where($colone1 >=$colone2  and $colone1 <=$colone3)  and (DINS BETWEEN '$datejour1' AND '$datejour2') and (SEX='$SEXEDNR' and STRUCTURED $STRUCTURED )";$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());$collecte=mysql_num_rows($requete);mysql_free_result($requete);return $collecte;}
 	function T2F20x($datejour1,$datejour2,$EPH1,$tages)  
     {
-	$this->SetFont('Times', 'B', 10);$this->SetTextColor(0,0,0);$this->SetFillColor(230); 
-	$mr = array();$fr = array();$mfrp = array();
-	for ($i = 0; $i <= $tages; $i+= 5) {$mr[$i]=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'M',$EPH1);$fr[$i]=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'F',$EPH1);}
-	$mf=array_sum($mr)+array_sum($fr);
-	$this->SetXY(5,25+10);$this->cell(285,5,"Cette étude a porté sur ".$mf." décès survenus durant la periode du ".$this->dateUS2FR($datejour1)." au ".$this->dateUS2FR($datejour2)." au niveau de 36 communes ",0,0,'L',0);
-	$this->SetXY(5,42);                 $this->cell(200,05,"Repartition des décès par tranche d'age et sexe (global)",1,0,'L',1,0);
-	$this->SetXY(5,$this->GetY()+5);    $this->cell(15,15,"Age",1,0,'C',1,0);
-	$this->SetXY(5+15,$this->GetY());   $this->cell(80,10,"Sexe",1,0,'C',1,0);$this->SetXY(105,$this->GetY());$this->cell(100,10,"P % des décès par tranche d'age et sexe",1,0,'C',1,0);
-	$this->SetXY(5+15,$this->GetY()+10);$this->cell(25,5,"M",1,0,'C',1,0); $this->cell(25,5,"F",1,0,'C',1,0);$this->cell(15,5,"T",1,0,'C',1,0);$this->cell(15,5,'P %',1,0,'C',1,0);
-	$this->SetXY(105,$this->GetY());for ($i = 10; $i <= 100; $i+= 10){$this->cell(10,5,$i,1,0,'R',0);} 
-	$this->RoundedRect(105,$this->GetY(), 100, (($tages/5)+3)*5, 2, $style = '');
-	for ($i = 0; $i <= $tages; $i+= 5) 
-	{
-		$m=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'M',$EPH1);
-		$f=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'F',$EPH1);
-		if($mf>0){$mfp=round(((($m+$f)*100)/$mf),2);$mfrp[$i]=round(((($m+$f)*100)/$mf),2);} else {$mfp=0;$mfrp[$i]=0;}
-		$this->SetXY(5,$this->GetY()+5);
-		$this->cell(15,5,$i."-".($i+4),1,0,'C',1,0);
-		$this->cell(25,5,$m,1,0,'C',0,0); 
-		$this->cell(25,5,$f,1,0,'C',0,0);
-		$this->cell(15,5,$m+$f,1,0,'C',0,0);
-		$this->cell(15,5,$mfp.' %',1,0,'C',1,0);
-		$this->SetFillColor(120,255,120);
-		if ($mfp>0){$this->SetXY(105,$this->GetY());$this->cell($mfp,5,'',1,0,'C',1,0);$this->cell(15,5,$mfp.' %',0,0,'C',0,0);} else {$this->SetXY(105,$this->GetY());$this->cell(0.01,5,'',1,0,'C',1,0);$this->cell(15,5,$mfp.' %',0,0,'C',0,0);}
-		$this->SetFillColor(230);
-	}
-	$this->SetXY(5,$this->GetY()+5);if($mf>0){$this->cell(15,5,"Total",1,0,'C',1,0);$this->cell(25,5,array_sum($mr),1,0,'C',1,0);$this->cell(25,5,array_sum($fr),1,0,'C',1,0);$this->cell(15,5,$mf,1,0,'C',1,0);$this->cell(15,5,'100 %',1,0,'C',1,0);} else {$this->cell(15,5,"Total",1,0,'C',1,0);$this->cell(25,5,array_sum($mr),1,0,'C',1,0); $this->cell(25,5,array_sum($fr),1,0,'C',1,0);$this->cell(15,5,$mf,1,0,'C',1,0);$this->cell(15,5,'0 %',1,0,'C',1,0);}
-	$this->SetXY(105,$this->GetY());for ($i = 10; $i <= 100; $i+= 10){$this->cell(10,5,$i,1,0,'R',0);} 
-	$this->SetXY(5,$this->GetY()+10);  $this->cell(285,5,"1-Répartition des décès par sexe : ",0,0,'L',0);
-	$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"La répartition des ".$mf." décès enregistrés montre que :",0,0,'L',0);
-	if($mf>0) {$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,round((array_sum($mr)/$mf)*100,2)."% des décès touche les hommes. ",0,0,'L',0);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,round((array_sum($fr)/$mf)*100,2)."% des décès touche les femmes. ",0,0,'L',0);}else {$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"0% des décès touche les hommes. ",0,0,'L',0);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"0% des décès touche les femmes. ",0,0,'L',0);}
-	if (array_sum($fr) > 0){$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"avec un sexe ratio de ".round((array_sum($mr)/array_sum($fr)),2),0,0,'L',0);}else{$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"avec un sexe ratio de 0 ",0,0,'L',0);}
-	$this->SetXY(5,$this->GetY()+10);$this->cell(285,5,"2-Répartition des décès par tranche d'âge : ",0,0,'L',0);
-	rsort($mfrp);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"la proportion des décès la plus élevée est : ".$mfrp[0]."%",0,0,'L',0);
-	sort($mfrp);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"la proportion des décès la moins élevée est : ".$mfrp[0]."%",0,0,'L',0);
-	$pie2 = array("x" => 135, "y" => $this->GetY()-15, "r" => 17,"v1" => array_sum($mr),"v2" => array_sum($fr),"t0" => "Distribution des décès par sexe ","t1" => "M","t2" => "F");$this->pie2($pie2);
+		$this->SetFont('Times', 'B', 10);$this->SetTextColor(0,0,0);$this->SetFillColor(230); 
+		$mr = array();$fr = array();$mfrp = array();
+		for ($i = 0; $i <= $tages; $i+= 5) {$mr[$i]=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'M',$EPH1);$fr[$i]=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'F',$EPH1);}
+		$mf=array_sum($mr)+array_sum($fr);
+		$this->SetXY(5,25+10);$this->cell(285,5,"Cette étude a porté sur ".$mf." décès survenus durant la periode du ".$this->dateUS2FR($datejour1)." au ".$this->dateUS2FR($datejour2)." au niveau de 36 communes ",0,0,'L',0);
+		$this->SetXY(5,42);                 $this->cell(200,05,"Repartition des décès par tranche d'age et sexe (global)",1,0,'L',1,0);
+		$this->SetXY(5,$this->GetY()+5);    $this->cell(15,15,"Age",1,0,'C',1,0);
+		$this->SetXY(5+15,$this->GetY());   $this->cell(80,10,"Sexe",1,0,'C',1,0);$this->SetXY(105,$this->GetY());$this->cell(100,10,"P % des décès par tranche d'age et sexe",1,0,'C',1,0);
+		$this->SetXY(5+15,$this->GetY()+10);$this->cell(16,5,"M",1,0,'C',1,0); $this->cell(16,5,"F",1,0,'C',1,0);$this->cell(16,5,"T",1,0,'C',1,0);$this->cell(16,5,"R(M/F)",1,0,'C',1,0);$this->cell(16,5,'P %',1,0,'C',1,0);
+		$this->SetXY(105,$this->GetY());for ($i = 10; $i <= 100; $i+= 10){$this->cell(10,5,$i,1,0,'R',0);} 
+		$this->RoundedRect(105,$this->GetY(), 100, (($tages/5)+3)*5, 2, $style = '');
+		for ($i = 0; $i <= $tages; $i+= 5) 
+		{
+			$m=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'M',$EPH1);
+			$f=$this->AGESEXE("years",$i,$i+4,$datejour1,$datejour2,'F',$EPH1);
+			if($mf>0){$mfp=round(((($m+$f)*100)/$mf),2);$mfrp[$i]=round(((($m+$f)*100)/$mf),2);} else {$mfp=0;$mfrp[$i]=0;}
+			$this->SetXY(5,$this->GetY()+5);
+			$this->cell(15,5,$i."-".($i+4),1,0,'C',1,0);
+			$this->cell(16,5,$m,1,0,'C',0,0); 
+			$this->cell(16,5,$f,1,0,'C',0,0);
+			$this->cell(16,5,$m+$f,1,0,'C',0,0);
+			if($f!=0){$this->cell(16,5,round($m/$f,2),1,0,'C',0,0);}else{$this->cell(16,5,"",1,0,'C',0,0);}
+			$this->cell(16,5,$mfp.' %',1,0,'C',1,0);
+			$this->SetFillColor(120,255,120);
+			if ($mfp>0){$this->SetXY(105,$this->GetY());$this->cell($mfp,5,'',1,0,'C',1,0);$this->cell(15,5,$mfp.' %',0,0,'C',0,0);} else {$this->SetXY(105,$this->GetY());$this->cell(0.01,5,'',1,0,'C',1,0);$this->cell(15,5,$mfp.' %',0,0,'C',0,0);}
+			$this->SetFillColor(230);
+		}
+		$this->SetXY(5,$this->GetY()+5);$this->cell(15,5,"Total",1,0,'C',1,0);
+		$xmr=array_sum($mr);
+		$xfr=array_sum($fr);
+		if($mf>0)
+		{
+			if($xfr!=0){
+			$this->cell(16,5,$xmr,1,0,'C',1,0);$this->cell(16,5,$xfr,1,0,'C',1,0);$this->cell(16,5,$mf,1,0,'C',1,0);$this->cell(16,5,round($xmr/$xfr,2),1,0,'C',1,0);$this->cell(16,5,'100 %',1,0,'C',1,0);	
+			}else{
+			$this->cell(16,5,$xmr,1,0,'C',1,0);$this->cell(16,5,$xfr,1,0,'C',1,0);$this->cell(16,5,$mf,1,0,'C',1,0);$this->cell(16,5,"***",1,0,'C',1,0);$this->cell(16,5,'100 %',1,0,'C',1,0);	
+			}	
+		} 
+		else 
+		{
+			$this->cell(16,5,$xmr,1,0,'C',1,0); $this->cell(16,5,$xfr,1,0,'C',1,0);$this->cell(16,5,$mf,1,0,'C',1,0);$this->cell(16,5,"***",1,0,'C',1,0);$this->cell(16,5,'0 %',1,0,'C',1,0);
+		}
+		
+		$this->SetXY(105,$this->GetY());for ($i = 10; $i <= 100; $i+= 10){$this->cell(10,5,$i,1,0,'R',0);} 
+		$this->SetXY(5,$this->GetY()+10);  $this->cell(285,5,"1-Répartition des décès par sexe : ",0,0,'L',0);
+		$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"La répartition des ".$mf." décès enregistrés montre que :",0,0,'L',0);
+		if($mf>0) {$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,round((array_sum($mr)/$mf)*100,2)."% des décès touche les hommes. ",0,0,'L',0);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,round((array_sum($fr)/$mf)*100,2)."% des décès touche les femmes. ",0,0,'L',0);}else {$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"0% des décès touche les hommes. ",0,0,'L',0);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"0% des décès touche les femmes. ",0,0,'L',0);}
+		if (array_sum($fr) > 0){$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"avec un sexe ratio de ".round((array_sum($mr)/array_sum($fr)),2),0,0,'L',0);}else{$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"avec un sexe ratio de 0 ",0,0,'L',0);}
+		$this->SetXY(5,$this->GetY()+10);$this->cell(285,5,"2-Répartition des décès par tranche d'âge : ",0,0,'L',0);
+		rsort($mfrp);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"la proportion des décès la plus élevée est : ".$mfrp[0]."%",0,0,'L',0);
+		sort($mfrp);$this->SetXY(5,$this->GetY()+5);$this->cell(285,5,"la proportion des décès la moins élevée est : ".$mfrp[0]."%",0,0,'L',0);
+		$pie2 = array("x" => 135, "y" => $this->GetY()-15, "r" => 17,"v1" => array_sum($mr),"v2" => array_sum($fr),"t0" => "Distribution des décès par sexe ","t1" => "M","t2" => "F");$this->pie2($pie2);
 	}
 	
 	

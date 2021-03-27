@@ -437,7 +437,7 @@ if ($_POST['format']=='1')
 	$pdf->cell(30,10,"Valide",1,0,'C',1,0);
 	$pdf->cell(30,10,"NValide",1,0,'C',1,0);
 	$pdf->cell(30,10,"T",1,0,'C',1,0);
-	$pdf->cell(30,10,"% Deces NV",1,0,'C',1,0);
+	$pdf->cell(30,10,"P% (Décès)",1,0,'C',1,0);
 	$pdf->SetXY(05,$pdf->GetY()+10); 
 	$pdf->mysqlconnect();
 	$pdf->SetFont('Arial', '',9, '', true);
@@ -451,7 +451,7 @@ if ($_POST['format']=='1')
 	$pdf->cell(30,5,$pdf->dspaprouve($pdf->datejour1,$pdf->datejour2,"=".$row->id,'= "1" '),1,0,'C',0);
 	$pdf->cell(30,5,$pdf->dspaprouve($pdf->datejour1,$pdf->datejour2,"=".$row->id,'= "0" '),1,0,'C',0);
 	$pdf->cell(30,5,$pdf->dspaprouve($pdf->datejour1,$pdf->datejour2,"=".$row->id,'IS NOT NULL'),1,0,'C',0);
-	$pdf->cell(30,5,round((($pdf->dspaprouve($pdf->datejour1,$pdf->datejour2,"=".$row->id,'IS NOT NULL')*100) / $pdf->dspaprouve($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','IS NOT NULL')),2),1,0,'C',0);
+	$pdf->cell(30,5,round((($pdf->dspaprouve($pdf->datejour1,$pdf->datejour2,"=".$row->id,'IS NOT NULL')*100) / $pdf->dspaprouve($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','IS NOT NULL')),2)." %",1,0,'C',0);
 	$pdf->SetXY(5,$pdf->GetY()+5); 
 	}
 	$pdf->SetFont('Arial', 'B',10, '', true);
@@ -488,10 +488,12 @@ if ($_POST['format']=='1')
 	$pdf->SetXY(05,$pdf->GetY()+10);
 	$pdf->cell(10,10,"id",1,0,'C',1,0);
 	$pdf->cell(70,10,"Etablissements",1,0,'L',1,0);
-	$pdf->cell(30,10,"M",1,0,'C',1,0);
-	$pdf->cell(30,10,"F",1,0,'C',1,0);
-	$pdf->cell(30,10,"T",1,0,'C',1,0);
-	$pdf->cell(30,10,"% Deces",1,0,'C',1,0);
+	
+	$pdf->cell(24,10,"M",1,0,'C',1,0);
+	$pdf->cell(24,10,"F",1,0,'C',1,0);
+	$pdf->cell(24,10,"T",1,0,'C',1,0);
+	$pdf->cell(24,10,"Ratio(M/F)",1,0,'C',1,0);
+	$pdf->cell(24,10,"P% (Décès)",1,0,'C',1,0);
 	$pdf->SetXY(05,$pdf->GetY()+10); 
 	$pdf->mysqlconnect();
 	$pdf->SetFont('Arial', '',9, '', true);
@@ -502,18 +504,30 @@ if ($_POST['format']=='1')
 	{
 	$pdf->cell(10,5,$row->id,1,0,'C',0);
 	$pdf->cell(70,5,$row->structure,1,0,'L',0);
-	$pdf->cell(30,5,$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'= "M" '),1,0,'C',0);
-	$pdf->cell(30,5,$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'= "F" '),1,0,'C',0);
-	$pdf->cell(30,5,$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'IS NOT NULL'),1,0,'C',0);
-	$pdf->cell(30,5,round((($pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'IS NOT NULL')*100) / $pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','IS NOT NULL')),2),1,0,'C',0);
+	$mas=$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'= "M" ');
+	$fem=$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'= "F" ');
+	$tmf=$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'IS NOT NULL');
+	$pdf->cell(24,5,$mas,1,0,'C',0);
+	$pdf->cell(24,5,$fem,1,0,'C',0);
+	$pdf->cell(24,5,$tmf,1,0,'C',0);
+	if($fem != 0){$pdf->cell(24,5,round($mas/$fem,2),1,0,'C',0);	}else{$pdf->cell(24,5,"",1,0,'C',0);}
+	$pdf->cell(24,5,round((($pdf->dspnbr($pdf->datejour1,$pdf->datejour2,"=".$row->id,'IS NOT NULL')*100) / $pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','IS NOT NULL')),2)." %",1,0,'C',0);
 	$pdf->SetXY(5,$pdf->GetY()+5); 
 	}
 	$pdf->SetFont('Arial', 'B',10, '', true);
 	$pdf->cell(80,10,"Total Etablissements",1,0,1,'C',0);
-	$pdf->cell(30,10,$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','= "M" '),1,0,'C',1,0);
-	$pdf->cell(30,10,$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','= "F" '),1,0,'C',1,0);
-	$pdf->cell(30,10,$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','IS NOT NULL'),1,0,'C',1,0);
-	$pdf->cell(30,10,'100 %',1,0,'C',1,0);
+	$mast=$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','= "M" ');
+	$femt=$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','= "F" ');
+	$tmft=$pdf->dspnbr($pdf->datejour1,$pdf->datejour2,'IS NOT NULL','IS NOT NULL');
+	$pdf->cell(24,10,$mast,1,0,'C',1,0);
+	$pdf->cell(24,10,$femt,1,0,'C',1,0);
+	$pdf->cell(24,10,$tmft,1,0,'C',1,0);
+	if($femt!=0){
+	$pdf->cell(24,10,round($mast/$femt,2),1,0,'C',1,0);	
+	}else{
+	$pdf->cell(24,10,"",1,0,'C',1,0);	
+	}
+	$pdf->cell(24,10,'100 %',1,0,'C',1,0);
     
 	
 
