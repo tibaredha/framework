@@ -46,6 +46,7 @@ echo '<form ALIGN="center" action="'.URL.'fpdf/dspd/fdeces.php" method="POST">';
 				echo '<option value="8">Mortalité maternelle</option>';
 				echo '<option value="9">Mortalité kc</option>';
 				echo '<option value="10">Mortalité par mois</option>';
+				echo '<option value="11">CIM-10</option>';
 				echo '</select>';
 		echo '</div>	';			
 		echo '<div id="e">'; 

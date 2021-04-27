@@ -40,6 +40,61 @@ class deces extends FPDI
 
 	}
 	
+	function pyramide($x,$y,$titre,$pyramide)
+    {
+		$this->SetFont('Times', 'BIU', 11);
+		$this->SetXY($x-20,$y-108);$this->Cell(0, 5,$titre ,0, 2, 'L');
+		$this->RoundedRect($x-40,$y-108, 110+40, 118, 2, $style = '');
+		$this->SetFont('Times', 'B', 11);
+		$this->SetXY($x+4.5-20,$y-100);$this->cell(20,5,'Feminin',1,0,'C',1,0);$this->SetXY($x+65,$y-100);$this->cell(20,5,'Masculin',1,0,'C',1,0);
+		$this->SetXY($x-40,$y);$this->cell(2.5,-100,'***',1,0,'L',1,0);
+		//***************************************************************//
+		$summ=array();
+		$sumf=array();
+		for($i=1; $i<21; $i+=1)
+		{	
+		$summ[]=$pyramide[$i.'M'];	
+		$sumf[]=$pyramide[$i.'F'];
+		}
+		$totm=array_sum($summ);if($totm==0){$totm=1;}
+		$totf=array_sum($sumf);if($totf==0){$totf=1;}
+        //***************************************************************//
+		$varxm=137.6;
+		$varxf=35;
+		$p=1000;
+		for($i=5; $i<100; $i+=5)
+		{
+			$val=$i/5;
+			$this->SetFillColor(255,120,120);$w0=round($pyramide[$val.'F']*$p/$totm,2);$this->SetXY(($x+$varxm-$w0)/2,$y-$i);$this->cell((($w0+1)/2),5,$pyramide[$val.'F'],1,0,'R',1,0);
+			$this->SetFillColor(120,120,255);$w1=round($pyramide[$val.'M']*$p/$totf,2);$this->SetXY($x+$varxf,$y-$i);        $this->cell((($w1+1)/2),5,$pyramide[$val.'M'],1,0,'L',1,0);
+		}
+		$this->SetFillColor(230);$this->SetTextColor(0,0,0);
+        //***************************************************************//
+		$w=14.1;
+	    $this->SetXY($x-36.16,$y);
+		$this->cell($w,5,'100',1,0,'L',1,0);$this->cell($w,5,'80',1,0,'L',1,0);$this->cell($w,5,'60',1,0,'L',1,0);$this->cell($w,5,'40',1,0,'L',1,0);$this->cell($w,5,'20',1,0,'L',1,0);$this->cell(0.5,5,'',1,0,'R',1,0);
+	  	$this->cell($w,5,'20',1,0,'R',1,0); $this->cell($w,5,'40',1,0,'R',1,0);$this->cell($w,5,'60',1,0,'R',1,0);$this->cell($w,5,'80',1,0,'R',1,0);$this->cell($w,5,'100',1,0,'R',1,0);	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	function valeur($DATEJOUR1,$DATEJOUR2,$SEX) 
 	{
 	$this->mysqlconnect();
@@ -738,13 +793,13 @@ class deces extends FPDI
 	}
 	function tblparcommune($dnrdon,$datejour1,$datejour2,$STRUCTURED) 
 	{    	
-	$this->SetFont('Times', 'B', 10);$this->SetTextColor(0,0,0);$this->SetFillColor(230); 	
+	$this->SetFont('Times', '', 10);$this->SetTextColor(0,0,0);$this->SetFillColor(230); 	
 	$nbrc = array();
 	$nbrc1= array();
 	$nbrp = array();
 	$tpop = array();
 	$this->SetXY(5,42);                 $this->cell(95,05,"Repartition des décès par Communes de residences ",1,0,'L',1,0);
-	$this->SetXY(5,$this->GetY()+5);    $this->cell(15,15,"N",1,0,'C',1,0);$this->SetXY(5+15,$this->GetY());   $this->cell(80,10,"Communes de residences",1,0,'C',1,0);$this->SetXY(5+15,$this->GetY()+10);$this->cell(35,5,"Communes de residences",1,0,'C',1,0);$this->cell(15,5,"NBR",1,0,'C',1,0);$this->cell(15,5,"P %",1,0,'C',1,0);$this->cell(15,5,'T %',1,0,'C',1,0);
+	$this->SetXY(5,$this->GetY()+5);    $this->cell(11,15,"N",1,0,'C',1,0);$this->SetXY(1+15,$this->GetY());   $this->cell(84,10,"Communes de residences (Taux de mortalité pour 1000)",1,0,'C',1,0);$this->SetXY(1+15,$this->GetY()+10);$this->cell(26,5,"Communes",1,0,'C',1,0);$this->cell(13,5,"Pop",1,0,'C',1,0);$this->cell(15,5,"N",1,0,'C',1,0);$this->cell(15,5,"P %",1,0,'C',1,0);$this->cell(15,5,'T %',1,0,'C',1,0);
 	// $STRUCTUREDX = explode('=',$STRUCTURED);
 	// $IDWIL=$this->nbrtostring("structure","id",$STRUCTUREDX[1],"idwil");
 	$this->mysqlconnect();
@@ -760,27 +815,37 @@ class deces extends FPDI
 	$totalmbr=mysql_num_rows($resultat);
 	$this->SetXY(5,$this->GetY()+5);$x=0;
 	$this->SetFont('Times', '', 10);
+	$tx=1000; //Taux de mortalité pour 1000
 	while($row=mysql_fetch_object($resultat))
 	{
 		$nbrc=$this->valeurmoisdeces('','deceshosp','DINS','COMMUNER',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED);
 		if (array_sum($nbrc1)>0) {$nbrcp=round(($nbrc*100)/array_sum($nbrc1),2);}else {$nbrcp=0;} 
-		$nbrct=round(($nbrc*1000)/$row->p2018,2);
-		$this->cell(15,4.5,($x=$x+1),1,0,'C',1,0);
-		$this->cell(35,4.5,trim($row->COMMUNE),1,0,'L',0);
+		$nbrct=round(($nbrc*$tx)/$row->p2018,2);
+		$this->cell(11,4.5,($x=$x+1),1,0,'C',1,0);
+		$this->cell(26,4.5,trim($row->COMMUNE),1,0,'L',0);
+		$this->cell(13,4.5,$row->p2018,1,0,'C',0);
 		$this->cell(15,4.5,$nbrc,1,0,'C',0);
 		$this->cell(15,4.5,$nbrcp,1,0,'C',1,0);
-		$this->cell(15,4.5,$nbrct,1,0,'C',1,0);if ($nbrcp>0){$lx=$nbrcp;}else {$lx=0.1;} $this->SetFont('Times', 'B', 8); $this->SetTextColor(0,0,0);$this->SetFillColor(120,255,120);$this->SetXY($this->GetX()+5,$this->GetY());$this->cell($lx,4.5,"",1,0,'C',1,0);$this->SetFillColor(230);$this->cell(15,4.5,$lx." %",0,0,'R',0,0);
-		$this->SetFont('Times', 'B', 11);$this->SetXY(5,$this->GetY()+4.5); 
+		if($nbrct >= 2 ){
+		$this->SetTextColor(254,17,0);$this->SetFillColor(255,255,255); 	
+		$this->cell(15,4.5,$nbrct,1,0,'C',1,0);
+		$this->SetTextColor(0,0,0);$this->SetFillColor(230); 	
+		}
+		else {
+		$this->cell(15,4.5,$nbrct,1,0,'C',1,0);	
+		}
+		if ($nbrcp>0){$lx=$nbrcp;}else {$lx=0.1;} $this->SetFont('Times', '', 8); $this->SetTextColor(0,0,0);$this->SetFillColor(120,255,120);$this->SetXY($this->GetX()+5,$this->GetY());$this->cell($lx,4.5,"",1,0,'C',1,0);$this->SetFillColor(230);$this->cell(15,4.5,$lx." %",0,0,'R',0,0);
+		$this->SetFont('Times', '', 11);$this->SetXY(5,$this->GetY()+4.5); 
 	}
 	$this->SetXY(5,$this->GetY());
 	$this->cell(50,5,"Total ".$totalmbr." Communes : ",1,0,'C',1,0);	    
 	$this->cell(15,5,array_sum($nbrc1),1,0,'C',1,0);
 	$this->cell(15,5,"100 %",1,0,'C',1,0);
-	$this->cell(15,5,round((array_sum($nbrc1)*1000)/array_sum($tpop),2),1,0,'C',1,0);
-	$this->SetFillColor(230);$this->SetFont('Times', 'B', 8);
+	$this->cell(15,5,round((array_sum($nbrc1)*$tx)/array_sum($tpop),2),1,0,'C',1,0);
+	$this->SetFillColor(230);$this->SetFont('Times', '', 8);
 	$this->SetXY($this->GetX()+5,$this->GetY());
 	for ($i = 10; $i <= 100; $i+= 10){$this->cell(10,5,$i,1,0,'R',0);} 
-	$this->SetFont('Times', 'B', 11);
+	$this->SetFont('Times', '', 11);
 	
 	
 	$this->barservicedcommune(135,150,$nbrp,"Distribution des décès par communes de residences");
@@ -820,6 +885,60 @@ class deces extends FPDI
 		if($totalmbr11 > 0){$this->cell(15,5,'100%',1,0,'C',1,0); ;} else {$this->cell(15,5,'0%',1,0,'C',1,0);}		
 	}
 	
+	function cim_mf($cim,$datejour1,$datejour2,$EPH1,$sexe) 
+	{ 
+	$this->mysqlconnect();
+	$que="SELECT CODECIM,DINS,STRUCTURED,SEX FROM deceshosp  where STRUCTURED $EPH1 and  DINS BETWEEN '$datejour1' AND '$datejour2' and  CODECIM = $cim  and  SEX='$sexe'     "; //    % %will search form 0-9,a-z            
+	$res=mysql_query($que);
+	$tot=mysql_num_rows($res);
+    return $tot;
+	}
+	
+	
+	
+	
+    function tblparcim3($titre,$datejour1,$datejour2,$EPH1,$link0) 
+	{    
+		$this->SetFont('Times', 'B', 10);
+		$this->SetXY(5,$this->GetY()+10);$this->cell(287,5,$titre,1,0,'C',1,$link0);
+		$this->SetXY(5,$this->GetY()+10);
+		$this->cell(10,5,"Code",1,0,'C',1,0);
+		$this->cell(232,5,"Categorie",1,0,'C',1,0);
+		$this->cell(10,5,"M",1,0,'C',1,0);
+		$this->cell(10,5,"F",1,0,'C',1,0);
+		
+	    $this->cell(10,5,"T",1,0,'C',1,0);
+		$this->cell(15,5,"TXM",1,0,'C',1,0);
+		$this->SetXY(5,$this->GetY()+5);
+		$IDWIL=17000;
+		$ANNEE='2016';
+		$this->mysqlconnect();
+		$req="SELECT STRUCTURED,DINS FROM deceshosp where STRUCTURED $EPH1 and  DINS BETWEEN '$datejour1' AND '$datejour2' ";
+		$query1 = mysql_query($req);   
+		$totalmbr11=mysql_num_rows($query1);
+		
+		
+		$query="SELECT CODECIM,count(CODECIM)as nbr,STRUCTURED,DINS FROM deceshosp where STRUCTURED $EPH1 and  DINS BETWEEN '$datejour1' AND '$datejour2' GROUP BY CODECIM  order by nbr desc "; //    % %will search form 0-9,a-z            
+		$resultat=mysql_query($query);
+		$totalmbr1=mysql_num_rows($resultat);
+		while($row=mysql_fetch_object($resultat))
+		{
+			$this->SetFont('Times', '', 10);
+			$this->cell(10,5,trim($this->nbrtostring('cim','row_id',$row->CODECIM,'diag_cod')),1,0,'C',0);
+			$this->cell(232,5,$this->nbrtostring('cim','row_id',$row->CODECIM,'diag_nom') ,1,0,'L',0);
+			$this->cell(10,5,$this->cim_mf($row->CODECIM,$datejour1,$datejour2,$EPH1,"M"),1,0,'C',0);
+			$this->cell(10,5,$this->cim_mf($row->CODECIM,$datejour1,$datejour2,$EPH1,"F"),1,0,'C',0);
+			$this->cell(10,5,trim($row->nbr),1,0,'C',0);
+			$this->cell(15,5,round(($row->nbr*100)/$totalmbr11,2).' %',1,0,'C',1,0);
+			$this->SetXY(5,$this->GetY()+5); 
+		}
+		$this->SetXY(5,$this->GetY());$this->cell(10,5,"Total",1,0,'C',1,0);	  
+		$this->cell(232,5,$totalmbr1." : Categorie",1,0,'C',1,0);
+		$this->cell(10,5,"",1,0,'C',1,0);
+		$this->cell(10,5,"",1,0,'C',1,0);
+		$this->cell(10,5,$totalmbr11,1,0,'C',1,0);	  
+		$this->cell(15,5,'100%',1,0,'C',1,0);  
+	}
 	
     function tblparcim2($titre,$datejour1,$datejour2,$EPH1,$link0) 
 	{    

@@ -410,9 +410,121 @@ if ($_POST['format']=='1')
 		
 		
 	}
-	if ($deces=='3') {
+	
+	if ($deces=='11') {
 
+    $pdf->AddPage('L','A4');
+	$pdf->SetDisplayMode('fullpage','single');
+	$pdf->SetTitle('Releve des causes de décés '."du ".$pdf->datejour1." au ".$pdf->datejour2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->SetTextColor(0,0,0);
+	$pdf->SetFillColor(230);
+	$w=287;
+	$pdf->SetXY(5,$pdf->GetY());  $pdf->cell($w,5,$pdf->repfr,0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->cell($w,5,$pdf->mspfr,0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->cell($w,5,$pdf->dspfr.': Djelfa ',0,0,'C',1,0);
+	
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->cell(50,5,"Service Prévention",0,0,'L',1,0);       $pdf->SetXY(242,$pdf->GetY());$pdf->cell(50,5,"Le : ".date('d-m-Y'),0,0,'C',1,0);	
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->cell(50,5,"N _________ / ".date('Y'),0,0,'L',1,0);
+		
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->cell($w,5,"RELEVE DES CAUSES DE DECES ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5); $pdf->cell($w,5,"Du  ".$pdf->dateUS2FR($pdf->datejour1)."  Au  ".$pdf->dateUS2FR($pdf->datejour2),0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5); $pdf->cell($w,5,"Ref : Circulaire N° 607 du 24 septembre 1994  ",0,0,'C',1,0);
+	
+	
+	$pdf->SetTitle('Releve des causes de décés '."du ".$pdf->datejour1." au ".$pdf->datejour2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->SetTextColor(0,0,0);
+	$pdf->SetFillColor(230);
+	$pdf->tblparcim3("VII-Distribution des causes de décès suivant la classification internationale des maladies CIM10 (Catégories)",$pdf->datejour1,$pdf->datejour2,'IS NOT NULL','');
+	
+	
+	
+	
+	}
+	
+	
+	if ($deces=='3') {
     $pdf->AddPage('P','A4');
+	$pdf->SetDisplayMode('fullpage','single');
+	$pdf->SetTitle('Releve des causes de décés '."du ".$pdf->datejour1." au ".$pdf->datejour2);
+	$pdf->SetFont('Arial','B',10);
+	$pdf->SetTextColor(0,0,0);
+	$pdf->SetFillColor(230);
+	$pdf->SetXY(5,$pdf->GetY());  $pdf->cell(200,5,$pdf->repfr,0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->cell(200,5,$pdf->mspfr,0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->cell(200,5,$pdf->dspfr.': Djelfa ',0,0,'C',1,0);
+	
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->cell(50,5,"Service Prévention",0,0,'L',1,0);  $pdf->SetXY(155,$pdf->GetY());$pdf->cell(50,5,"Le : ".date('d-m-Y'),0,0,'C',1,0);	
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->cell(50,5,"N _________ / ".date('Y'),0,0,'L',1,0);
+		
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->cell(200,5,"RELEVE DES CAUSES DE DECES ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5); $pdf->cell(200,5,"Du  ".$pdf->dateUS2FR($pdf->datejour1)."  Au  ".$pdf->dateUS2FR($pdf->datejour2),0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5); $pdf->cell(200,5,"Ref : Circulaire N° 607 du 24 septembre 1994  ",0,0,'C',1,0);
+	
+    
+	
+	//I  Repartition des dons par tranche d'age 05
+	// $M1=$pdf->AGESEXE1(0,4,$t1,$t2,'M');  $F1=$pdf->AGESEXE1(0,4,$t1,$t2,'F');
+	// $M2=$pdf->AGESEXE1(5,9,$t1,$t2,'M');  $F2=$pdf->AGESEXE1(5,9,$t1,$t2,'F');
+	// $M3=$pdf->AGESEXE1(10,14,$t1,$t2,'M');$F3=$pdf->AGESEXE1(10,14,$t1,$t2,'F');
+	// $M4=$pdf->AGESEXE1(15,19,$t1,$t2,'M');$F4=$pdf->AGESEXE1(15,19,$t1,$t2,'F');
+	// $M5=$pdf->AGESEXE1(20,24,$t1,$t2,'M');$F5=$pdf->AGESEXE1(20,24,$t1,$t2,'F');
+	// $M6=$pdf->AGESEXE1(25,29,$t1,$t2,'M');$F6=$pdf->AGESEXE1(25,29,$t1,$t2,'F');
+	// $M7=$pdf->AGESEXE1(30,34,$t1,$t2,'M');$F7=$pdf->AGESEXE1(30,34,$t1,$t2,'F');
+	// $M8=$pdf->AGESEXE1(35,39,$t1,$t2,'M');$F8=$pdf->AGESEXE1(35,39,$t1,$t2,'F');
+	// $M9=$pdf->AGESEXE1(40,44,$t1,$t2,'M');$F9=$pdf->AGESEXE1(40,44,$t1,$t2,'F');
+	// $M10=$pdf->AGESEXE1(45,49,$t1,$t2,'M');$F10=$pdf->AGESEXE1(45,49,$t1,$t2,'F');
+	// $M11=$pdf->AGESEXE1(50,54,$t1,$t2,'M');$F11=$pdf->AGESEXE1(50,54,$t1,$t2,'F');
+	// $M12=$pdf->AGESEXE1(55,59,$t1,$t2,'M');$F12=$pdf->AGESEXE1(55,59,$t1,$t2,'F');
+	// $M13=$pdf->AGESEXE1(60,64,$t1,$t2,'M');$F13=$pdf->AGESEXE1(60,64,$t1,$t2,'F');
+	// $M14=$pdf->AGESEXE1(65,69,$t1,$t2,'M');$F14=$pdf->AGESEXE1(65,69,$t1,$t2,'F');
+	// $M15=$pdf->AGESEXE1(70,74,$t1,$t2,'M');$F15=$pdf->AGESEXE1(70,74,$t1,$t2,'F');
+	// $M16=$pdf->AGESEXE1(75,79,$t1,$t2,'M');$F16=$pdf->AGESEXE1(75,79,$t1,$t2,'F');
+	// $M17=$pdf->AGESEXE1(80,84,$t1,$t2,'M');$F17=$pdf->AGESEXE1(80,84,$t1,$t2,'F');
+	// $M18=$pdf->AGESEXE1(85,89,$t1,$t2,'M');$F18=$pdf->AGESEXE1(85,89,$t1,$t2,'F');
+	// $M19=$pdf->AGESEXE1(90,94,$t1,$t2,'M');$F19=$pdf->AGESEXE1(90,94,$t1,$t2,'F');
+	// $M20=$pdf->AGESEXE1(95,99,$t1,$t2,'M');$F20=$pdf->AGESEXE1(95,99,$t1,$t2,'F');
+	
+	
+	$pyramide= array(
+	"1M"  => $M1=103443,   "1F"  => $F1=90967,
+	"2M"  => $M2=88378,   "2F"  => $F2=81917,
+	"3M"  => $M3=88518,   "3F"  => $F3=82498,
+	"4M"  => $M4=89036,   "4F"  => $F4=84367,
+	"5M"  => $M5=80035,   "5F"  => $F5=80979,
+	"6M"  => $M6=67721,   "6F"  => $F6=68111,
+	"7M"  => $M7=47486,   "7F"  => $F7=45851,
+	"8M"  => $M8=42004,   "8F"  => $F8=41158,
+	"9M"  => $M9=31698,   "9F"  => $F9=31632,
+	"10M" => $M10=28043,  "10F" => $F10=27806,
+	"11M" => $M11=19518,  "11F" => $F11=19291,
+	"12M" => $M12=18091,  "12F" => $F12=16082,
+	"13M" => $M13=11431,  "13F" => $F13=10162,
+	"14M" => $M14=11924,  "14F" => $F14=9688,
+	"15M" => $M15=8349,  "15F" => $F15=6823,
+	"16M" => $M16=6250,  "16F" => $F16=4619,
+	"17M" => $M17=3031,  "17F" => $F17=2018,
+	"18M" => $M18=2608,  "18F" => $F18=1989,
+	"19M" => $M19=0,  "19F" => $F19=0,
+	"20M" => $M20=0,  "20F" => $F20=0
+	);
+	
+	$pdf->pyramide(70,190,utf8_decode('1 - Pyramide des ages de la pop-2018 wilaya de djelfa'),$pyramide);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->cell(50,5,"Effectif de décès",0,0,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+7);$pdf->cell(50,5,"Taux brut de mortalité : TBM = (nbr deces / nbr pop) *1000 hab",0,0,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+7);$pdf->cell(50,5,"Taux spécifiques de mortalité : TSM = (nbr deces du sous-groupe  / nbr pop du sous-groupe ) *1000 hab  ",0,0,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+7);$pdf->cell(50,5,"Taux standardisés : direct et indirect ",0,0,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+7);$pdf->cell(50,5,"Part d'une cause (%) ou mortalité proportionnelle : (nbr deces cause x / nbr deces total) *100 ",0,0,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+7);$pdf->cell(50,5,"Taux brut de mortalité",0,0,'L',1,0);
+	
+	
+	
+	
+	
+	
+	
+	$pdf->AddPage('P','A4');
 	$pdf->SetDisplayMode('fullpage','single');
 	$pdf->SetTitle('Releve des causes de décés '."du ".$pdf->datejour1." au ".$pdf->datejour2);
 	$pdf->SetFont('Arial','B',10);
